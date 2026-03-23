@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100
+           text-sm font-medium tracking-wide transition-colors duration-200
+           after:absolute after:bottom-0 after:left-0 after:h-px after:w-0
+           after:bg-stone-900 dark:after:bg-stone-100
+           after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .tag {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+           bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400
+           border border-stone-200 dark:border-stone-700;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full
+           bg-stone-900 dark:bg-stone-100 text-stone-50 dark:text-stone-900
+           text-sm font-semibold tracking-wide
+           hover:bg-stone-700 dark:hover:bg-stone-300
+           transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full
+           border border-stone-300 dark:border-stone-600
+           text-stone-700 dark:text-stone-300
+           text-sm font-semibold tracking-wide
+           hover:border-stone-500 dark:hover:border-stone-400
+           hover:bg-stone-100 dark:hover:bg-stone-800
+           transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 9999px; }
+.dark ::-webkit-scrollbar-thumb { background: #57534e; }

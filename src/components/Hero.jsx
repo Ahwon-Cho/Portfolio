@@ -1,7 +1,3 @@
-import { useEffect, useState } from 'react'
-
-const roles = ['UX Designer', 'Visual Designer', 'Product Designer', 'Systems Thinker']
-
 function ArrowDownIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
@@ -11,20 +7,6 @@ function ArrowDownIcon() {
 }
 
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0)
-  const [visible, setVisible] = useState(true)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setVisible(false)
-      setTimeout(() => {
-        setRoleIndex((i) => (i + 1) % roles.length)
-        setVisible(true)
-      }, 400)
-    }, 2800)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
     <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-stone-50 dark:bg-stone-950">
       {/* Grid background */}
@@ -54,16 +36,6 @@ export default function Hero() {
             that feel effortless.
           </span>
         </h1>
-
-        {/* Rotating role */}
-        <div className="h-8 mb-6 flex items-center justify-center">
-          <p
-            className="text-lg md:text-xl font-medium tracking-widest uppercase text-stone-500 dark:text-stone-400"
-            style={{ transition: 'opacity 0.4s ease, transform 0.4s ease', opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(8px)' }}
-          >
-            {roles[roleIndex]}
-          </p>
-        </div>
 
         {/* Description */}
         <p className="max-w-2xl mx-auto text-base md:text-lg text-stone-500 dark:text-stone-400 leading-relaxed mb-12">

@@ -7,8 +7,7 @@ const skills = [
 const stats = [
   { value: '10+', label: 'Years Experience' },
   { value: '50+', label: 'Projects Shipped' },
-  { value: '4', label: 'Industries' },
-  { value: '3', label: 'Countries' },
+{ value: '2', label: 'Countries' },
 ]
 
 export default function About() {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const navItems = [
   { label: 'Work', href: '#projects' },
@@ -44,6 +44,29 @@ function CloseIcon() {
 
 export default function Header({ darkMode, setDarkMode, scrolled }) {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const drawerRef = useRef(null)
+
+  // Focus trap for mobile drawer
+  useEffect(() => {
+    if (!mobileOpen) return
+    const drawer = drawerRef.current
+    if (!drawer) return
+    const focusable = drawer.querySelectorAll('button, a, [tabindex]:not([tabindex="-1"])')
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    first?.focus()
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') { setMobileOpen(false); return }
+      if (e.key !== 'Tab') return
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last?.focus() }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first?.focus() }
+      }
+    }
+    drawer.addEventListener('keydown', handleKeyDown)
+    return () => drawer.removeEventListener('keydown', handleKeyDown)
+  }, [mobileOpen])
 
   const scrollTo = (href) => {
     setMobileOpen(false)
@@ -61,7 +84,7 @@ export default function Header({ darkMode, setDarkMode, scrolled }) {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 h-16 flex items-center justify-between">
-          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex flex-col leading-none group">
+          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Scroll to top" className="flex flex-col leading-none group focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100">
             <span className="text-base font-semibold tracking-tight text-stone-900 dark:text-stone-100 group-hover:text-stone-500 dark:group-hover:text-stone-400 transition-colors">
               Ahwon Cho
             </span>
@@ -72,7 +95,7 @@ export default function Header({ darkMode, setDarkMode, scrolled }) {
 
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <button key={item.label} onClick={() => scrollTo(item.href)} className="nav-link">
+              <button key={item.label} onClick={() => scrollTo(item.href)} className="nav-link focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100">
                 {item.label}
               </button>
             ))}
@@ -85,13 +108,13 @@ export default function Header({ darkMode, setDarkMode, scrolled }) {
             <button
               onClick={() => setDarkMode(!darkMode)}
               aria-label="Toggle dark mode"
-              className="w-8 h-8 rounded-full flex items-center justify-center text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all duration-200"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100"
             >
               {darkMode ? <SunIcon /> : <MoonIcon />}
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden w-8 h-8 flex items-center justify-center text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full transition-colors duration-200"
+              className="md:hidden w-8 h-8 flex items-center justify-center text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full transition-colors duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <CloseIcon /> : <MenuIcon />}
@@ -103,7 +126,7 @@ export default function Header({ darkMode, setDarkMode, scrolled }) {
       {/* Mobile drawer */}
       <div className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-stone-900/40 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
-        <div className={`absolute top-0 right-0 h-full w-72 bg-stone-50 dark:bg-stone-900 shadow-2xl transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div ref={drawerRef} role="dialog" aria-modal="true" aria-label="Navigation menu" className={`absolute top-0 right-0 h-full w-72 bg-stone-50 dark:bg-stone-900 shadow-2xl transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="pt-20 px-8 flex flex-col gap-6">
             {navItems.map((item) => (
               <button

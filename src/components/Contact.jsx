@@ -56,7 +56,7 @@ export default function Contact() {
 
             <div className="mt-10 space-y-4">
               {links.map(({ icon: Icon, label, href, value }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={`Contact via ${label}`} className="flex items-center gap-4 group">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 group-hover:bg-stone-900 dark:group-hover:bg-stone-100 group-hover:text-stone-100 dark:group-hover:text-stone-900 transition-all duration-200">
                     <Icon />
                   </div>
@@ -74,17 +74,17 @@ export default function Contact() {
             <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-stone-500 dark:text-stone-500 mb-2 uppercase tracking-wide">Name</label>
-                  <input type="text" placeholder="Your name" className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-600 focus:outline-none focus:ring-2 focus:ring-stone-400 dark:focus:ring-stone-500 text-sm transition-all duration-200" />
+                  <label htmlFor="contact-name" className="block text-xs font-medium text-stone-700 dark:text-stone-400 mb-2 uppercase tracking-wide">Name</label>
+                  <input id="contact-name" type="text" placeholder="Your name" className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 placeholder:text-stone-500 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-stone-400 dark:focus:ring-stone-500 text-sm transition-all duration-200" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-stone-500 dark:text-stone-500 mb-2 uppercase tracking-wide">Email</label>
-                  <input type="email" placeholder="your@email.com" className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-600 focus:outline-none focus:ring-2 focus:ring-stone-400 dark:focus:ring-stone-500 text-sm transition-all duration-200" />
+                  <label htmlFor="contact-email" className="block text-xs font-medium text-stone-700 dark:text-stone-400 mb-2 uppercase tracking-wide">Email</label>
+                  <input id="contact-email" type="email" placeholder="your@email.com" className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 placeholder:text-stone-500 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-stone-400 dark:focus:ring-stone-500 text-sm transition-all duration-200" />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-medium text-stone-500 dark:text-stone-500 mb-2 uppercase tracking-wide">Message</label>
-                <textarea rows={4} placeholder="Tell me about the role or project..." className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-600 focus:outline-none focus:ring-2 focus:ring-stone-400 dark:focus:ring-stone-500 text-sm transition-all duration-200 resize-none" />
+                <label htmlFor="contact-message" className="block text-xs font-medium text-stone-700 dark:text-stone-400 mb-2 uppercase tracking-wide">Message</label>
+                <textarea id="contact-message" rows={4} placeholder="Tell me about the role or project..." className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 placeholder:text-stone-500 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-stone-400 dark:focus:ring-stone-500 text-sm transition-all duration-200 resize-none" />
               </div>
               <button type="submit" className="w-full btn-primary justify-center">
                 Send Message

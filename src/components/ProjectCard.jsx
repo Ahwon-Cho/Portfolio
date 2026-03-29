@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function ArrowIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -23,10 +25,11 @@ const gradients = [
 
 export default function ProjectCard({ project, index }) {
   const gradient = gradients[index % gradients.length]
-  const catColor = categoryColors[project.category] || categoryColors['UX Design']
+  const primaryCategory = project.category
+  const catColor = categoryColors[primaryCategory] || categoryColors['UX Design']
 
   return (
-    <div className="group relative flex flex-col bg-white dark:bg-stone-900 rounded-2xl overflow-hidden border border-stone-100 dark:border-stone-800 card-hover cursor-pointer">
+    <Link to={`/project/${project.slug}`} className="group relative flex flex-col bg-white dark:bg-stone-900 rounded-2xl overflow-hidden border border-stone-100 dark:border-stone-800 card-hover cursor-pointer">
       {/* Image area */}
       <div className={`relative overflow-hidden h-52 ${!project.image ? `bg-gradient-to-br ${gradient}` : 'bg-stone-100 dark:bg-stone-800'}`}>
         {project.image ? (
@@ -50,16 +53,16 @@ export default function ProjectCard({ project, index }) {
 
       {/* Content */}
       <div className="flex-1 p-6">
-        <div className="flex items-center gap-2 mb-3">
+        <div className="mb-3">
           <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${catColor}`}>
             {project.category}
           </span>
-          <span className="text-xs text-stone-400 dark:text-stone-600">{project.type}</span>
         </div>
 
-        <h3 className="text-base font-semibold text-stone-900 dark:text-stone-100 mb-2 group-hover:text-stone-700 dark:group-hover:text-stone-300 transition-colors leading-snug">
+        <h3 className="text-base font-semibold text-stone-900 dark:text-stone-100 mb-1 group-hover:text-stone-700 dark:group-hover:text-stone-300 transition-colors leading-snug">
           {project.title}
         </h3>
+        <p className="text-xs text-stone-400 dark:text-stone-600 mb-2">{project.type}</p>
         <p className="text-sm text-stone-500 dark:text-stone-500 leading-relaxed line-clamp-2">
           {project.description}
         </p>
@@ -70,11 +73,11 @@ export default function ProjectCard({ project, index }) {
               <span key={tag} className="text-xs text-stone-400 dark:text-stone-600">#{tag}</span>
             ))}
           </div>
-          <span className="text-xs text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 flex items-center gap-1 transition-colors">
-            View case study <ArrowIcon />
+          <span className="text-stone-400 dark:text-stone-600 group-hover:text-stone-600 dark:group-hover:text-stone-400 transition-colors">
+            <ArrowIcon />
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

@@ -1,3 +1,5 @@
+import ParticleCanvas from './ParticleCanvas'
+
 function ArrowDownIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
@@ -6,16 +8,11 @@ function ArrowDownIcon() {
   )
 }
 
-export default function Hero() {
+export default function Hero({ darkMode = false }) {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-stone-50 dark:bg-stone-950">
-      {/* Grid background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.06]"
-        style={{
-          backgroundImage: `linear-gradient(#78716c 1px, transparent 1px), linear-gradient(90deg, #78716c 1px, transparent 1px)`,
-          backgroundSize: '64px 64px',
-        }}
-      />
+      {/* Particle background */}
+      <ParticleCanvas darkMode={darkMode} />
 
       {/* Gradient orbs */}
       <div className="absolute top-1/4 -left-48 w-96 h-96 rounded-full bg-gradient-to-br from-purple-200/30 to-pink-200/20 dark:from-purple-900/20 dark:to-pink-900/10 blur-3xl pointer-events-none" />

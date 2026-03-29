@@ -8,10 +8,10 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ProjectDetail from './pages/ProjectDetail'
 
-function HomePage() {
+function HomePage({ darkMode }) {
   return (
     <>
-      <Hero />
+      <Hero darkMode={darkMode} />
       <About />
       <Projects />
       <Contact />
@@ -43,7 +43,6 @@ function AppContent() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Reset scroll position on route change
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [location.pathname])
@@ -53,7 +52,7 @@ function AppContent() {
       <Header darkMode={darkMode} setDarkMode={setDarkMode} scrolled={scrolled} />
       <main>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage darkMode={darkMode} />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
         </Routes>
       </main>

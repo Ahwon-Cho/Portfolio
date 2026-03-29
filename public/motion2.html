@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particle Tree</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.3/lib/p5.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #fff; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<script>
+// ── Particle storage (typed arrays for performance) ───────────────────────────
+const CAP   = 5000;
+const GRAYS = [68, 102, 136, 170];   // dark → light gray palette
+
+let N = 0;
+const TX = new Float32Array(CAP);    // target position
+const TY = new Float32Array(CAP);
+const TZ = new Float32Array(CAP);
+const CX = new Float32Array(CAP);    // current position
+const CY = new Float32Array(CAP);
+const CZ = new Float32Array(CAP);
+const VX = new Float32Array(CAP);    // velocity
+const VY = new Float32Array(CAP);
+const VZ = new Float32Array(CAP);
+const LA = new Float32Array(CAP);    // 0-1 layer → color bucket
+const RO = new Uint8Array(CAP);      // role: 0=trunk 1=branch 2=flower 3=free
+
+// Reused bucket arrays (avoids allocation per frame)
+const buckets = [[], [], [], []];
+
+let S, RY;   // scene scale, root Y world position
+let T = 0;   // animation time
+
+// ── Particle factory ──────────────────────────────────────────────────────────
+function addPt(x, y, z, role) {
+  if (N >= CAP) return;
+  TX[N] = x; TY[N] = y; TZ[N] = z;
+  CX[N] = x + (Math.random() - 0.5) * 12;
+  CY[N] = y + (Math.random() - 0.5) * 12;
+  CZ[N] = z + (Math.random() - 0.5) * 12;
+  VX[N] = 0; VY[N] = 0; VZ[N] = 0;
+  LA[N] = Math.random();
+  RO[N] = role;
+  N++;
+}
+
+// ── Tree geometry ─────────────────────────────────────────────────────────────
+function addFlowerCluster(fx, fy, fz) {
+  const r = S * (0.052 + Math.random() * 0.036);
+  for (let i = 0; i < 44; i++) {
+    const th = Math.random() * Math.PI * 2;
+    const ph = Math.acos(1 - 2 * Math.random());
+    const d  = r * Math.cbrt(Math.random());
+    addPt(
+      fx + d * Math.sin(ph) * Math.cos(th),
+      fy + d * Math.sin(ph) * Math.sin(th) * 0.70,
+      fz + d * Math.cos(ph),
+      2
+    );
+  }
+}
+
+function addBranch(x, y, z, polar, az, len, depth) {
+  const sinP = Math.sin(polar);
+  const cosP = Math.cos(polar);
+  const cosA = Math.cos(az);
+  const sinA = Math.sin(az);
+
+  const dx = sinP * cosA;
+  const dy = -cosP;          // negative = upward in WEBGL (Y down)
+  const dz = sinP * sinA;
+  const ex = x + dx * len;
+  const ey = y + dy * len;
+  const ez = z + dz * len;
+
+  // Leaf cluster at terminal branches
+  if (depth >= 4 || len < S * 0.022) {
+    addFlowerCluster(ex, ey, ez);
+    return;
+  }
+
+  // Particles along this branch segment
+  const segs = Math.max(3, Math.round(len / (S * 0.040)));
+  const bw   = S * 0.009 * Math.max(0.2, 1 - depth * 0.20);
+  for (let i = 0; i <= segs; i++) {
+    const tf = i / segs;
+    addPt(
+      x + (ex - x) * tf + (Math.random() - 0.5) * bw * 2,
+      y + (ey - y) * tf + (Math.random() - 0.5) * bw * 0.30,
+      z + (ez - z) * tf + (Math.random() - 0.5) * bw * 2,
+      1
+    );
+  }
+
+  // Sub-branches
+  const splits = depth === 1 ? 2 + Math.floor(Math.random() * 2) : 2;
+  for (let c = 0; c < splits; c++) {
+    const dPolar = 0.30 + Math.random() * 0.58;
+    const dAz    = az + (c / splits) * Math.PI * 2 + (Math.random() - 0.5) * 0.60;
+    addBranch(ex, ey, ez, polar + dPolar, dAz, len * (0.56 + Math.random() * 0.12), depth + 1);
+  }
+}
+
+function buildTree() {
+  N = 0;
+
+  // ── Trunk ──────────────────────────────────────────────────────────────────
+  const TRUNK_H = S * 0.44;
+  const SEGS    = 24;
+  for (let si = 0; si <= SEGS; si++) {
+    const tf = si / SEGS;
+    const ty = RY - TRUNK_H * tf;                          // grows upward
+    const tr = S * 0.016 * (1 - tf * 0.58);               // taper
+    const cx = Math.sin(tf * Math.PI) * S * 0.006;        // gentle curve
+    for (let j = 0; j < 10; j++) {
+      const a  = Math.random() * Math.PI * 2;
+      const rd = tr * Math.sqrt(Math.random());
+      addPt(cx + rd * Math.cos(a), ty, rd * Math.sin(a), 0);
+    }
+  }
+
+  // ── Main branches (evenly spaced in azimuth, staggered heights) ────────────
+  const mainDefs = [
+    { yf: 0.22, polar: 1.04, az: 0.00, lenF: 0.27 },
+    { yf: 0.26, polar: 1.10, az: 0.70, lenF: 0.26 },
+    { yf: 0.30, polar: 0.85, az: 1.57, lenF: 0.25 },
+    { yf: 0.33, polar: 1.08, az: 2.25, lenF: 0.24 },
+    { yf: 0.36, polar: 0.78, az: 3.14, lenF: 0.23 },
+    { yf: 0.39, polar: 1.00, az: 3.80, lenF: 0.22 },
+    { yf: 0.42, polar: 0.68, az: 4.55, lenF: 0.21 },
+    { yf: 0.44, polar: 0.88, az: 5.20, lenF: 0.19 },
+    { yf: 0.46, polar: 0.52, az: 5.90, lenF: 0.17 },
+  ];
+  for (const d of mainDefs) {
+    addBranch(0, RY - S * d.yf, 0, d.polar, d.az, S * d.lenF, 1);
+  }
+
+  // ── Ambient free particles (scattered loosely around tree volume) ───────────
+  for (let i = 0; i < 260; i++) {
+    addPt(
+      (Math.random() - 0.5) * S * 0.55,
+      RY - Math.random() * S * 0.54,
+      (Math.random() - 0.5) * S * 0.32,
+      3
+    );
+  }
+}
+
+// ── p5 sketch ─────────────────────────────────────────────────────────────────
+function setup() {
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  noiseDetail(3, 0.5);
+  S  = min(width, height);
+  RY = height * 0.28;
+  buildTree();
+}
+
+function draw() {
+  background(255);
+  T += 0.0011;
+
+  // Mouse in world space (approximately, at z = 0 plane)
+  const mwX = mouseX - width  * 0.5;
+  const mwY = mouseY - height * 0.5;
+  const REPEL = 130;
+  const R2    = REPEL * REPEL;
+
+  // ── Physics ────────────────────────────────────────────────────────────────
+  for (let i = 0; i < N; i++) {
+    const role = RO[i];
+
+    // Spring stiffness and wave amplitude per role
+    let sk, wa;
+    if      (role === 0) { sk = 0.054; wa = 0.07; }   // trunk: stiff, subtle sway
+    else if (role === 1) { sk = 0.030; wa = 0.20; }   // branch: medium
+    else if (role === 2) { sk = 0.015; wa = 0.40; }   // flower: loose, flutter freely
+    else                 { sk = 0.010; wa = 0.34; }   // free ambient
+
+    // Spring pull toward target position
+    VX[i] += (TX[i] - CX[i]) * sk;
+    VY[i] += (TY[i] - CY[i]) * sk;
+    VZ[i] += (TZ[i] - CZ[i]) * sk;
+
+    // Perlin noise wind — phase-shifted by height so wave travels up the tree
+    const ht = (RY - TY[i]) / (S * 0.48 + 0.001);   // 0 at root → 1 at top
+    const nt = T + ht * 0.52;                          // height phase delay
+
+    const nx = noise(CX[i] * 0.0036,         CZ[i] * 0.0036 + 7.3,  nt);
+    const nz = noise(CX[i] * 0.0036 + 13.1,  CZ[i] * 0.0036,        nt + 5.7);
+    const ny = noise(CY[i] * 0.0028 + 31.4,  nt + 11.2);
+
+    VX[i] += (nx - 0.5) * wa * 2.0;
+    VZ[i] += (nz - 0.5) * wa * 1.4;
+    VY[i] += (ny - 0.5) * wa * 0.40;
+
+    // Mouse repulsion (screen space)
+    const pdx = CX[i] - mwX;
+    const pdy = CY[i] - mwY;
+    const d2  = pdx * pdx + pdy * pdy;
+    if (d2 < R2 && d2 > 0.01) {
+      const d = Math.sqrt(d2);
+      const f = ((REPEL - d) / REPEL) * 7.5;
+      VX[i] += (pdx / d) * f;
+      VY[i] += (pdy / d) * f;
+      VZ[i] += (Math.random() - 0.5) * f * 0.55;
+    }
+
+    // Velocity damping
+    VX[i] *= 0.86; VY[i] *= 0.86; VZ[i] *= 0.86;
+    CX[i] += VX[i]; CY[i] += VY[i]; CZ[i] += VZ[i];
+  }
+
+  // ── Render — batch by color bucket for minimal state changes ───────────────
+  buckets[0].length = 0; buckets[1].length = 0;
+  buckets[2].length = 0; buckets[3].length = 0;
+
+  for (let i = 0; i < N; i++) {
+    buckets[Math.min(3, LA[i] * 4 | 0)].push(i);
+  }
+
+  noFill();
+  strokeWeight(1.5);
+
+  for (let g = 0; g < 4; g++) {
+    stroke(GRAYS[g]);
+    beginShape(POINTS);
+    const bkt = buckets[g];
+    for (let b = 0, bl = bkt.length; b < bl; b++) {
+      const i = bkt[b];
+      vertex(CX[i], CY[i], CZ[i]);
+    }
+    endShape();
+  }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  S  = min(width, height);
+  RY = height * 0.28;
+  buildTree();
+}
+</script>
+</body>
+</html>

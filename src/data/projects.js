@@ -1,5 +1,53 @@
 export const projects = [
   {
+    id: 9,
+    slug: 'gpuflight',
+    title: 'GPU Flight',
+    subtitle: 'Designing a developer-facing GPU observability dashboard from zero — research, UI, and frontend built with AI-assisted development.',
+    type: 'Web Dashboard',
+    category: 'Product Design',
+    company: null,
+    employment: 'Personal Project',
+    role: 'Product Designer & Frontend Developer',
+    timeline: '2026',
+    team: 'Andy Shin (Software Engineer)',
+    tags: ['developer-tools', 'data-visualization', 'open-source'],
+    image: null,
+    thumbnail: null,
+    tldr: 'Full product design and frontend development for an open-source GPU profiling dashboard — using vibe coding to research, design, and ship the entire React UI.',
+    overview: 'GPU Flight (gpufl) is an open-source GPU observability platform that gives developers a real-time window into CUDA application performance. Think of it as a flight recorder for GPUs — capturing kernel execution, occupancy, thread divergence, and system metrics in a structured, queryable format. I designed and built the entire web dashboard (gpufl-front) — from information architecture to visual design to React + TypeScript implementation — using AI-assisted development throughout.',
+    problem: 'GPU performance engineers working with CUDA had no lightweight, production-safe way to continuously observe what their applications were doing at the GPU level. Existing profiling tools (NSight, nvprof) required stopping the process, were too heavy for production use, and produced output that was hard to interpret without deep CUDA expertise. The challenge was designing a dashboard that made low-level GPU data readable, actionable, and fast — for a technical audience that values precision over polish.',
+    process: [
+      {
+        phase: 'Research',
+        description: 'Used AI-assisted research to rapidly understand the CUDA performance engineering domain — kernel occupancy, warp stall reasons, thread divergence, SASS metrics, NVML telemetry. Studied how existing developer tools (Grafana, DataDog, NSight) structure complex time-series and profiling data. Identified the core user need: surface the limiting resource immediately, without requiring users to already know what to look for.',
+      },
+      {
+        phase: 'Information Architecture',
+        description: 'Designed a three-tab mental model — Kernels, Scopes, System — mapping to the three natural levels of GPU analysis: micro (individual kernel launches), meso (grouped execution phases via scoping macros), and macro (system-wide utilization and health). This structure let engineers drill down progressively without getting lost.',
+      },
+      {
+        phase: 'UI Design',
+        description: 'Designed the full interface in a developer-tool aesthetic: dense but scannable, data-forward, with deliberate use of color only to signal state (occupancy thresholds, throttling flags, stall reason breakdowns). Prioritized the occupancy inspector and per-resource breakdown as the hero interaction — the moment where the tool earns its value.',
+      },
+      {
+        phase: 'Frontend Development',
+        description: 'Built the entire React + TypeScript dashboard using vibe coding — AI-assisted development for component architecture, data binding, and visualization logic. Shipped the 3-tab UI with timeline views, hierarchical scope trees, and real-time system metric charts. Live demo available at gpufl-front.vercel.app/demo.',
+      },
+    ],
+    challenges: [
+      'Designing for a highly technical domain (CUDA/GPU engineering) with no prior background — solved through rapid AI-assisted research and close collaboration with the backend engineer.',
+      'Making dense, low-level profiling data scannable without oversimplifying — kernel occupancy, limiting resources, stall reasons, and SASS metrics all needed to coexist without overwhelming the interface.',
+      'Owning the full stack as a designer — product decisions, visual design, and React implementation — required using AI-assisted development to close the gap between design intent and shipped code.',
+    ],
+    outcomes: [
+      'Designed and shipped the complete web dashboard (gpufl-front) — React + TypeScript, 3-tab architecture, live demo deployed.',
+      'Full product design ownership from IA to visual system to frontend code.',
+      'Open-source project actively maintained on GitHub (github.com/gpu-flight).',
+    ],
+    reflection: 'GPUFlight pushed me into a new working mode — using AI tools not just to assist design, but to compress the distance between designing and building. Being able to research a domain, design a system, and ship production frontend in the same workflow changed how I think about what a designer can own.',
+  },
+  {
     id: 1,
     slug: 'surface-it-toolkit',
     title: 'Surface IT Toolkit',

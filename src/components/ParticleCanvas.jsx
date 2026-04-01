@@ -23,7 +23,7 @@ const PEARL_LIGHT = ['#888899','#9090A8','#7878A0','#A0A0B8','#6868A0','#9898B0'
 function proj(wx, wy, wz, W, H, F) {
   const d = Math.max(F * 0.06, F + wz)
   const s = F / d
-  return { sx: W * 0.5 + wx * s, sy: H * 0.72 - wy * s, s }
+  return { sx: W * 0.72 + 50 + wx * s, sy: H * 0.52 - wy * s, s }
 }
 
 function rotate(wx, wy, wz, rX, rY) {

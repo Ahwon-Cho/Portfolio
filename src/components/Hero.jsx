@@ -1,65 +1,136 @@
+/* ART: dark editorial hero, left-aligned asymmetric layout, Playfair Display italic headline */
+/* UX: semantic section, accessible CTAs, meaningful heading hierarchy */
+/* MOTION: staggered text reveal, subtle badge pulse */
+import { useEffect, useRef } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import ParticleCanvas from './ParticleCanvas'
 
-function ArrowDownIcon() {
+const COMPANIES = ['Microsoft', 'Home Depot', 'Blue Cross NC', 'Samsung', 'LG']
+
+function ArrowIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
+      <path d="M7 17L17 7M7 7h10v10"/>
+    </svg>
+  )
+}
+
+function DownIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
       <path d="M12 5v14M5 12l7 7 7-7"/>
     </svg>
   )
 }
 
 export default function Hero({ darkMode = false }) {
+  const shouldReduce = useReducedMotion()
+
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: shouldReduce ? 0 : 0.12, delayChildren: shouldReduce ? 0 : 0.3 } },
+  }
+
+  const item = {
+    hidden: { opacity: 0, y: shouldReduce ? 0 : 28 },
+    show:   { opacity: 1, y: 0, transition: { duration: shouldReduce ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] } },
+  }
+
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-stone-50 dark:bg-stone-950">
-      {/* Particle background */}
+    <section
+      id="hero"
+      aria-label="Introduction"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-zinc-950"
+    >
+      {/* Particle background — unchanged */}
       <ParticleCanvas darkMode={darkMode} />
 
-      {/* Gradient orbs */}
-      <div className="absolute top-1/4 -left-48 w-96 h-96 rounded-full bg-gradient-to-br from-purple-200/30 to-pink-200/20 dark:from-purple-900/20 dark:to-pink-900/10 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-48 w-96 h-96 rounded-full bg-gradient-to-br from-teal-200/30 to-blue-200/20 dark:from-teal-900/20 dark:to-blue-900/10 blur-3xl pointer-events-none" />
+      {/* ART: gradient orbs for depth */}
+      <div className="absolute top-1/3 -left-64 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-violet-900/20 to-transparent blur-3xl pointer-events-none" aria-hidden="true" />
+      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-gradient-to-bl from-amber-900/10 to-transparent blur-3xl pointer-events-none" aria-hidden="true" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 text-center">
-        {/* Available badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-stone-200 dark:border-stone-700 bg-white/60 dark:bg-stone-900/60 backdrop-blur-sm text-xs font-medium text-stone-500 dark:text-stone-400 mb-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          Available for new opportunities
-        </div>
+      {/* ART: left-aligned layout — breaks convention, signals editorial confidence */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 w-full pt-24 pb-16 -translate-y-[50px]">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="max-w-3xl"
+        >
+          {/* UX: available status badge */}
+          <motion.div variants={item} className="mb-10">
+            <span className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-xs font-medium text-stone-400">
+              <span className="accent-dot" aria-hidden="true" />
+              Available for new opportunities
+            </span>
+          </motion.div>
 
-        {/* Headline */}
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold leading-[1.05] tracking-tight text-stone-900 dark:text-stone-100 mb-6">
-          Crafting experiences
-          <br />
-          <span className="italic font-normal text-stone-500 dark:text-stone-400">
-            that feel effortless.
-          </span>
-        </h1>
+          {/* ART: headline — Inter black + Playfair Display italic contrast */}
+          <motion.h1
+            variants={item}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-[84px] font-extrabold leading-[1.02] tracking-tight text-stone-100 mb-6"
+          >
+            I design complex
+            <br />
+            software that feels
+            <br />
+            {/* ART: lighter weight + stone-300 for the final line — elegant contrast within PJS */}
+            <span className="font-light text-stone-400">
+              remarkably simple.
+            </span>
+          </motion.h1>
 
-        {/* Description */}
-        <p className="max-w-2xl mx-auto text-base md:text-lg text-stone-500 dark:text-stone-400 leading-relaxed mb-12">
-          Senior designer with deep expertise spanning enterprise software, mobile applications,
-          and e-commerce. I bridge user research, systems thinking, and visual craft to build
-          products people love.
-        </p>
+          {/* UX: concise, specific value prop — not generic */}
+          <motion.p variants={item} className="text-base md:text-lg text-stone-400 leading-relaxed max-w-xl mb-12">
+            Senior UX &amp; visual designer. 10+ years building enterprise software, mobile apps,
+            and developer tools — from discovery to shipped product.
+          </motion.p>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary">
-            View My Work
-            <ArrowDownIcon />
-          </button>
-          <button onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })} className="btn-secondary">
-            Get in Touch
-          </button>
-        </div>
+          {/* UX: two clear CTAs, primary action first */}
+          <motion.div variants={item} className="flex flex-col sm:flex-row items-start gap-4 mb-16">
+            <button
+              onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
+              className="btn-primary"
+            >
+              View My Work
+              <DownIcon />
+            </button>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+            >
+              Download Résumé
+              <ArrowIcon />
+            </a>
+          </motion.div>
 
-        {/* Worked with */}
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-6">
-          <span className="text-xs text-stone-400 dark:text-stone-600 font-medium uppercase tracking-wide">Worked with</span>
-          {['Microsoft', 'Home Depot', 'Blue Cross NC', 'Samsung'].map((co) => (
-            <span key={co} className="text-xs font-semibold text-stone-500 dark:text-stone-500">{co}</span>
-          ))}
-        </div>
+          {/* ART: "Worked with" — company names as proof points, not just decoration */}
+          <motion.div variants={item} className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <span className="section-label text-stone-600">Worked with</span>
+            {COMPANIES.map((co) => (
+              <span key={co} className="text-xs font-semibold text-stone-500 tracking-wide">
+                {co}
+              </span>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
+
+      {/* ART: bottom scroll cue */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: shouldReduce ? 0 : 2, duration: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-stone-600"
+        aria-hidden="true"
+      >
+        <div className="flex flex-col items-center gap-1">
+          <div className="w-px h-8 bg-gradient-to-b from-transparent to-stone-600" />
+          <span className="text-[10px] tracking-[0.2em] uppercase">Scroll</span>
+        </div>
+      </motion.div>
     </section>
   )
 }

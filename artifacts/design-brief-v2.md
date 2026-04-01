@@ -79,8 +79,24 @@ _Created: 2026-03-29_
 
 ---
 
-## Next Steps
-1. Decide final top 4 (or confirm these recommendations)
-2. Design new editorial project layout
-3. Swap About photo placeholder + rewrite stats
-4. Refine hero headline
+## v2 Build Status — Complete
+Branch: `v2` | Build: ✓ clean
+
+### What was built
+- Dark editorial design — zinc-950 hero/footer/contact, ink-50 about, white projects
+- Playfair Display for all headlines and italic moments (font was already loaded)
+- Amber-400 accent — used sparingly on: available dot, progress bar, hover underlines, process step numbers, outcome checks, amber TL;DR badges
+- Left-aligned hero — breaks convention, signals editorial confidence
+- Philosophy interstitial section between About and Projects
+- Editorial project grid: GPUFlight full-width featured card, 5 cards in 3-col grid below
+- Framer Motion throughout: staggered hero reveal, scroll reveals, page transitions, reduced-motion respected
+- Skip nav link, ARIA landmarks, accessible form with required fields + success state
+- Scroll progress bar in header (amber)
+- Active section tracking in nav
+- Null image handled gracefully in both ProjectCard and ProjectDetail (gradient placeholder with title watermark)
+
+### Next steps
+1. Add your photo to About (replace the AC monogram placeholder)
+2. Add GPUFlight screenshots (drop images in /public/images/, update projects.js thumbnail)
+3. Update email/LinkedIn/Dribbble links in Contact.jsx
+4. Run /design-team again for fine-tuning pass

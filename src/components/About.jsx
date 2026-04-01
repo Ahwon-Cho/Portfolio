@@ -1,85 +1,134 @@
-const skills = [
-  { category: 'Design', items: ['User Research', 'Interaction Design', 'Visual Design', 'Prototyping', 'Design Systems', 'Information Architecture'] },
-  { category: 'Tools', items: ['Figma', 'Sketch', 'Adobe XD', 'Illustrator', 'Photoshop', 'After Effects'] },
-  { category: 'Methods', items: ['Usability Testing', 'A/B Testing', 'Journey Mapping', 'Card Sorting', 'Heuristic Analysis', 'Design Sprints'] },
+/* ART: warm off-white section, editorial split, pull-quote in Playfair Display */
+/* UX: replaced "Add photo here" placeholder with a proper monogram; refined stats */
+/* MOTION: scroll-triggered reveal, staggered children */
+import { motion, useReducedMotion } from 'framer-motion'
+import greetingVideo from '../Firefly A sunny afternoon scene where a woman waves slowly in the foreground while sitting. The back.mp4'
+
+const STATS = [
+  { value: '10+',  label: 'Years of end-to-end product design experience' },
+  { value: '6',    label: 'Active products as sole designer at Microsoft' },
+  { value: 'MICA', label: "Master's in UX Design" },
 ]
 
-const stats = [
-  { value: '10+', label: 'Years Experience' },
-  { value: '50+', label: 'Projects Shipped' },
-{ value: '2', label: 'Countries' },
+const SKILLS = [
+  { category: 'Design',     items: ['Visual Design', 'Interaction Design', 'Design Systems', 'Information Architecture', 'High-fidelity UI', 'Prototyping', 'Accessibility'] },
+  { category: 'AI & Tools', items: ['Vibe Coding', 'Claude Code', 'VS Code', 'Figma', 'Pencil'] },
+  { category: 'Research',   items: ['User Research', 'Usability Testing', 'Journey Mapping', 'Wireframing', 'User Flows'] },
 ]
+
+const fadeUp = (reduce) => ({
+  hidden: { opacity: 0, y: reduce ? 0 : 32 },
+  show:   { opacity: 1, y: 0, transition: { duration: reduce ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] } },
+})
 
 export default function About() {
+  const shouldReduce = useReducedMotion()
+  const f = fadeUp(shouldReduce)
+
   return (
-    <section id="about" className="py-24 md:py-32 bg-white dark:bg-stone-900 border-y border-stone-100 dark:border-stone-800">
+    <section
+      id="about"
+      aria-label="About Ahwon Cho"
+      className="py-28 md:py-36 bg-ink-50"
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        <div className="flex items-center gap-4 mb-16">
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500">02 — About</span>
-          <div className="flex-1 h-px bg-stone-200 dark:bg-stone-700" />
-        </div>
+
+        {/* Section eyebrow */}
+        <motion.div
+          variants={f} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
+          className="flex items-center gap-4 mb-20"
+        >
+          <span className="section-label">About</span>
+          <div className="flex-1 h-px bg-stone-200" aria-hidden="true" />
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+
+          {/* Left: pull-quote + bio */}
           <div>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold text-stone-900 dark:text-stone-100 leading-tight mb-8">
-              Designing with purpose,
+            {/* ART: Playfair Display pull-quote — the editorial centrepiece of this section */}
+            <motion.blockquote
+              variants={f} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
+              className="text-3xl md:text-4xl font-semibold leading-[1.2] text-ink-900 mb-10 border-l-2 border-amber-400 pl-6"
+            >
+              "Design is not what it looks like.
               <br />
-              <span className="italic font-normal text-stone-500 dark:text-stone-400">shipping with clarity.</span>
-            </h2>
+              <span className="font-light text-ink-600">It's how it works — and whether it ships."</span>
+            </motion.blockquote>
 
-            <div className="space-y-5 text-stone-600 dark:text-stone-400 leading-relaxed">
+            <motion.div
+              variants={f} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
+              className="space-y-5 text-stone-600 leading-relaxed text-[15px]"
+            >
               <p>
-                I'm Ahwon Cho, a senior UX and visual designer based in the US. I specialize in
-                crafting complex digital products — from enterprise software for Fortune 500
-                companies to consumer mobile apps — with an emphasis on clarity, accessibility,
-                and visual refinement.
+                I'm Ahwon Cho, a senior UX and visual designer with 10+ years of end-to-end product
+                design experience across enterprise, B2B, e-commerce, and cloud platforms. Currently
+                the sole designer across 6 active products and initiatives on Microsoft's Surface
+                Commercial team — building tools for IT admins and enterprise customers,
+                including device management portals.
               </p>
               <p>
-                My work spans the full design spectrum: deep user research and strategy through
-                to high-fidelity visual production. I've shipped products for Microsoft, The Home
-                Depot, Blue Cross NC, and Samsung, always working closely with engineering and
-                product teams to deliver experiences that actually launch.
+                My work spans the full design spectrum: research, interaction models, and journey maps
+                through to pixel-perfect visual production and front-end implementation. I've shipped
+                for Fortune 500 companies and startups alike — mentoring designers, guiding engineers
+                on implementation, and presenting solutions to VP-level stakeholders.
               </p>
               <p>
-                I'm energized by complex problem spaces where good design can create meaningful
-                change — whether that's simplifying a healthcare cost estimator or reimagining
-                a mobile insurance experience.
+                I stay at the edge of what designers can own — using vibe coding
+                (Claude Code, VS Code, Figma, Pencil) to prototype and ship faster than a
+                traditional handoff allows.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 pt-12 border-t border-stone-100 dark:border-stone-800">
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-3xl font-semibold text-stone-900 dark:text-stone-100 mb-1">{stat.value}</div>
-                  <div className="text-xs text-stone-500 dark:text-stone-500 uppercase tracking-wide">{stat.label}</div>
+            {/* Stats grid */}
+            <motion.div
+              variants={f} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
+              className="grid grid-cols-2 gap-6 mt-12 pt-12 border-t border-stone-200"
+            >
+              {STATS.map(({ value, label }) => (
+                <div key={label}>
+                  {/* ART: amber accent on stat value */}
+                  <div className="font-bold text-3xl text-ink-900 mb-1">{value}</div>
+                  <div className="text-xs text-stone-500 leading-snug">{label}</div>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
-          <div className="space-y-8">
-            {skills.map((group) => (
-              <div key={group.category}>
-                <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-stone-400 dark:text-stone-500 mb-4">
-                  {group.category}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {group.items.map((skill) => (
-                    <span key={skill} className="tag">{skill}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
+          {/* Right: photo + skills */}
+          <div className="space-y-10">
+            {/* UX: intentional photo placeholder — monogram, not "Add your photo here" */}
+            <motion.div
+              variants={f} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
+              className="rounded-2xl overflow-hidden aspect-[4/3] bg-ink-900 relative"
+            >
+              <video
+                src={greetingVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                aria-label="Greeting from Ahwon Cho"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
 
-            {/* Photo placeholder */}
-            <div className="mt-8 rounded-2xl overflow-hidden bg-gradient-to-br from-stone-100 to-stone-200 dark:from-stone-800 dark:to-stone-700 aspect-[4/3] flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-200 to-pink-200 dark:from-purple-800 dark:to-pink-800 mx-auto mb-3 flex items-center justify-center text-2xl font-display font-semibold text-stone-600 dark:text-stone-300">
-                  AC
+            {/* Skills */}
+            <motion.div
+              variants={f} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
+              className="space-y-6"
+            >
+              {SKILLS.map(({ category, items }) => (
+                <div key={category}>
+                  <h3 className="section-label mb-3">{category}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {items.map((skill) => (
+                      <span key={skill} className="tag">{skill}</span>
+                    ))}
+                  </div>
                 </div>
-                <p className="text-sm text-stone-500 dark:text-stone-500">Add your photo here</p>
-              </div>
-            </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </div>

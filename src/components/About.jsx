@@ -5,20 +5,20 @@ import { motion, useReducedMotion } from 'framer-motion'
 import greetingVideo from '../Firefly A sunny afternoon scene where a woman waves slowly in the foreground while sitting. The back.mp4'
 
 const STATS = [
-  { value: '10+',  label: 'Years of end-to-end product design experience' },
-  { value: '6',    label: 'Active products as sole designer at Microsoft' },
+  { value: '10+', label: 'Years of end-to-end product design experience' },
+  { value: '6', label: 'Active products as sole designer at Microsoft' },
   { value: 'MICA', label: "Master's in UX Design" },
 ]
 
 const SKILLS = [
-  { category: 'Design',     items: ['Visual Design', 'Interaction Design', 'Design Systems', 'Information Architecture', 'High-fidelity UI', 'Prototyping', 'Accessibility'] },
+  { category: 'Design', items: ['Visual Design', 'Interaction Design', 'Design Systems', 'Information Architecture', 'High-fidelity UI', 'Prototyping', 'Accessibility'] },
   { category: 'AI & Tools', items: ['Vibe Coding', 'Claude Code', 'VS Code', 'Figma', 'Pencil'] },
-  { category: 'Research',   items: ['User Research', 'Usability Testing', 'Journey Mapping', 'Wireframing', 'User Flows'] },
+  { category: 'Research', items: ['User Research', 'Usability Testing', 'Journey Mapping', 'Wireframing', 'User Flows'] },
 ]
 
 const fadeUp = (reduce) => ({
   hidden: { opacity: 0, y: reduce ? 0 : 32 },
-  show:   { opacity: 1, y: 0, transition: { duration: reduce ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: reduce ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] } },
 })
 
 export default function About() {

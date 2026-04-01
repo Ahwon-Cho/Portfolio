@@ -1,4 +1,5 @@
 import vibeCodingImg    from '../img/vibecoding01.png'
+import gpuFlightImg     from '../img/gpuflight01.png'
 import surfaceImg       from '../img/surface-it-toolkit.png'
 import blueConnectImg   from '../img/blueconnect-redesign.png'
 import blueCrossImg     from '../img/bluecross-cost-estimator.png'
@@ -13,7 +14,7 @@ export const projects = [
     id: 9,
     slug: 'gpuflight',
     title: 'GPU Flight',
-    subtitle: 'My first vibe-coding project — a designer entering an unknown domain, learning to ship React UI, and discovering what changes when design and code happen in the same breath.',
+    subtitle: 'My first vibe-coding project — a designer entering an unknown domain, learning to build React UI, and discovering what changes when design and code happen in the same breath.',
     type: 'Web Dashboard',
     category: 'Product Design',
     company: null,
@@ -24,8 +25,8 @@ export const projects = [
     tags: ['developer-tools', 'data-visualization'],
     wip: true,
     image: vibeCodingImg,
-    thumbnail: vibeCodingImg,
-    tldr: 'My first vibe-coding project. I knew nothing about GPU engineering. I designed and shipped a production React dashboard anyway — and it changed how I think about what a designer can own.',
+    thumbnail: gpuFlightImg,
+    tldr: 'My first vibe-coding project. I knew nothing about GPU engineering. I designed and built a production React dashboard anyway — and it changed how I think about what a designer can own.',
     overview: 'GPU Flight is a GPU observability platform that gives developers a real-time window into CUDA application performance — think of it as a flight recorder for GPUs. I came into this project knowing nothing about CUDA, kernel execution, or GPU profiling. The backend engineer, Andy Shin, built the data layer. I owned everything else: understanding the domain, defining the product, designing the interface, and building the entire React + TypeScript dashboard using vibe coding. This is the story of what I learned doing it.',
     problem: 'GPU performance engineers had no lightweight way to observe what their applications were doing in real time. Existing tools (NSight, nvprof) required stopping the process entirely — too disruptive for production use. The data they produced was dense and hard to read without deep CUDA expertise. My challenge was twofold: understand a highly technical domain I had never touched, then design an interface that made that complexity feel navigable to engineers who live in it every day.',
     process: [
@@ -43,7 +44,7 @@ export const projects = [
       },
       {
         phase: 'Designing and building in the same breath',
-        description: 'This was my first time shipping production frontend as a designer. Using Claude Code and VS Code, the feedback loop was immediate — describe it, see it, refine it. No handoff. No translation loss. No waiting. It changed how I made decisions: I stopped designing things that looked perfect in Figma but would be painful to build, and started designing things I could actually ship. The constraint became a creative tool — and I\'ll never go back to the old way.',
+        description: 'This was my first time building production frontend as a designer. Using Claude Code and VS Code, the feedback loop was immediate — describe it, see it, refine it. No handoff. No translation loss. No waiting. It changed how I made decisions: I stopped designing things that looked perfect in Figma but would be painful to build, and started designing things I could actually build. The constraint became a creative tool — and I\'ll never go back to the old way.',
       },
     ],
     challenges: [
@@ -52,11 +53,11 @@ export const projects = [
       'Directing AI output effectively as a designer — knowing when the code was wrong, and having enough front-end knowledge to fix it.',
     ],
     outcomes: [
-      'Shipped the complete web dashboard — React + TypeScript, 3-tab architecture, live demo deployed.',
-      'Proved that a designer can own a full technical product end-to-end using vibe coding.',
-      'Walked away with a new working method — and a much clearer view of what design skills are actually for.',
+      'Dashboard in progress — React + TypeScript, 3-tab architecture, live demo running.',
+      'Proving that a designer can own a full technical product end-to-end using vibe coding.',
+      'Developing a new working method — and a much clearer view of what design skills are actually for.',
     ],
-    reflection: 'GPU Flight changed what I think a designer is capable of. Vibe coding didn\'t make me a developer — it made me a designer who can ship without depending on a handoff. But the deeper finding was this: design skill matters more in this workflow, not less. AI can generate code — but it doesn\'t know how humans think, feel, or get confused. It can\'t decide what a person needs to see first, what creates anxiety, or what makes an interface feel trustworthy versus overwhelming. That understanding is still entirely human. If anything, this project made me more confident in the value of a trained design eye — because now that eye is the only thing standing between functional code and an experience people actually want to use.',
+    reflection: 'This project is still in progress. I\'ll share the full case study — including outcomes, learnings, and a deeper look at the design decisions — once it\'s complete.',
   },
   {
     id: 1,

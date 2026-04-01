@@ -272,7 +272,7 @@ export default function ProjectDetail() {
               <div className="flex-1 h-px bg-stone-200" />
             </div>
             <h2 id="reflection-heading" className="font-semibold text-2xl md:text-3xl text-ink-900 mb-6 leading-snug">
-              What I'd Do Differently
+              {project.wip ? 'More to Come' : "What I'd Do Differently"}
             </h2>
             {/* ART: blockquote styling for reflection */}
             <blockquote className="border-l-2 border-indigo-400 pl-6">

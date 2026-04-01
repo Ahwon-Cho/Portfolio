@@ -40,7 +40,7 @@ export default function Hero({ darkMode = false }) {
     <section
       id="hero"
       aria-label="Introduction"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-zinc-950"
+      className="relative min-h-[75vh] flex flex-col justify-center overflow-hidden bg-zinc-950"
     >
       {/* Particle background — unchanged */}
       <ParticleCanvas darkMode={darkMode} />

@@ -68,16 +68,14 @@ export default function Hero({ darkMode = false }) {
           {/* ART: headline — Inter black + Playfair Display italic contrast */}
           <motion.h1
             variants={item}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-[84px] font-extrabold leading-[1.02] tracking-tight text-stone-100 mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-normal leading-[1.02] tracking-tight text-stone-100 mb-6"
           >
             I design complex
             <br />
-            software that feels
+            software —
             <br />
             {/* ART: lighter weight + stone-300 for the final line — elegant contrast within PJS */}
-            <span className="font-light text-stone-400">
-              remarkably simple.
-            </span>
+            <span className="font-bold text-stone-400">simple, </span><span className="font-bold text-stone-300">crafted, </span><span className="font-bold text-white">human.</span>
           </motion.h1>
 
           {/* UX: concise, specific value prop — not generic */}

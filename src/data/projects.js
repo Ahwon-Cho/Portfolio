@@ -1,3 +1,4 @@
+import vibeCodingImg    from '../img/vibecoding01.png'
 import surfaceImg       from '../img/surface-it-toolkit.png'
 import blueConnectImg   from '../img/blueconnect-redesign.png'
 import blueCrossImg     from '../img/bluecross-cost-estimator.png'
@@ -22,8 +23,8 @@ export const projects = [
     team: 'Andy Shin (Software Engineer)',
     tags: ['developer-tools', 'data-visualization'],
     wip: true,
-    image: null,
-    thumbnail: null,
+    image: vibeCodingImg,
+    thumbnail: vibeCodingImg,
     tldr: 'My first vibe-coding project. I knew nothing about GPU engineering. I designed and shipped a production React dashboard anyway — and it changed how I think about what a designer can own.',
     overview: 'GPU Flight is a GPU observability platform that gives developers a real-time window into CUDA application performance — think of it as a flight recorder for GPUs. I came into this project knowing nothing about CUDA, kernel execution, or GPU profiling. The backend engineer, Andy Shin, built the data layer. I owned everything else: understanding the domain, defining the product, designing the interface, and building the entire React + TypeScript dashboard using vibe coding. This is the story of what I learned doing it.',
     problem: 'GPU performance engineers had no lightweight way to observe what their applications were doing in real time. Existing tools (NSight, nvprof) required stopping the process entirely — too disruptive for production use. The data they produced was dense and hard to read without deep CUDA expertise. My challenge was twofold: understand a highly technical domain I had never touched, then design an interface that made that complexity feel navigable to engineers who live in it every day.',

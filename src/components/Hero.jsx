@@ -80,8 +80,8 @@ export default function Hero({ darkMode = false }) {
 
           {/* UX: concise, specific value prop — not generic */}
           <motion.p variants={item} className="text-base md:text-lg text-stone-400 leading-relaxed max-w-xl mb-12">
-            Senior UX &amp; visual designer. 10+ years building enterprise software, mobile apps,
-            and developer tools — from discovery to shipped product.
+            Senior UX &amp; visual designer. 10+ years across enterprise software, e-commerce,
+            and admin tools — B2B and B2C, from discovery to shipped product.
           </motion.p>
 
           {/* UX: two clear CTAs, primary action first */}

@@ -68,10 +68,10 @@ export default function About() {
                 including device management portals.
               </p>
               <p>
-                My work spans the full design spectrum: research, interaction models, and journey maps
-                through to pixel-perfect visual production and front-end implementation. I've shipped
-                for Fortune 500 companies and startups alike — mentoring designers, guiding engineers
-                on implementation, and presenting solutions to VP-level stakeholders.
+                My work spans the full design spectrum — and AI has changed how I move through
+                all of it, from research to shipping. I've shipped for Fortune 500 companies and
+                startups alike — mentoring designers, guiding engineers on implementation, and
+                presenting solutions to VP-level stakeholders.
               </p>
               <p>
                 I stay at the edge of what designers can own — using vibe coding

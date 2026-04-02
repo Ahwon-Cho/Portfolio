@@ -261,7 +261,7 @@ export const projects = [
     subtitle: 'A full visual redesign that raised user satisfaction from 65 to 96 out of 100.',
     type: 'Mobile Application',
     category: 'Visual Design',
-    categories: ['Visual Design', 'UX Design'],
+    categories: ['Visual Design'],
     company: 'Blue Cross NC',
     employment: 'Contractor',
     role: 'Visual Interface Designer',

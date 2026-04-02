@@ -123,7 +123,7 @@ export default function Header({ darkMode, setDarkMode }) {
             <span className="font-display italic text-base font-normal text-stone-100 group-hover:text-white transition-colors">
               Ahwon Cho
             </span>
-            <span className="text-[10px] font-medium tracking-widest uppercase text-stone-500 group-hover:text-stone-400 transition-colors mt-0.5">
+            <span className="text-[10px] font-medium tracking-widest uppercase text-stone-300 group-hover:text-white transition-colors mt-0.5">
               UX / Visual Designer
             </span>
           </button>

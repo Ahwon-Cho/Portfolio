@@ -199,9 +199,6 @@ export default function SurfaceITCaseStudy() {
                 Product Design
               </span>
               <span className="text-sm font-medium text-stone-400">Microsoft</span>
-              <span className="text-xs font-medium text-stone-400 px-2.5 py-0.5 rounded-full border border-stone-200">
-                Full-time
-              </span>
             </motion.div>
 
             <motion.h1

@@ -180,7 +180,6 @@ export default function PantryNoteCaseStudy() {
 
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-2.5 mb-6">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border bg-emerald-50 text-emerald-700 border-emerald-100">Product Design</span>
-              <span className="text-sm font-medium text-stone-400">Personal Project</span>
             </motion.div>
 
             <motion.h1 variants={fadeUp} className="font-bold text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight mb-5">

@@ -163,7 +163,6 @@ export default function HomeDepotCaseStudy() {
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-2.5 mb-6">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border bg-blue-50 text-blue-700 border-blue-100">UX Design</span>
               <span className="text-sm font-medium text-stone-400">The Home Depot</span>
-              <span className="text-xs font-medium text-stone-400 px-2.5 py-0.5 rounded-full border border-stone-200">Contract</span>
             </motion.div>
 
             <motion.h1 variants={fadeUp} className="font-bold text-4xl md:text-5xl lg:text-6xl text-ink-900 leading-tight mb-5">

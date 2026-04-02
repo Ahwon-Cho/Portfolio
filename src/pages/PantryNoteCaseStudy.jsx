@@ -7,52 +7,68 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { getAdjacentProjects } from '../data/projects'
 
 const SLUG = 'pantry-note'
-const CDN  = 'https://cdn.myportfolio.com/f779c1db-0e78-4f40-83ba-b55379ff9d5c/'
+import pnHero        from '../img/pn_hero.gif'
+import pnScreens1    from '../img/pn_screens1.png'
+import pnScreens2    from '../img/pn_screens2.png'
+import pnInline      from '../img/pn_inline.gif'
+import pnScreens3    from '../img/pn_screens3.png'
+import pnTimeline    from '../img/pn_timeline.png'
+import pnSurvey1     from '../img/pn_survey1.jpg'
+import pnSurvey2     from '../img/pn_survey2.jpg'
+import pnPersona     from '../img/pn_persona.jpg'
+import pnJourney     from '../img/pn_journey.jpg'
+import pnMentalModel from '../img/pn_mentalmodel.jpg'
+import pnUserFlow    from '../img/pn_userflow.jpg'
+import pnColorSystem from '../img/pn_colorsystem.png'
+import pnWire1       from '../img/pn_wire1.png'
+import pnWire2       from '../img/pn_wire2.png'
+import pnWire3       from '../img/pn_wire3.png'
+import pnWire4       from '../img/pn_wire4.png'
+import pnWire5       from '../img/pn_wire5.png'
+import pnWire6       from '../img/pn_wire6.png'
+import pnWire7       from '../img/pn_wire7.png'
+import pnWire8       from '../img/pn_wire8.png'
+import pnWire9       from '../img/pn_wire9.png'
+import pnWire10      from '../img/pn_wire10.png'
+import pnWire11      from '../img/pn_wire11.png'
+import pnWire12      from '../img/pn_wire12.png'
+import pnWire13      from '../img/pn_wire13.png'
+import pnScreen1     from '../img/pn_screen1.png'
+import pnScreen2     from '../img/pn_screen2.png'
+import pnScreen3     from '../img/pn_screen3.png'
+import pnScreen4     from '../img/pn_screen4.png'
+import pnScreen5     from '../img/pn_screen5.png'
+import pnScreen6     from '../img/pn_screen6.png'
+import pnScreen7     from '../img/pn_screen7.png'
+import pnScreen8     from '../img/pn_screen8.png'
+import pnScreen9     from '../img/pn_screen9.png'
+import pnScreen10    from '../img/pn_screen10.png'
+import pnScreen11    from '../img/pn_screen11.png'
 
 const IMG = {
-  heroGif:     CDN + 'c9fe7672-6f0c-438b-a6a0-00d42f44056e_rw_1200.gif?h=e0852bbd39b3ff9baffdca8aa9b1ebd7',
-  screens1:    CDN + 'd8daa238-ad70-4a14-8993-3d62b08a1ca4_rw_1920.png?h=e55a3216cd8464c1e76bbc2ac01d172d',
-  screens2:    CDN + '38abcbc7-a331-4802-bd61-a78080c7fe47_rw_1920.png?h=3751727d95b63c0ab4c377037194de83',
-  inlineGif:   CDN + 'd90eabd3-4f4c-4ac7-a2ed-e42dd9f5f331_rw_1200.gif?h=d58331c5daa20a587b88b2334a280018',
-  screens3:    CDN + '2e2eee4c-0585-4a76-be56-597ff5c54f02_rw_1920.png?h=052f183601fa66e3cc927dc97217437d',
-  timeline:    CDN + '2395ff69-93a5-4a8e-906b-ed94f0ae80a3_rw_1200.png?h=60dbe20c2797e906a47382fd8cb725a5',
-  survey1:     CDN + '4afbe116-c1ac-4c9a-b635-b5793e559b97_rw_600.jpg?h=63647fc164791aed8c098acd1b71e801',
-  survey2:     CDN + 'b29806b8-b0a2-4ffb-8c93-23b152b2bee2_rw_600.jpg?h=a1366a5395778e0ca1bbdb4a5a519392',
-  persona:     CDN + '33ca7012-9b55-4ab9-9fd5-9ea6c2affbf9_rw_1200.jpg?h=c0ccb4b84b0c91d50781f8c0e1c561fa',
-  journey:     CDN + '78ac696d-dbb7-4fdb-89f0-6f1ef95f2164_rw_1920.jpeg?h=6c7020dacfa17a4885ce31ba0a2eb135',
-  mentalModel: CDN + 'be98ffb3-f2a7-4fc1-a801-679f992f9adb_rw_1200.jpg?h=ba13525d71fc2974c3ba9ffdce764aa7',
-  userFlow:    CDN + '71e7cdd6-19c9-4218-b35b-ff444b09a6cb_rw_1200.jpg?h=f7b1257545c7bf75c79c5a736409e025',
-  colorSystem: CDN + '3d27b5ef-54b4-47a5-a84a-e3d82ceb5910_rw_1200.png?h=b47d53ae006d7e962bec0eacfea19d35',
+  heroGif:     pnHero,
+  screens1:    pnScreens1,
+  screens2:    pnScreens2,
+  inlineGif:   pnInline,
+  screens3:    pnScreens3,
+  timeline:    pnTimeline,
+  survey1:     pnSurvey1,
+  survey2:     pnSurvey2,
+  persona:     pnPersona,
+  journey:     pnJourney,
+  mentalModel: pnMentalModel,
+  userFlow:    pnUserFlow,
+  colorSystem: pnColorSystem,
 }
 
 const WIREFRAMES = [
-  CDN + 'f0ea382d-f6cf-4086-bc40-e9acc06ed293_rw_600.png?h=b65be39703e48743933163c37215c3c7',
-  CDN + '5bd0136a-6301-4d4d-b580-d1af93b9456a_rw_600.png?h=6252ded126442ca123088038e8cb4332',
-  CDN + '670b82ae-60ad-4ac2-ab58-ca919c6dbf0c_rw_600.png?h=78be1f79e7389ba2f28afaf4b5e590aa',
-  CDN + 'c017db26-17c1-4bb1-9515-89a7d4261cf8_rw_600.png?h=30d3620d2adfd14238a1a21741769a51',
-  CDN + '80e435af-b5ea-4194-a556-fb275d529a42_rw_600.png?h=52f018fa8599f72a077370a97feee826',
-  CDN + 'c630ee84-c204-49fc-ac24-12db6342c1ad_rw_600.png?h=2c6a91faa943f1ca6dc133b5e3440414',
-  CDN + '82c9d2a7-570c-4807-af7a-bda64c3c0379_rw_600.png?h=5bda1fb5196edb514240b2a16599423a',
-  CDN + '6a0a8bff-3184-4aa6-bf24-5e4b6e19017c_rw_600.png?h=61bd452ee730be16b6e1d78b94815ec4',
-  CDN + '0619f232-1a76-4593-91ea-971ae3a8881f_rw_600.png?h=de270f10a229766383799454eefdcea0',
-  CDN + '3e843bc4-7348-4f1d-96f0-83958380362b_rw_600.png?h=4ecaf48550193ed34c00be899e26f28a',
-  CDN + 'bf47252a-e094-4d91-850c-49de7bbe77ce_rw_600.png?h=db3a848a6e5bbee72714039f2341337a',
-  CDN + '3eff2bd5-317f-472b-bc86-4e2a41fb5633_rw_600.png?h=50edb882bb96a610b853d71a88724aad',
-  CDN + '4d64a9fa-9e74-4cea-ab21-b3abc9e26d87_rw_600.png?h=293d86ace75dc72860f51014b425dfcf',
+  pnWire1, pnWire2, pnWire3, pnWire4, pnWire5, pnWire6, pnWire7,
+  pnWire8, pnWire9, pnWire10, pnWire11, pnWire12, pnWire13,
 ]
 
 const FINAL_SCREENS = [
-  CDN + '3c58f54d-aae7-49ec-a678-d9380da6b35f_rw_1200.png?h=7f31d89d526e217cebafc3fb1ce355e9',
-  CDN + '2f10d999-d0a8-412d-b377-5aa0f7e81d8d_rw_1200.png?h=15d282d2fc5a7c243cc50146255b6cf1',
-  CDN + 'a53646fe-b6cf-4bf4-9923-df6242d13b6a_rw_1200.png?h=880c050e58cb9d008ec236a18b22ea68',
-  CDN + '3e6c5428-79e5-4d95-90c3-30872429931b_rw_1200.png?h=0270000b90db4ac0742ca42bb0ad47c',
-  CDN + '0a3fa5ad-fa00-4431-b1c8-7717b1d48952_rw_1200.png?h=01de6b8be2e3558e6ad1ff1d30e8e68b',
-  CDN + '08f5b2a1-01d9-475a-8f17-8fc03690b0bf_rw_1200.png?h=ee99057e54bbe7bc927e7043f968bde0',
-  CDN + '8c64beae-fafa-4bde-9c48-7ba6050bc67b_rw_1200.png?h=a5b71e9e14d16a978407e48b36449e56',
-  CDN + '3a8a4a24-d362-4240-aea1-a813c3f98693_rw_1200.png?h=5b270c1816a892f0908ec485b2ae577b',
-  CDN + 'e59389b9-3624-497e-9c25-6da498b89646_rw_1200.png?h=537028b6e2a6be7f2d847f4fabcb8446',
-  CDN + 'b4159413-89f4-4a86-91ec-60cb66fe4ec9_rw_1200.png?h=79f1739f49bacdb8101c4c04d4b43b24',
-  CDN + '713e7703-8650-48ab-aa08-a83592a93efb_rw_1200.png?h=62ac2bb5fc6f2f2ee725fd37f60841d8',
+  pnScreen1, pnScreen2, pnScreen3, pnScreen4, pnScreen5, pnScreen6,
+  pnScreen7, pnScreen8, pnScreen9, pnScreen10, pnScreen11,
 ]
 
 /* ── Lightbox ─────────────────────────────────────────────── */

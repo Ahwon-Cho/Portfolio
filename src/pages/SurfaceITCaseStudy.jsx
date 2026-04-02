@@ -77,61 +77,58 @@ function Zoomable({ src, alt, className, children }) {
 const SLUG = 'surface-it-toolkit'
 
 /* ── Image inventory from reference page ──────────────────── */
-const CDN = 'https://cdn.myportfolio.com/f779c1db-0e78-4f40-83ba-b55379ff9d5c/'
+import sitHero1      from '../img/sit_hero1.png'
+import sitHero2      from '../img/sit_hero2.png'
+import sitHero3      from '../img/sit_hero3.png'
+import sitUefi       from '../img/sit_uefi.png'
+import sitFinal1     from '../img/sit_final1.png'
+import sitFinal2     from '../img/sit_final2.png'
+import sitFinal3     from '../img/sit_final3.png'
+import sitFinal4     from '../img/sit_final4.png'
+import sitFinal5     from '../img/sit_final5.png'
+import sitFinal6     from '../img/sit_final6.png'
+import sitFinal7     from '../img/sit_final7.png'
+import sitFinal8     from '../img/sit_final8.png'
+import sitFinal9     from '../img/sit_final9.png'
+import sitLegacy1    from '../img/sit_legacy1.png'
+import sitLegacy2    from '../img/sit_legacy2.png'
+import sitWireframe1 from '../img/sit_wireframe1.png'
+import sitWireframe2 from '../img/sit_wireframe2.png'
+import sitFlowchart  from '../img/sit_flowchart.png'
+import sitIconset    from '../img/sit_iconset.png'
 
 const HERO_IMAGES = [
-  {
-    src: CDN + '4712fd83-f8aa-400a-ab31-d8d6613e1f34_rw_1920.png?h=27f9fff96f7d191e6d9a413c4e13a4bd',
-    alt: 'Surface IT Toolkit — home screen redesign',
-  },
-  {
-    src: CDN + '7e44ecd9-93ad-4859-b23b-dc0686cda271_rw_1920.png?h=921057c3e5e50b21cf8543f3638ea2fc',
-    alt: 'Surface IT Toolkit — tool navigation redesign',
-  },
-  {
-    src: CDN + '5741493c-c078-4287-964e-c04f632a717d_rw_1920.png?h=d83700bf77069eaf7f2784d39f694bf8',
-    alt: 'Surface IT Toolkit — device management panel',
-  },
+  { src: sitHero1, alt: 'Surface IT Toolkit — home screen redesign' },
+  { src: sitHero2, alt: 'Surface IT Toolkit — tool navigation redesign' },
+  { src: sitHero3, alt: 'Surface IT Toolkit — device management panel' },
 ]
 
-const UEFI_SCREENSHOT = CDN + 'eaf4a5f5-0834-4450-aea7-913aada93aa8_rw_1920.png?h=e0257327489f30769ba0f2ef9334b1c6'
+const UEFI_SCREENSHOT = sitUefi
 
 const FINAL_DESIGNS = [
-  { src: CDN + 'e092c4f8-b045-45a1-8bc7-0e55ee8dc89d_rw_1200.png?h=724de717dc22f37c08c3a6a5668b524a', alt: 'Final design — home dashboard' },
-  { src: CDN + '40e72926-0e8b-425d-9ea8-f5894d0338a8_rw_1200.png?h=0edd99e54013e02bf90bdf52f2d33367', alt: 'Final design — tool list view' },
-  { src: CDN + 'd6f257f3-cee7-42fb-a63b-0074c830298c_rw_1200.png?h=d79f4739957e70bc65e6f66a49c9e14b', alt: 'Final design — UEFI Configurator' },
-  { src: CDN + '2af826b5-f59d-4b08-8d1f-241e15452876_rw_1200.png?h=438b12c95a91bbd4f541607f9c934ca8', alt: 'Final design — Data Eraser workflow' },
-  { src: CDN + 'd15fb61c-be64-4bc6-afef-20c3b66a06ce_rw_1200.png?h=19cc86b913c93785622962a9b385814f', alt: 'Final design — First Run Experience' },
-  { src: CDN + '48b65c95-d36a-45ad-853c-81dbea909f34_rw_1200.png?h=1cf2c5c1f04aeeaa3001ad2dc0c34b0a', alt: 'Final design — device diagnostics' },
-  { src: CDN + '339c69b3-4f71-40ff-a1a1-c77923318731_rw_1200.png?h=0bb34abb51365815e7cf3e61da59962d', alt: 'Final design — dark mode variant' },
-  { src: CDN + '029e0a20-6076-45f6-91dc-7c4222976e3f_rw_1200.png?h=a322f96f94e08312656d4c13bc89789d', alt: 'Final design — settings screen' },
-  { src: CDN + '7f6809ae-bfe1-4783-b583-44eb5c593055_rw_1200.png?h=93f2a0790eecd2797166fbd94a531f7c', alt: 'Final design — recovery workflow' },
+  { src: sitFinal1, alt: 'Final design — home dashboard' },
+  { src: sitFinal2, alt: 'Final design — tool list view' },
+  { src: sitFinal3, alt: 'Final design — UEFI Configurator' },
+  { src: sitFinal4, alt: 'Final design — Data Eraser workflow' },
+  { src: sitFinal5, alt: 'Final design — First Run Experience' },
+  { src: sitFinal6, alt: 'Final design — device diagnostics' },
+  { src: sitFinal7, alt: 'Final design — dark mode variant' },
+  { src: sitFinal8, alt: 'Final design — settings screen' },
+  { src: sitFinal9, alt: 'Final design — recovery workflow' },
 ]
 
 const LEGACY_DESIGNS = [
-  {
-    src: CDN + 'bb864f36-c55c-4f19-a3b8-f9af545090bf_rw_1920.png?h=f3f8d65bff354ec26f925654ac8117fc',
-    caption: 'Legacy Design and flow — UEFI Configurator',
-  },
-  {
-    src: CDN + '4634dfc1-296b-49d8-8ea2-6f236ba10cfd_rw_1920.png?h=b21ba5678170d988358aec87c97fa79d',
-    caption: 'Legacy Design and flow — Data Eraser',
-  },
+  { src: sitLegacy1,    caption: 'Legacy Design and flow — UEFI Configurator' },
+  { src: sitLegacy2,    caption: 'Legacy Design and flow — Data Eraser' },
 ]
 
 const WIREFRAMES = [
-  {
-    src: CDN + '028bb35a-ca69-468b-ae6a-3fac0ca234e8_rw_1920.png?h=c38f44a9bb5530fa941bf99eed3732c1',
-    caption: 'Wireframes — Data Eraser',
-  },
-  {
-    src: CDN + 'a09bdc61-3b7a-473a-858a-3a622fe7de10_rw_1920.png?h=291bbda1d2a838f64b664e209a2156cb',
-    caption: 'Wireframes — First Run Experience',
-  },
+  { src: sitWireframe1, caption: 'Wireframes — Data Eraser' },
+  { src: sitWireframe2, caption: 'Wireframes — First Run Experience' },
 ]
 
-const FLOWCHART_IMG = CDN + 'af22ce43-0676-431d-b0a2-70eb048c6142_rw_1200.png?h=c91ef71c7bf5e0bc889a3d08e54a37e4'
-const ICON_SET_IMG  = CDN + '29814a0f-0905-44af-8c40-43e85cfb253a_rw_1200.png?h=7c3078533484cbe953b32396a1987e0b'
+const FLOWCHART_IMG = sitFlowchart
+const ICON_SET_IMG  = sitIconset
 
 /* ── Sub-components ───────────────────────────────────────── */
 function BackIcon() {

@@ -89,11 +89,6 @@ export default function ProjectDetail() {
               {project.company && (
                 <span className="text-sm font-medium text-stone-400">{project.company}</span>
               )}
-              {project.employment && (
-                <span className="text-xs font-medium text-stone-400 px-2.5 py-0.5 rounded-full border border-stone-200">
-                  {project.employment}
-                </span>
-              )}
               {project.wip && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border bg-indigo-50 text-indigo-700 border-indigo-200">
                   <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" aria-hidden="true" />

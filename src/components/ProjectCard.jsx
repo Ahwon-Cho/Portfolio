@@ -60,11 +60,6 @@ function FeaturedCard({ project }) {
                   {project.company}
                 </span>
               )}
-              {!project.company && project.employment && (
-                <span className="text-xs font-medium text-stone-400 px-2.5 py-0.5 rounded-full border border-stone-200">
-                  {project.employment}
-                </span>
-              )}
               {project.wip && (
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium border bg-amber-50 text-amber-700 border-amber-200">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" aria-hidden="true" />

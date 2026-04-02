@@ -168,7 +168,7 @@ export default function HomeDepotCaseStudy() {
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-lg text-stone-500 leading-relaxed max-w-2xl mb-10">
-              Designing the post-purchase protection plan experience from zero — enabling customers
+              Designing the post-purchase protection plan experience — enabling customers
               to add coverage after checkout across a complex web of flows, item types, and two design systems in parallel.
             </motion.p>
 
@@ -176,7 +176,7 @@ export default function HomeDepotCaseStudy() {
               className="inline-flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 rounded-2xl bg-indigo-50 border border-indigo-100">
               <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">TL;DR</span>
               <p className="text-sm text-indigo-900 leading-relaxed">
-                Sole designer on a zero-to-one post-purchase experience at The Home Depot. Shipped GM items in week one,
+                Sole designer on the post-purchase experience at The Home Depot. Shipped GM items in week one,
                 hit edge cases, ran a 5-whys post-mortem, rebuilt flowchart-first — and earned the company design award.
               </p>
             </motion.div>

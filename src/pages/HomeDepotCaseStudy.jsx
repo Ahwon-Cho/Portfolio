@@ -17,7 +17,6 @@ import hdPostmortem   from '../img/hd_postmortem.png'
 import hdFlowchart    from '../img/hd_flowchart.png'
 import hdCollaboration from '../img/hd_collaboration.png'
 import hdPrototype    from '../img/hd_prototype.png'
-import hdUsertest1    from '../img/hd_usertest1.png'
 import hdUsertest2    from '../img/hd_usertest2.png'
 import hdDevhandoff1  from '../img/hd_devhandoff1.png'
 import hdDevhandoff2  from '../img/hd_devhandoff2.png'
@@ -42,7 +41,6 @@ const IMG = {
   flowchart:     hdFlowchart,
   collaboration: hdCollaboration,
   prototype:     hdPrototype,
-  usertest1:     hdUsertest1,
   usertest2:     hdUsertest2,
   devhandoff1:   hdDevhandoff1,
   devhandoff2:   hdDevhandoff2,
@@ -451,9 +449,8 @@ export default function HomeDepotCaseStudy() {
             <h2 id="testing-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-4">"Easier than expected."</h2>
             <p className="text-stone-500 mb-10 max-w-xl">The simplified HDPP post-purchase drawer was user-tested before launch. The result validated the interaction redesign.</p>
           </motion.div>
-          <div className="grid md:grid-cols-2 gap-5">
+          <div className="grid md:grid-cols-1 gap-5">
             {[
-              { src: IMG.usertest1, caption: 'User testing — session 1' },
               { src: IMG.usertest2, caption: 'User testing — session 2' },
             ].map((img, i) => (
               <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">

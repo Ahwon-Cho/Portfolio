@@ -5,32 +5,49 @@ import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { getAdjacentProjects } from '../data/projects'
+import hdDesignComp1  from '../img/hd_design_comp1.png'
+import hdDesignComp2  from '../img/hd_design_comp2.png'
+import hdDesignComp3  from '../img/hd_design_comp3.png'
+import hdDesignComp4  from '../img/hd_design_comp4.png'
+import hdChallenge1   from '../img/hd_challenge1.png'
+import hdChallenge2   from '../img/hd_challenge2.png'
+import hdSolution     from '../img/hd_solution.png'
+import hdProcess      from '../img/hd_process.png'
+import hdPostmortem   from '../img/hd_postmortem.png'
+import hdFlowchart    from '../img/hd_flowchart.png'
+import hdCollaboration from '../img/hd_collaboration.png'
+import hdPrototype    from '../img/hd_prototype.png'
+import hdUsertest1    from '../img/hd_usertest1.png'
+import hdUsertest2    from '../img/hd_usertest2.png'
+import hdDevhandoff1  from '../img/hd_devhandoff1.png'
+import hdDevhandoff2  from '../img/hd_devhandoff2.png'
+import hdDevhandoff3  from '../img/hd_devhandoff3.png'
+import hdReflection   from '../img/hd_reflection.png'
 
 const SLUG = 'home-depot-protection-plan'
-const CDN  = 'https://cdn.myportfolio.com/f779c1db-0e78-4f40-83ba-b55379ff9d5c/'
 
 const DESIGN_COMPS = [
-  { src: CDN + 'be1e0432-1bb2-481e-b393-9d1e11f3cdae_rw_1200.png?h=9da8eebe4b8d2f8e2823816362a38d6c', alt: 'GM item design — option 1' },
-  { src: CDN + '9d364fe5-eb0b-457a-8cf9-efa8ac2b3d00_rw_1200.png?h=0e6d5ba8625d46c6cde44ba4a6e3e2e1', alt: 'GM item design — option 2' },
-  { src: CDN + '11192701-914d-4674-86d4-0f1a7a50587a_rw_1200.png?h=70e9a9433d658ba919885f01f841220f', alt: 'GM item design — option 3' },
-  { src: CDN + '838f4f23-cb24-4710-b9b7-e5a344b1ef22_rw_1200.png?h=2bef5561f2f50a1ec04e999faccd8331', alt: 'GM item design — final selected' },
+  { src: hdDesignComp1, alt: 'GM item design — option 1' },
+  { src: hdDesignComp2, alt: 'GM item design — option 2' },
+  { src: hdDesignComp3, alt: 'GM item design — option 3' },
+  { src: hdDesignComp4, alt: 'GM item design — final selected' },
 ]
 
 const IMG = {
-  challenge1:    CDN + 'cc006309-66af-40b8-9597-a45c1031078f_rw_1200.png?h=930bfbb0558819d9d6386cfba42c1c5c',
-  challenge2:    CDN + '43f21d81-9a9d-4904-9818-8369034071a4_rw_1200.png?h=45aa49af59327fbf68d56274b6abcaa7',
-  solution:      CDN + '7fb565f1-ef19-4025-8fc5-750801e30360_rw_1200.png?h=6f2fa7ca7a06939e6f852c1527cdf2d6',
-  process:       CDN + '56b7d059-a380-4001-9475-a496da5d0c55_rw_1200.png?h=a3f2b7e6815475f5d91b0f2df3f3de69',
-  postmortem:    CDN + 'f88f2d5f-37a5-40ea-aaea-6dce2ada1f85_rw_1200.png?h=75ea4e2d2aa5594589fbece68406c12f',
-  flowchart:     CDN + '52c9a8d2-39ab-493a-9bbc-4885414df505_rw_1920.png?h=ca08825fa29a9485edca7c2f0b83a46f',
-  collaboration: CDN + '1b8add6f-adb8-4ca4-9bea-31dd43338bfc_rw_1200.png?h=e4d2eadc9071ec0c4aec0347047fabfe',
-  prototype:     CDN + '1d2f4ac1-8ff0-40af-a6e1-9e305e03c530_rw_1920.png?h=db8431035e07fd76185bfb774e8626de',
-  usertest1:     CDN + 'b6f81cbf-a03a-4498-9782-c2e853e750cd_rw_1200.png?h=abedbe40488bfe71b4bcb88f6c5ed902',
-  usertest2:     CDN + 'f437c584-9f24-462d-ba34-c2e7e7da24a9_rw_1920.png?h=b24f41149fa012d44010f9ed0f0330f4',
-  devhandoff1:   CDN + '92c76774-19a5-4cbc-9e5c-b01fd40c10a1_rw_1200.png?h=4b419a2356e6ce7fad717469f7811887',
-  devhandoff2:   CDN + '849fad7f-e26b-4cd7-b82f-c20ebf23a55c_rw_1920.png?h=85548a25716fafb3f22f3e976be88243',
-  devhandoff3:   CDN + '6140dd3e-eb7d-4aa1-a737-31dfe9fbc05a_rw_1200.png?h=f34c3f2ad1af5192ce418bf0232501d6',
-  reflection:    CDN + 'f2c14057-5976-4a66-92c5-db7f64a113f2_rw_1200.png?h=95b95995924be1b3288d8a09b4764d25',
+  challenge1:    hdChallenge1,
+  challenge2:    hdChallenge2,
+  solution:      hdSolution,
+  process:       hdProcess,
+  postmortem:    hdPostmortem,
+  flowchart:     hdFlowchart,
+  collaboration: hdCollaboration,
+  prototype:     hdPrototype,
+  usertest1:     hdUsertest1,
+  usertest2:     hdUsertest2,
+  devhandoff1:   hdDevhandoff1,
+  devhandoff2:   hdDevhandoff2,
+  devhandoff3:   hdDevhandoff3,
+  reflection:    hdReflection,
 }
 
 /* ── Lightbox ─────────────────────────────────────────────── */

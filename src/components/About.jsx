@@ -12,7 +12,7 @@ const STATS = [
 
 const SKILLS = [
   { category: 'Design', items: ['Visual Design', 'Interaction Design', 'Design Systems', 'Information Architecture', 'High-fidelity UI', 'Prototyping', 'Accessibility'] },
-  { category: 'AI & Tools', items: ['Vibe Coding', 'Claude Code', 'VS Code', 'Figma', 'Pencil'] },
+  { category: 'AI & Tools', items: ['Vibe Coding', 'Claude Code', 'VS Code', 'Figma'] },
   { category: 'Research', items: ['User Research', 'Usability Testing', 'Journey Mapping', 'Wireframing', 'User Flows'] },
 ]
 
@@ -75,10 +75,25 @@ export default function About() {
               </p>
               <p>
                 I stay at the edge of what designers can own — using vibe coding
-                (Claude Code, VS Code, Figma, Pencil) to prototype and ship faster than a
+                (Claude Code, VS Code, Figma) to prototype and ship faster than a
                 traditional handoff allows.
               </p>
             </motion.div>
+
+            {/* Featured Writing */}
+            <motion.a
+              href="https://medium.com/@acho_24144/my-team-used-ai-to-skip-design-for-mvp-heres-what-i-learned-98d13787fb91"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={f} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
+              className="group flex items-center gap-4 mt-10 px-5 py-4 rounded-lg bg-stone-100/80 hover:bg-amber-50 transition-colors duration-300"
+            >
+              <span className="section-label shrink-0" style={{ marginBottom: 0 }}>Writing</span>
+              <span className="text-ink-900 text-[15px] font-medium leading-snug group-hover:text-amber-700 transition-colors">
+                My Team Used AI to Skip Design for MVP — Here's What I Learned
+                <svg className="inline-block ml-1.5 w-3.5 h-3.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </span>
+            </motion.a>
 
             {/* Stats grid */}
             <motion.div

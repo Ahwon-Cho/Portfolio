@@ -87,7 +87,8 @@
 
   /* Amber accent dot (Available badge) */
   .accent-dot {
-    @apply w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse-slow;
+    @apply w-1.5 h-1.5 rounded-full bg-emerald-400;
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 }
 

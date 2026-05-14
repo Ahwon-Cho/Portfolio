@@ -32,9 +32,8 @@ function GitHubIcon() {
 }
 
 const LINKS = [
-  { Icon: EmailIcon,    label: 'Email',    href: 'mailto:august.dreams23@gmail.com',              value: 'august.dreams23@gmail.com'        },
+  { Icon: EmailIcon,    label: 'Email',    href: 'mailto:awony82@gmail.com',                     value: 'awony82@gmail.com'                },
   { Icon: LinkedInIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/ahwon-c-3bb41593/', value: 'linkedin.com/in/ahwon-c-3bb41593' },
-  { Icon: GitHubIcon,   label: 'GitHub',   href: 'https://github.com/Ahwon-Cho',                  value: 'github.com/Ahwon-Cho'             },
 ]
 
 const INPUT_BASE = `

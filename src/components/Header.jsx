@@ -117,7 +117,7 @@ export default function Header({ darkMode, setDarkMode }) {
               )
             })}
             <a
-              href="/Resume/AhwonCho_SeniorUXVisualDesigner.pdf"
+              href="/resume"
               target="_blank"
               rel="noopener noreferrer"
               className="nav-link"
@@ -180,7 +180,7 @@ export default function Header({ darkMode, setDarkMode }) {
               )
             })}
             <a
-              href="/Resume/AhwonCho_SeniorUXVisualDesigner.pdf"
+              href="/resume"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}

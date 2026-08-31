@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Analytics } from '@vercel/analytics/react'
 import Header from './components/Header'
 import About from './components/About'
 import Philosophy from './components/Philosophy'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
-import Footer from './components/Footer'
 import ProjectDetail from './pages/ProjectDetail'
 import SurfaceITCaseStudy from './pages/SurfaceITCaseStudy'
 import HomeDepotCaseStudy from './pages/HomeDepotCaseStudy'
@@ -28,6 +28,33 @@ function PageTransition({ children }) {
         {children}
       </motion.div>
     </AnimatePresence>
+  )
+}
+
+/* The résumé PDF, and the route that hands off to it.
+ *
+ * Vercel's analytics script only sees client-side route changes, so a link
+ * straight to the PDF is invisible in the dashboard. Sending people through a
+ * real route logs a pageview first, which is how résumé opens get counted on
+ * the free plan — custom events need Pro.
+ *
+ * The short delay gives that pageview time to leave before the tab navigates
+ * away, and the manual link covers the case where the redirect is blocked. */
+export const RESUME_FILE = '/Resume/AhwonCho_SeniorUXVisualDesigner.pdf'
+
+function ResumeRedirect() {
+  useEffect(() => {
+    const t = setTimeout(() => window.location.replace(RESUME_FILE), 300)
+    return () => clearTimeout(t)
+  }, [])
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center gap-3 bg-ink-50 px-6 text-center">
+      <p className="text-ink-900 text-lg font-medium">Opening résumé…</p>
+      <a href={RESUME_FILE} className="text-sm text-stone-500 underline hover:text-ink-900">
+        Click here if it doesn&rsquo;t open automatically
+      </a>
+    </div>
   )
 }
 
@@ -78,6 +105,7 @@ function AppContent() {
             <Route path="/work"                                element={<WorkPage />} />
             <Route path="/about"                               element={<AboutPage />} />
             <Route path="/contact"                             element={<ContactPage />} />
+            <Route path="/resume"                              element={<ResumeRedirect />} />
             {/* The walk used to live here. Kept as a redirect so shared or
                 bookmarked /landing links still land somewhere. */}
             <Route path="/landing"                             element={<Navigate to="/" replace />} />
@@ -88,7 +116,8 @@ function AppContent() {
           </Routes>
         </PageTransition>
       </main>
-      <Footer />
+      {/* Pageviews per route — no cookies, so no consent banner needed. */}
+      <Analytics />
     </div>
   )
 }

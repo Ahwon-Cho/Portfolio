@@ -87,8 +87,9 @@ const CARDS = [
   { label: 'About me', href: '/about', x:  1.08, r: 0.52, dy: -50, delay:  900, ph: 2.1, img: meImg },
   /* Tucked below and right of About me, and last to arrive. `solid` makes it
      text-only, and `external` keeps the click on the anchor's own behaviour so
-     it opens the PDF instead of routing. Label matches the header nav exactly. */
-  { label: 'Résumé',   href: '/Resume/AhwonCho_SeniorUXVisualDesigner.pdf',
+     it opens in a new tab rather than routing away from the walk — /resume then
+     logs the pageview and hands off to the PDF. Label matches the header nav. */
+  { label: 'Résumé',   href: '/resume',
     x: 1.68, r: 0.26, dy:  60, delay: 1800, ph: 4.0, solid: BUBBLE_GREEN, external: true },
 ]
 

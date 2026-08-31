@@ -36,7 +36,6 @@ import pnWire13      from '../img/pn_wire13.png'
 import pnScreen1     from '../img/pn_screen1.png'
 import pnScreen2     from '../img/pn_screen2.png'
 import pnScreen3     from '../img/pn_screen3.png'
-import pnScreen4     from '../img/pn_screen4.png'
 import pnScreen5     from '../img/pn_screen5.png'
 import pnScreen6     from '../img/pn_screen6.png'
 import pnScreen7     from '../img/pn_screen7.png'
@@ -67,7 +66,7 @@ const WIREFRAMES = [
 ]
 
 const FINAL_SCREENS = [
-  pnScreen1, pnScreen2, pnScreen3, pnScreen4, pnScreen5, pnScreen6,
+  pnScreen1, pnScreen2, pnScreen3, pnScreen5, pnScreen6,
   pnScreen7, pnScreen8, pnScreen9, pnScreen10, pnScreen11,
 ]
 

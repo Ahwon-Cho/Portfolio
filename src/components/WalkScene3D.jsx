@@ -67,24 +67,30 @@ const CARD_IN_AT   = 8500   // ms — when the first one starts
 const CARD_IN_MS   = 1400   // ms — how long each takes
 const CARD_IN_RISE = 18     // px it travels up while arriving
 
+/* Colours and type, declared before CARDS because the cards refer to them.
+   The caption band and the tail share one solid fill so the tail reads as a
+   continuation of the bubble rather than a shape stuck onto it. */
+const BUBBLE_INK   = '#1B211A'
+const BUBBLE_GREEN = '#2E4A2C'   // fill for text-only bubbles; ~9.9:1 with white
+const LABEL_SIZE   = 0.095       // one type size across every bubble
+const TAIL_W = 0.12   // width where the tail meets the bubble's edge
+const TAIL_H = 0.10   // how far it reaches past that edge
+
 /* `x` is metres either side of centre; `r` is the bubble's radius in metres.
    The girl's crop is ~1.35 m wide, so keeping `x - r` above ~0.7 leaves her
    path clear — and because she is drawn in front of the bubbles, grazing them
    reads as depth rather than collision.
    `dy` pushes a bubble down the screen in px, `delay` staggers its entrance,
-   and `ph` offsets its float so the two never bob in lockstep. */
+   and `ph` offsets its float so the three never bob in lockstep. */
 const CARDS = [
-  { label: 'My work',  href: '/work',  x: -1.45, r: 0.68, dy:  0, delay:   0, ph: 0,   img: workImg },
-  { label: 'About me', href: '/about', x:  1.08, r: 0.52, dy: 30, delay: 900, ph: 2.1, img: meImg },
+  { label: 'My work',  href: '/work',  x: -1.45, r: 0.68, dy:  25, delay:    0, ph: 0,   img: workImg },
+  { label: 'About me', href: '/about', x:  1.08, r: 0.52, dy: -50, delay:  900, ph: 2.1, img: meImg },
+  /* Tucked below and right of About me, and last to arrive. `solid` makes it
+     text-only, and `external` keeps the click on the anchor's own behaviour so
+     it opens the PDF instead of routing. Label matches the header nav exactly. */
+  { label: 'Résumé',   href: '/Resume/AhwonCho_SeniorUXVisualDesigner.pdf',
+    x: 1.68, r: 0.26, dy:  60, delay: 1800, ph: 4.0, solid: BUBBLE_GREEN, external: true },
 ]
-
-/* Speech-bubble tail, in metres. The caption bar and the tail share one solid
-   fill so the tail reads as a continuation of the bubble rather than a shape
-   stuck onto it — which is why the bar is solid here instead of the black-at-
-   half-opacity wash it used to be. */
-const BUBBLE_INK = '#1B211A'
-const TAIL_W = 0.12   // width where the tail meets the bubble's edge
-const TAIL_H = 0.10   // how far it reaches past that edge
 
 function drawCard(g, d, i) {
   const sel = d3.select(g)
@@ -95,6 +101,7 @@ function drawCard(g, d, i) {
   /* The tail leans back toward the girl walking between the two bubbles. */
   const inner = d.x < 0 ? 1 : -1
   const bx    = inner * R * 0.42
+  const ink   = d.solid || BUBBLE_INK   // tail matches whatever the bubble is
 
   /* Meet the circle where it actually curves: the tip springs from the edge
      directly below bx, while the base is tucked inside the arc at its widest
@@ -114,10 +121,27 @@ function drawCard(g, d, i) {
     .attr('d', `M ${bx - TAIL_W / 2} ${baseY} `
              + `L ${bx + TAIL_W / 2} ${baseY} `
              + `L ${bx + inner * TAIL_W * 0.7} ${tipY} Z`)
-    .attr('fill', BUBBLE_INK)
-    .attr('stroke', BUBBLE_INK)
+    .attr('fill', ink)
+    .attr('stroke', ink)
     .attr('stroke-width', 0.02)
     .attr('stroke-linejoin', 'round')
+
+  /* Text-only bubble: one filled circle with the label centred in it — no
+     photo, no caption band, but the same type size as its neighbours. */
+  if (d.solid) {
+    body.append('circle')
+      .attr('cx', 0).attr('cy', cy).attr('r', R)
+      .attr('fill', d.solid)
+    body.append('text')
+      .attr('x', 0).attr('y', cy + LABEL_SIZE * 0.35)   // optical centre
+      .attr('text-anchor', 'middle')
+      .attr('font-size', LABEL_SIZE)
+      .attr('font-weight', 700)
+      .attr('letter-spacing', 0.004)
+      .attr('fill', '#ffffff')
+      .text(d.label)
+    return
+  }
 
   body.append('circle')
     .attr('cx', 0).attr('cy', cy).attr('r', R)
@@ -142,7 +166,7 @@ function drawCard(g, d, i) {
   body.append('text')
     .attr('x', 0).attr('y', bandTop + bandH * 0.62)
     .attr('text-anchor', 'middle')
-    .attr('font-size', 0.095)
+    .attr('font-size', LABEL_SIZE)
     .attr('font-weight', 700)
     .attr('letter-spacing', 0.004)
     .attr('fill', '#ffffff')
@@ -162,7 +186,7 @@ export default function WalkScene3D({ progress, onNavigate }) {
       .attr('width', '100%').attr('height', '100%')
       .attr('role', 'img')
       .attr('aria-label',
-        'A girl and her two dogs walking toward you, between two floating speech bubbles')
+        'A girl and her two dogs walking toward you, among three floating speech bubbles')
       .style('display', 'block')
 
     /* Gradients */
@@ -321,14 +345,18 @@ export default function WalkScene3D({ progress, onNavigate }) {
 
     /* Floating cards */
     const cardSel = gCards.selectAll('a').data(CARDS).join('a')
+      .attr('class', 'w3d-bubble-link')
       .attr('href', d => d.href)
-      .attr('aria-label', d => d.label)
+      .attr('aria-label', d => (d.external ? `${d.label} (opens a PDF in a new tab)` : d.label))
+      .attr('target', d => (d.external ? '_blank' : null))
+      .attr('rel', d => (d.external ? 'noopener noreferrer' : null))
       .style('cursor', 'pointer')
       .on('mouseenter focus', (e, d) => { d.hover = true })
       .on('mouseleave blur', (e, d) => { d.hover = false })
-      /* Keep it a real link, but route in-app when it's a plain left click. */
+      /* Keep it a real link, but route in-app when it's a plain left click.
+         External targets fall through to the browser so the PDF opens. */
       .on('click', (e, d) => {
-        if (!onNavigate || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return
+        if (!onNavigate || d.external || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return
         e.preventDefault()
         onNavigate(d.href)
       })

@@ -3,21 +3,11 @@
 /* MOTION: staggered card entrance on scroll */
 import { motion, useReducedMotion } from 'framer-motion'
 import ProjectCard from './ProjectCard'
-import { projects as allData } from '../data/projects'
+import { featuredProjects } from '../data/projects'
 
-/* UX: define which projects to feature and in what order */
-const FEATURED_SLUGS = [
-  'surface-it-toolkit',
-  'gpuflight',
-  'pantry-note',
-  'blue-cross-cost-estimator',
-  'home-depot-protection-plan',
-  'blue-connect-mobile-app',
-]
-
-const featured = FEATURED_SLUGS
-  .map(slug => allData.find(p => p.slug === slug))
-  .filter(Boolean)
+/* Order and membership live in projects.js so the grid and the prev/next
+   tour cannot drift apart. */
+const featured = featuredProjects
   .map(p => ({
     id:          p.id,
     slug:        p.slug,

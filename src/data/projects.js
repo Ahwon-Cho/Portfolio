@@ -8,9 +8,6 @@ import blueConnectImg   from '../img/blueconnect-redesign.png'
 import blueCrossImg     from '../img/bluecross-cost-estimator.png'
 import homeDepotImg     from '../img/homedepot-protection-plan.png'
 import pantryNoteImg    from '../img/pantry-note.png'
-import teamsImg         from '../img/teams-anywhere.png'
-import samsungImg       from '../img/samsung-crazy.png'
-import ergoDaumImg      from '../img/ergo-daum-insurance.png'
 
 export const projects = [
   {
@@ -280,8 +277,8 @@ export const projects = [
     timeline: '2023',
     team: 'PM Tabish Javed',
     tags: ['future-of-work', 'narrative'],
-    image: teamsImg,
-    thumbnail: teamsImg,
+    image: null,      // 32x19 stub on disk — placeholder renders instead
+    thumbnail: null,
     tldr: 'Concept storyboards communicating a new B2B product vision for IT professionals managing distributed networks through Microsoft Teams.',
     overview: 'Microsoft Teams Anywhere is a concept initiative exploring a new B2B product that would make it easier for IT professionals to manage their company\'s network and equipment in a remote work environment — targeting existing Microsoft 365 and Teams customers.',
     problem: 'As hybrid and remote work became the norm, IT professionals faced increasing complexity managing distributed networks and devices without being physically present. There was no unified, Teams-integrated solution for remote network and equipment management.',
@@ -425,8 +422,8 @@ export const projects = [
     timeline: '2018',
     team: 'Samsung Marketing Team',
     tags: ['motion', 'campaign'],
-    image: samsungImg,
-    thumbnail: samsungImg,
+    image: null,      // 32x19 stub on disk — placeholder renders instead
+    thumbnail: null,
     tldr: 'High-impact motion design micro website for a Samsung product launch — built with Photoshop, Illustrator, and Flash.',
     overview: 'Samsung Crazy is a micro website campaign designed to generate buzz around a Samsung product launch. The project demanded bold, immersive visual design and motion-driven interactions to create an experience that felt as energetic as the product itself.',
     problem: 'Product launch campaigns need to stand out in crowded digital environments. A standard product page wouldn\'t generate the viral energy Samsung needed — the experience had to be as bold and unexpected as the "Crazy" brand positioning.',
@@ -472,8 +469,8 @@ export const projects = [
     timeline: '2017',
     team: 'Ergo Daum Marketing Team',
     tags: ['insurance', 'brand'],
-    image: ergoDaumImg,
-    thumbnail: ergoDaumImg,
+    image: null,      // 32x19 stub on disk — placeholder renders instead
+    thumbnail: null,
     tldr: 'Visual design for an insurance micro website — balancing Korean design sensibilities with trust, clarity, and modern aesthetics.',
     overview: 'Ergo Daum Insurance needed a micro website that communicated complex insurance products simply and built trust with Korean consumers. The challenge was balancing a modern visual aesthetic with the credibility and warmth that insurance customers expect.',
     problem: 'Insurance products are inherently complex and emotionally charged. The design needed to reduce cognitive load, build immediate trust, and make policy information feel accessible — all while maintaining the sophisticated aesthetic expected of a financial brand.',
@@ -512,10 +509,29 @@ export function getProjectBySlug(slug) {
   return projects.find((p) => p.slug === slug)
 }
 
+/* The curated set, in the order they appear on /work. Adjacency walks THIS
+   list, not `projects` — otherwise Next carries a reader out of the featured
+   work and into projects that were deliberately left off the grid. */
+export const FEATURED_SLUGS = [
+  'surface-it-toolkit',
+  'gpuflight',
+  'pantry-note',
+  'blue-cross-cost-estimator',
+  'home-depot-protection-plan',
+  'blue-connect-mobile-app',
+]
+
+export const featuredProjects = FEATURED_SLUGS
+  .map((slug) => projects.find((p) => p.slug === slug))
+  .filter(Boolean)
+
 export function getAdjacentProjects(slug) {
-  const index = projects.findIndex((p) => p.slug === slug)
+  const index = featuredProjects.findIndex((p) => p.slug === slug)
+  /* Not a featured project — reachable by direct URL, but it has no place
+     in the tour, so it offers no onward step. */
+  if (index === -1) return { prev: null, next: null }
   return {
-    prev: index > 0 ? projects[index - 1] : null,
-    next: index < projects.length - 1 ? projects[index + 1] : null,
+    prev: index > 0 ? featuredProjects[index - 1] : null,
+    next: index < featuredProjects.length - 1 ? featuredProjects[index + 1] : null,
   }
 }

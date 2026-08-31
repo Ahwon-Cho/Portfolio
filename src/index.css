@@ -24,6 +24,21 @@
     outline-offset: 3px;
     border-radius: 4px;
   }
+
+  /* The walk scene's nav bubbles are SVG <a> wrapping a <circle>. Chrome
+     paints its own focus ring on those, and because it follows the shape it
+     reads as a blue circle flashing around the bubble the moment it is
+     clicked — then the route change or the new tab takes it away. Drop the
+     ring for pointer input only; keyboard focus still gets a real one, in
+     the site's amber rather than the browser's blue. */
+  .w3d-bubble-link:focus:not(:focus-visible) {
+    outline: none;
+  }
+  .w3d-bubble-link:focus-visible {
+    outline: 2px solid #F59E0B;
+    outline-offset: 4px;
+    border-radius: 9999px;
+  }
 }
 
 /* ─── Components ─────────────────────────────────────────────── */

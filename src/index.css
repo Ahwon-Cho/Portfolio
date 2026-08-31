@@ -95,5 +95,5 @@
 /* ─── Scrollbar ──────────────────────────────────────────────── */
 ::-webkit-scrollbar              { width: 5px; }
 ::-webkit-scrollbar-track        { background: transparent; }
-::-webkit-scrollbar-thumb        { background: #3C3935; border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover  { background: #524E49; }
+::-webkit-scrollbar-thumb        { background: #383F36; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover  { background: #4C554A; }

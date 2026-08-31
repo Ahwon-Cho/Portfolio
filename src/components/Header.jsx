@@ -1,11 +1,11 @@
-/* UX: skip link, focus trap, active section tracking, keyboard nav */
+/* UX: skip link, focus trap, active route tracking, keyboard nav */
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
 const NAV = [
-  { label: 'Work',    href: '#projects' },
-  { label: 'About',   href: '#about'    },
-  { label: 'Contact', href: '#contact'  },
+  { label: 'Work',    to: '/work'    },
+  { label: 'About',   to: '/about'   },
+  { label: 'Contact', to: '/contact' },
 ]
 
 function SunIcon()  {
@@ -45,33 +45,16 @@ function CloseIcon() {
 }
 
 export default function Header({ darkMode, setDarkMode }) {
-  const [mobileOpen, setMobileOpen]   = useState(false)
-  const [activeSection, setActive]    = useState('')
-  const [scrollProgress, setProgress] = useState(0)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const drawerRef = useRef(null)
-  const navigate  = useNavigate()
   const location  = useLocation()
-  const isHome    = location.pathname === '/'
+  const pathname  = location.pathname
 
-  /* ── Scroll progress + active section ───────────────── */
-  useEffect(() => {
-    const onScroll = () => {
-      const el   = document.documentElement
-      const prog = el.scrollTop / (el.scrollHeight - el.clientHeight)
-      setProgress(Math.min(1, prog))
-
-      const sections = ['projects', 'about', 'contact']
-      for (const id of sections.reverse()) {
-        const el = document.getElementById(id)
-        if (el && el.getBoundingClientRect().top <= 120) {
-          setActive(id); return
-        }
-      }
-      setActive('')
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  /* Work stays active while viewing any case study */
+  const isActive = (to) =>
+    to === '/work'
+      ? pathname.startsWith('/work') || pathname.startsWith('/project')
+      : pathname === to
 
   /* ── Focus trap for mobile drawer ────────────────────── */
   useEffect(() => {
@@ -91,16 +74,6 @@ export default function Header({ darkMode, setDarkMode }) {
     return () => drawer.removeEventListener('keydown', trap)
   }, [mobileOpen])
 
-  const scrollTo = (href) => {
-    setMobileOpen(false)
-    if (isHome) {
-      const el = document.querySelector(href)
-      if (el) el.scrollIntoView({ behavior: 'smooth' })
-    } else {
-      navigate('/' + href)
-    }
-  }
-
   return (
     <>
       {/* UX: skip to main content for keyboard users */}
@@ -111,13 +84,13 @@ export default function Header({ darkMode, setDarkMode }) {
         Skip to main content
       </a>
 
-      <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-white/5">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950 border-b border-white/5">
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 h-14 flex items-center justify-between">
           {/* Logo */}
-          <button
-            onClick={() => isHome ? window.scrollTo({ top: 0, behavior: 'smooth' }) : navigate('/')}
-            aria-label="Go to home"
+          <Link
+            to="/landing"
+            aria-label="Ahwon Cho — landing page"
             className="flex flex-col items-start leading-none group"
           >
             <span className="font-display italic text-base font-normal text-stone-100 group-hover:text-white transition-colors">
@@ -126,25 +99,25 @@ export default function Header({ darkMode, setDarkMode }) {
             <span className="text-[10px] font-medium tracking-widest uppercase text-stone-300 group-hover:text-white transition-colors mt-0.5">
               UX / Visual Designer
             </span>
-          </button>
+          </Link>
 
           {/* Desktop nav */}
           <nav aria-label="Primary navigation" className="hidden md:flex items-center gap-8">
-            {NAV.map(({ label, href }) => {
-              const id = href.replace('#', '')
-              const isActive = activeSection === id
+            {NAV.map(({ label, to }) => {
+              const active = isActive(to)
               return (
-                <button
+                <Link
                   key={label}
-                  onClick={() => scrollTo(href)}
-                  className={`nav-link ${isActive ? 'text-white after:w-full' : ''}`}
+                  to={to}
+                  aria-current={active ? 'page' : undefined}
+                  className={`nav-link ${active ? 'text-white after:w-full' : ''}`}
                 >
                   {label}
-                </button>
+                </Link>
               )
             })}
             <a
-              href="/Resume/AhwonCho_SeniorProductDesigner.pdf"
+              href="/Resume/AhwonCho_SeniorUXVisualDesigner.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="nav-link"
@@ -190,19 +163,27 @@ export default function Header({ darkMode, setDarkMode }) {
           }`}
         >
           <div className="pt-20 px-8 flex flex-col gap-2">
-            {NAV.map(({ label, href }) => (
-              <button
-                key={label}
-                onClick={() => scrollTo(href)}
-                className="text-left py-3 text-lg font-medium text-stone-300 hover:text-white transition-colors border-b border-white/5"
-              >
-                {label}
-              </button>
-            ))}
+            {NAV.map(({ label, to }) => {
+              const active = isActive(to)
+              return (
+                <Link
+                  key={label}
+                  to={to}
+                  onClick={() => setMobileOpen(false)}
+                  aria-current={active ? 'page' : undefined}
+                  className={`text-left py-3 text-lg font-medium transition-colors border-b border-white/5 ${
+                    active ? 'text-white' : 'text-stone-300 hover:text-white'
+                  }`}
+                >
+                  {label}
+                </Link>
+              )
+            })}
             <a
-              href="/Resume/AhwonCho_SeniorProductDesigner.pdf"
+              href="/Resume/AhwonCho_SeniorUXVisualDesigner.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
               className="py-3 text-lg font-medium text-stone-300 hover:text-white transition-colors"
             >
               Résumé

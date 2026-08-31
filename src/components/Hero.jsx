@@ -2,6 +2,7 @@
 /* UX: semantic section, accessible CTAs, meaningful heading hierarchy */
 /* MOTION: staggered text reveal, subtle badge pulse */
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import ParticleCanvas from './ParticleCanvas'
 
@@ -11,14 +12,6 @@ function ArrowIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
       <path d="M7 17L17 7M7 7h10v10"/>
-    </svg>
-  )
-}
-
-function DownIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
     </svg>
   )
 }
@@ -40,7 +33,7 @@ export default function Hero({ darkMode = false }) {
     <section
       id="hero"
       aria-label="Introduction"
-      className="relative min-h-[75vh] flex flex-col justify-center overflow-hidden bg-zinc-950"
+      className="relative min-h-[calc(100vh-3.5rem)] flex flex-col justify-center overflow-hidden bg-zinc-950"
     >
       {/* Particle background — unchanged */}
       <ParticleCanvas darkMode={darkMode} />
@@ -86,15 +79,12 @@ export default function Hero({ darkMode = false }) {
 
           {/* UX: two clear CTAs, primary action first */}
           <motion.div variants={item} className="flex flex-col sm:flex-row items-start gap-4 mb-16">
-            <button
-              onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-primary"
-            >
+            <Link to="/work" className="btn-primary">
               View My Work
-              <DownIcon />
-            </button>
+              <ArrowIcon />
+            </Link>
             <a
-              href="/resume.pdf"
+              href="/Resume/AhwonCho_SeniorUXVisualDesigner.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"
@@ -116,19 +106,6 @@ export default function Hero({ darkMode = false }) {
         </motion.div>
       </div>
 
-      {/* ART: bottom scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: shouldReduce ? 0 : 2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-stone-600"
-        aria-hidden="true"
-      >
-        <div className="flex flex-col items-center gap-1">
-          <div className="w-px h-8 bg-gradient-to-b from-transparent to-stone-600" />
-          <span className="text-[10px] tracking-[0.2em] uppercase">Scroll</span>
-        </div>
-      </motion.div>
     </section>
   )
 }

@@ -3,6 +3,24 @@
 /* MOTION: scroll-triggered reveal, staggered children */
 import { motion, useReducedMotion } from 'framer-motion'
 import greetingVideo from '../Firefly A sunny afternoon scene where a woman waves slowly in the foreground while sitting. The back.mp4'
+import { Zoomable } from './Lightbox'
+import art01 from '../img/art01.png'
+import art02 from '../img/art02.png'
+import art03 from '../img/art03.png'
+import art04 from '../img/art04.png'
+import art05 from '../img/art05.png'
+import art06 from '../img/art06.png'
+import art07 from '../img/art07.png'
+
+const ART_WORKS = [
+  { src: art01, alt: 'Art class study, 2019 — 1' },
+  { src: art02, alt: 'Art class study, 2019 — 2' },
+  { src: art03, alt: 'Art class study, 2019 — 3' },
+  { src: art04, alt: 'Art class study, 2019 — 4' },
+  { src: art05, alt: 'Art class study, 2019 — 5' },
+  { src: art06, alt: 'Art class study, 2019 — 6' },
+  { src: art07, alt: 'Art class study, 2019 — 7' },
+]
 
 const STATS = [
   { value: '10+', label: 'Years of end-to-end product design experience' },
@@ -29,18 +47,9 @@ export default function About() {
     <section
       id="about"
       aria-label="About Ahwon Cho"
-      className="py-28 md:py-36 bg-ink-50"
+      className="min-h-[calc(100vh-3.5rem)] pt-32 pb-28 md:pt-40 md:pb-36 bg-ink-50"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-
-        {/* Section eyebrow */}
-        <motion.div
-          variants={f} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
-          className="flex items-center gap-4 mb-20"
-        >
-          <span className="section-label">About</span>
-          <div className="flex-1 h-px bg-stone-200" aria-hidden="true" />
-        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
@@ -77,6 +86,22 @@ export default function About() {
                 I stay at the edge of what designers can own — using vibe coding
                 (Claude Code, VS Code, Figma) to prototype and ship faster than a
                 traditional handoff allows.
+              </p>
+              <p>
+                Craft matters to me, but so does how the work gets made. I listen — to
+                users describing a problem in their own words, and to colleagues who see
+                something I've missed. Great solutions can come from anyone, which is why
+                I work closely with cross-functional teams and other designers. Taking the
+                time to understand where someone is coming from produces better designs,
+                and a better team to build them with.
+              </p>
+              <p>
+                Design shapes how people feel, what they do, and what they decide. I'm
+                drawn to motivators and behavior change — how design can move someone
+                toward a better outcome, and make a meaningful difference. It's the
+                question behind my ongoing machine learning studies: understanding these
+                systems well enough to build products that genuinely serve the people
+                using them.
               </p>
             </motion.div>
 
@@ -146,6 +171,44 @@ export default function About() {
             </motion.div>
           </div>
         </div>
+
+        {/* Art class, 2019 — masonry columns so each piece keeps its own
+            proportions rather than being cropped to a uniform tile. */}
+        <motion.div
+          variants={f} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
+          className="mt-24 pt-16 border-t border-stone-200"
+        >
+          <h3 className="section-label mb-3">Art class, 2019</h3>
+          <p className="text-stone-500 text-[15px] leading-relaxed max-w-xl mb-8">
+            Work from a drawing and painting course I took in 2019. Time away from
+            the screen that still shows up in how I think about form and light.
+          </p>
+
+          <div className="columns-2 md:columns-3 gap-4 [column-fill:_balance]">
+            {ART_WORKS.map(({ src, alt }) => (
+              <div key={src} className="mb-4 break-inside-avoid">
+                <Zoomable src={src} alt={alt}>
+                  <img
+                    src={src}
+                    alt={alt}
+                    loading="lazy"
+                    className="w-full rounded-xl border border-stone-200 hover:opacity-95 transition-opacity duration-300"
+                  />
+                </Zoomable>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Sign-off — closes the page in the same voice as the letter on Contact */}
+        <motion.p
+          variants={f} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
+          className="mt-20 max-w-xl text-stone-600 leading-relaxed text-[15px]"
+        >
+          I hope you enjoy the work here, and the possibilities it points to. I'm
+          excited about what comes next — and I'd love to build something with you.
+          Thanks for visiting.
+        </motion.p>
       </div>
     </section>
   )

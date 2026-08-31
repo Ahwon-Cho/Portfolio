@@ -1,7 +1,6 @@
-/* ART: dark contact section matching hero — creates bookend rhythm with hero */
-/* UX: personal opening hook, accessible form with required fields, aria-live for status */
-/* MOTION: scroll reveal, form input micro-interactions */
-import { useState } from 'react'
+/* ART: warm off-white page, narrow single column — reads like a letter, not a pitch */
+/* UX: no form, no ask — an open invitation with two direct ways to reach out */
+/* MOTION: gentle staggered reveal */
 import { motion, useReducedMotion } from 'framer-motion'
 
 function EmailIcon() {
@@ -23,109 +22,162 @@ function LinkedInIcon() {
   )
 }
 
-function GitHubIcon() {
+function ArrowIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5" aria-hidden="true">
-      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
+      <path d="M7 17L17 7M7 7h10v10"/>
     </svg>
   )
 }
 
 const LINKS = [
-  { Icon: EmailIcon,    label: 'Email',    href: 'mailto:awony82@gmail.com',                     value: 'awony82@gmail.com'                },
-  { Icon: LinkedInIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/ahwon-c-3bb41593/', value: 'linkedin.com/in/ahwon-c-3bb41593' },
+  {
+    Icon: EmailIcon,
+    label: 'Email',
+    value: 'awony82@gmail.com',
+    href: 'mailto:awony82@gmail.com',
+    note: 'The most direct way',
+  },
+  {
+    Icon: LinkedInIcon,
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/ahwon-c',
+    href: 'https://www.linkedin.com/in/ahwon-c-3bb41593/',
+    note: 'If you prefer to connect first',
+  },
 ]
 
-const INPUT_BASE = `
-  w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10
-  text-stone-200 placeholder:text-stone-600
-  focus:outline-none focus:ring-1 focus:ring-amber-400/60 focus:border-amber-400/40
-  text-sm transition-all duration-200
-`
+/* UX: things worth talking about — invites a conversation, not an application */
+const TOPICS = [
+  'Design and AI',
+  'Vibe coding',
+  'Enterprise UX',
+  'Portfolio feedback',
+  'Getting into UX',
+  'Whatever you\'re building',
+]
 
 export default function Contact() {
-  const [status, setStatus]   = useState('idle') // idle | sending | sent
-  const shouldReduce          = useReducedMotion()
+  const shouldReduce = useReducedMotion()
 
   const fadeUp = {
-    hidden: { opacity: 0, y: shouldReduce ? 0 : 32 },
+    hidden: { opacity: 0, y: shouldReduce ? 0 : 24 },
     show:   { opacity: 1, y: 0, transition: { duration: shouldReduce ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] } },
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setStatus('sending')
-    setTimeout(() => setStatus('sent'), 1200)
+  const stagger = {
+    hidden: {},
+    show:   { transition: { staggerChildren: shouldReduce ? 0 : 0.09 } },
   }
 
   return (
     <section
       id="contact"
-      aria-label="Contact Ahwon Cho"
-      className="py-28 md:py-36 bg-zinc-950 border-t border-white/5"
+      aria-label="Say hello to Ahwon Cho"
+      className="min-h-[calc(100vh-3.5rem)] pt-32 pb-28 md:pt-40 md:pb-36 bg-ink-50"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: '-80px' }}
+        className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20"
+      >
 
-        {/* Section header */}
-        <motion.div
-          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
-          className="flex items-center gap-4 mb-20"
+        {/* Two columns, as on the About page: the letter reads on the left, the
+            ways to reach me collect on the right. Fills the same shell width as
+            every other page while each column keeps its own reading measure. */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+
+          {/* Left — the letter */}
+          <motion.div>
+
+        {/* ART: warm headline — the italic line does the softening */}
+        <motion.h2
+          variants={fadeUp}
+          className="font-bold text-4xl md:text-5xl text-ink-900 leading-[1.15] mb-8"
         >
-          <span className="section-label text-stone-600">Contact</span>
-          <div className="flex-1 h-px bg-white/5" aria-hidden="true" />
+          I'd genuinely love
+          <br />
+          to hear from you.
+          <span className="block font-display italic font-normal text-stone-400 mt-3 text-3xl md:text-4xl">
+            No agenda required.
+          </span>
+        </motion.h2>
+
+        {/* ART: amber rule — the one warm accent, echoes the About pull-quote */}
+        <motion.div variants={fadeUp} className="w-12 h-0.5 bg-amber-400 mb-8" aria-hidden="true" />
+
+        <motion.div
+          variants={fadeUp}
+          className="space-y-5 text-stone-600 leading-relaxed text-[15px] md:text-base"
+        >
+          <p>
+            Some of my favorite conversations started with a message from someone I'd
+            never met — a question about a project, a half-formed idea, or a note that
+            just said hi.
+          </p>
+          <p>
+            So if something here stuck with you, or you're chewing on a problem and want
+            to think out loud with someone, I'm always happy to listen. I read everything
+            that comes in.
+          </p>
         </motion.div>
 
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-12">
+          </motion.div>
 
-          {/* Left: heading + description */}
-          <div className="max-w-xl">
-            <motion.h2
-              variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
-              className="font-bold text-4xl md:text-5xl text-stone-100 leading-tight mb-6"
-            >
-              Building something complex?
-              <br />
-              <span className="text-stone-400 font-normal">
-                Let's make it feel simple.
-              </span>
-            </motion.h2>
+          {/* Right — topics and the ways to reach me */}
+          <motion.div>
 
-            <motion.p
-              variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
-              className="text-stone-400 leading-relaxed"
-            >
-              Open to senior IC and lead design roles at companies where design has a real
-              seat at the table — especially in enterprise software, e-commerce, and
-              AI/developer tools.
-            </motion.p>
-          </div>
-
-          {/* Right: contact links */}
-          <motion.div
-            variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
-            className="space-y-4 flex-shrink-0 mt-[50px]"
-          >
-            {LINKS.map(({ Icon, label, href, value }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Contact via ${label}: ${value}`}
-                className="flex items-center gap-4 group"
-              >
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/5 border border-white/8 text-stone-400 group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600 transition-all duration-200">
-                  <Icon />
-                </div>
-                <div>
-                  <div className="text-xs text-stone-600 uppercase tracking-wide mb-0.5">{label}</div>
-                  <div className="text-sm font-medium text-stone-300 group-hover:text-white transition-colors">{value}</div>
-                </div>
-              </a>
+        {/* Topics — warm, low-stakes conversation starters */}
+        <motion.div variants={fadeUp}>
+          <h3 className="section-label mb-4">Things I never get tired of</h3>
+          <div className="flex flex-wrap gap-2">
+            {TOPICS.map((topic) => (
+              <span key={topic} className="tag">{topic}</span>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Contact links — warm cards, amber on hover */}
+        <motion.div variants={fadeUp} className="mt-12 pt-12 border-t border-stone-200 space-y-3">
+          {LINKS.map(({ Icon, label, value, href, note }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${label}: ${value}`}
+              className="group flex items-center gap-4 p-4 rounded-2xl bg-white border border-stone-200 hover:border-amber-300 hover:bg-amber-50/50 transition-all duration-300"
+            >
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-stone-100 text-stone-500 group-hover:bg-amber-400 group-hover:text-ink-900 transition-all duration-300 flex-shrink-0">
+                <Icon />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-medium text-ink-900 truncate">{value}</div>
+                <div className="text-xs text-stone-500 mt-0.5">{note}</div>
+              </div>
+              <span className="text-stone-300 group-hover:text-amber-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 flex-shrink-0" aria-hidden="true">
+                <ArrowIcon />
+              </span>
+            </a>
+          ))}
+        </motion.div>
+
           </motion.div>
         </div>
-      </div>
+
+        {/* ART: signature closes the letter */}
+        <motion.p
+          variants={fadeUp}
+          className="mt-16 text-stone-500 text-[15px] leading-relaxed"
+        >
+          Talk soon,
+          <span className="block font-display italic text-2xl text-ink-900 mt-1">
+            Ahwon
+          </span>
+        </motion.p>
+      </motion.div>
     </section>
   )
 }

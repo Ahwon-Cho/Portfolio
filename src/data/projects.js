@@ -1,5 +1,8 @@
 import vibeCodingImg    from '../img/vibecoding01.png'
-import gpuFlightImg     from '../img/gpuflight01.png'
+import gpuThumbImg      from '../img/thumb-gpu.png'
+import gfSystemPalette  from '../img/system02.png'
+import gfSystemAtom     from '../img/system01.png'
+import gfSystemTemplate from '../img/system03.png'
 import surfaceImg       from '../img/surface-it-toolkit.png'
 import blueConnectImg   from '../img/blueconnect-redesign.png'
 import blueCrossImg     from '../img/bluecross-cost-estimator.png'
@@ -14,7 +17,7 @@ export const projects = [
     id: 9,
     slug: 'gpuflight',
     title: 'GPU Flight',
-    subtitle: 'My first vibe-coding project — a designer entering an unknown domain, learning to build React UI, and discovering what changes when design and code happen in the same breath.',
+    subtitle: 'My first vibe-coding project — a designer entering an unknown domain, building a React dashboard, and then building the design system that gave it an identity of its own and kept it coherent when I could not be in the room.',
     type: 'Web Dashboard',
     category: 'Product Design',
     company: null,
@@ -22,11 +25,11 @@ export const projects = [
     role: 'Product Designer & Frontend Developer',
     timeline: '2026',
     team: 'Andy Shin (Software Engineer)',
-    tags: ['developer-tools', 'data-visualization'],
+    tags: ['developer-tools', 'data-visualization', 'design-systems'],
     wip: true,
     image: vibeCodingImg,
-    thumbnail: gpuFlightImg,
-    tldr: 'My first vibe-coding project. I knew nothing about GPU engineering. I designed and built a production React dashboard anyway — and it changed how I think about what a designer can own.',
+    thumbnail: gpuThumbImg,
+    tldr: 'My first vibe-coding project. I knew nothing about GPU engineering, and I could only work on it part-time. Generating screens turned out to be the easy part — keeping them consistent, and stopping them from looking like every other AI-generated product, was the real problem. So I built a design system to solve both.',
     overview: 'GPU Flight is a GPU observability platform that gives developers a real-time window into CUDA application performance — think of it as a flight recorder for GPUs. I came into this project knowing nothing about CUDA, kernel execution, or GPU profiling. The backend engineer, Andy Shin, built the data layer. I owned everything else: understanding the domain, defining the product, designing the interface, and building the entire React + TypeScript dashboard using vibe coding. This is the story of what I learned doing it.',
     problem: 'GPU performance engineers had no lightweight way to observe what their applications were doing in real time. Existing tools (NSight, nvprof) required stopping the process entirely — too disruptive for production use. The data they produced was dense and hard to read without deep CUDA expertise. My challenge was twofold: understand a highly technical domain I had never touched, then design an interface that made that complexity feel navigable to engineers who live in it every day.',
     process: [
@@ -46,18 +49,74 @@ export const projects = [
         phase: 'Designing and building in the same breath',
         description: 'This was my first time building production frontend as a designer. Using Claude Code and VS Code, the feedback loop was immediate — describe it, see it, refine it. No handoff. No translation loss. No waiting. It changed how I made decisions: I stopped designing things that looked perfect in Figma but would be painful to build, and started designing things I could actually build. The constraint became a creative tool — and I\'ll never go back to the old way.',
       },
+      {
+        phase: 'Building the system that held it together',
+        description: 'Speed created two problems I did not expect. Every generated screen was plausible on its own and slightly different from the last — and left to its defaults, generation kept reaching for the same generic look every AI project has. I stopped adding features and built Verdant 2 instead: foundations first, then atoms, molecules, organisms, and the templates that compose them. Tokens gave the product a character that was actually chosen, and the component layer kept that character from eroding one screen at a time.',
+      },
     ],
     challenges: [
       'Entering a completely unknown domain — CUDA and GPU profiling — and getting up to speed fast enough to make credible design decisions.',
       'Keeping dense, low-level profiling data scannable without oversimplifying — every metric mattered to the user, nothing could be hidden.',
       'Directing AI output effectively as a designer — knowing when the code was wrong, and having enough front-end knowledge to fix it.',
+      'Generation is fast, but it is not consistent. Ask for a button twice and you get two buttons — so the faster we moved, the faster the product drifted out of alignment.',
+      'Working part-time on a project that moved daily. Design had to survive my absence, because I was not there to defend it.',
+      'Escaping the default AI aesthetic. Left alone, generation produces the same indigo-and-drop-shadow look on every project — giving GPU Flight a character of its own meant encoding that character somewhere the next generated screen could not ignore.',
     ],
     outcomes: [
-      'Dashboard in progress — React + TypeScript, 3-tab architecture, live demo running.',
-      'Proving that a designer can own a full technical product end-to-end using vibe coding.',
-      'Developing a new working method — and a much clearer view of what design skills are actually for.',
+      'Verdant 2 — a documented design system: 5 foundation pages, 20 atoms, 21 molecules, 13 organisms, and 11 page templates, each with live examples and a stable-or-planned status.',
+      'Chart palette built to hold 3:1 contrast against the page in both themes, with 36° minimum hue separation and an explicit color-vision advisory for two-series charts.',
+      'Every token remaps between light and dark automatically, so theme parity is a property of the system rather than something to re-check by hand.',
+      'Design decisions stopped being re-litigated. The system became the reference, which meant the product stayed coherent on the weeks I could not be there.',
+      'GPU Flight reads as an engineering instrument rather than a generated template — monospace where the machine speaks, a restrained sage-and-graphite palette, and density tuned for telemetry, all encoded as tokens so the look holds without me re-applying it.',
     ],
-    reflection: 'This project is still in progress. I\'ll share the full case study — including outcomes, learnings, and a deeper look at the design decisions — once it\'s complete.',
+    featureSections: [
+      {
+        label: 'The Core of This Project',
+        tone: 'dark',
+        heading: 'I built a design system so every page came out consistent — and looked like GPU Flight, not like AI.',
+        intro: 'This is the part of GPU Flight I care most about. Not the dashboard — the system underneath it that made the dashboard possible to build consistently, by two people who were rarely working at the same time.',
+        body: [
+          'The first problem showed up fast. Every generated screen was plausible on its own and slightly different from the last: ask for a button twice and you get two buttons. Because this was a side project, I was only on it part-time, so decisions I made one week were re-answered differently the next. Nobody was being careless — design decisions simply had nowhere durable to live. They existed in my head and in whichever file happened to be open, which meant anyone editing code was editing design, whether they meant to or not.',
+          'The second problem bothered me just as much: left to its defaults, generation produces a very particular look. The same indigo buttons, the same soft shadows, the same rounded cards you have seen on a hundred other projects. GPU Flight is an instrument for engineers watching kernels execute in real time — it should not look like a marketing site. But "make it feel like an engineering tool" is not something you can ask for once and expect to hold. The next generated screen quietly reverts to the defaults.',
+          'Both problems have the same fix. Tokens are how you overwrite a model\'s defaults permanently, and components are how you keep them overwritten. So I stopped adding features and built Verdant 2 instead, with a narrow goal: make the consistent, on-brand page the easiest one to build.',
+        ],
+        layersHeading: 'How the system produces consistency — and identity',
+        layersNote: 'I built it in the order the system actually depends on. Each layer can only use what is below it, so a decision made once at the bottom — a color, a spacing step, a focus ring — propagates everywhere above it automatically. The foundations layer is where GPU Flight\'s character is actually defined: a restrained sage-and-graphite palette, monospace for anything the machine produced, flat borders instead of drop shadows, and density tuned for reading dense telemetry rather than for whitespace. Once those became tokens, every component inherited them, and identity stopped being something I had to re-apply screen by screen.',
+        layers: [
+          { tier: 'Foundations', note: 'where the identity lives', examples: 'Tokens · Type scale · Color palette · A11y matrix · Chart palette' },
+          { tier: 'Atoms',       examples: 'VButton · VInput · VProgress · VTag · VIcon · VToggle · VSkeleton' },
+          { tier: 'Molecules',   examples: 'VCard · VStatCard · VSearchBar · VField · VMessageBar · VPagination' },
+          { tier: 'Organisms',   examples: 'VAppShell · VLeftNav · VTopBar · VTable · VDialog · VDrawer · VToast' },
+          { tier: 'Templates',   examples: 'Dashboard · Data table · L1 + tabs + inspector · States · Overlays' },
+        ],
+        callout: {
+          label: 'What actually changed',
+          text: 'Design stopped being an opinion I had to be present to defend and became a reference anyone could check. Pages stayed consistent on the weeks I was not there, and they stopped defaulting to a look I had not chosen. Specific requests became answerable too — I could make a change once in the system and have it hold everywhere it belonged, instead of hand-applying it screen by screen and watching it drift out again.',
+        },
+        images: [
+          {
+            src: gfSystemPalette,
+            alt: 'Verdant 2 chart palette documentation — ten categorical color tokens with bar and line samples, plus usage rules',
+            caption: '1 — Foundations: decide once, inherit everywhere',
+            note: 'The ten-color categorical sequence for data visualisation. Every value is a semantic token that remaps between light and dark automatically, holds at least 3:1 contrast against the page, and keeps 36° of hue separation from its neighbours. The usage rules go further than swatches — including a color-vision advisory against pairing crimson with olive as the only two series. Because the rules live here, no chart built later needs a judgement call, and no two charts can drift apart.',
+          },
+          {
+            src: gfSystemAtom,
+            alt: 'Verdant 2 VProgress component documentation showing live example, variants, and sizes',
+            caption: '2 — Components: every state answered in advance',
+            note: 'VProgress, one of twenty atoms. Determinate and indeterminate modes, default, warning, and error variants, two sizes, and a live example that can be toggled through each combination. This is where consistency is actually enforced: when every state a developer might need is already documented and working, there is no reason to invent a twenty-first way to show progress — and no gap for one to appear in.',
+          },
+          {
+            src: gfSystemTemplate,
+            alt: 'Verdant 2 template T05 — a full GPU Flight fleet host page assembled from system components',
+            caption: '3 — Templates: new pages start consistent by default',
+            note: 'T05 — an actual GPU Flight fleet host screen assembled entirely from system parts, with the layout grid specified down to the column widths (56px + 1fr + 320px). Eleven templates cover the product\'s real page types, so a new page never starts from a blank file — it starts from a layout that is already correct. That is the whole mechanism: consistency became the path of least resistance rather than something to enforce after the fact.',
+          },
+        ],
+      },
+    ],
+    reflectionHeading: 'What It Changed',
+    reflection: 'That constraint is not unique to side projects. At Microsoft I am the sole designer across six active products — I cannot be in every conversation there either. GPU Flight is where I learned to design for my own absence, and it changed what I reach for first on every project since. The dashboard itself is still in progress; I will share the full product story once it ships.',
   },
   {
     id: 1,
@@ -68,13 +127,13 @@ export const projects = [
     category: 'Product Design',
     company: 'Microsoft',
     employment: 'Contractor',
-    role: 'UI/UX Designer',
+    role: 'Sole Designer — end-to-end UX, UI, and visual',
     timeline: 'September 2023 – April 2024',
     team: '2 PMs · 4 Engineers · 1 Designer',
     tags: ['enterprise', 'b2b'],
     image: surfaceImg,
     thumbnail: surfaceImg,
-    tldr: 'Redesigned a fragmented suite of enterprise IT tools into a single, consistent Windows application — shipped in 7 months as sole designer.',
+    tldr: 'Redesigned a fragmented suite of enterprise IT tools into a single, consistent Windows application — end to end as sole designer, from IA and UX through UI, a custom icon set, and the hero imagery. Shipped in 7 months.',
     overview: 'The Surface IT Toolkit is a Windows application built for IT administrators who manage Microsoft Surface devices at scale. Before this redesign, tools were scattered across multiple locations with inconsistent versioning, poor discoverability, and no unified design language — all built without formal design support.',
     problem: 'IT professionals managing hundreds of Surface devices had to navigate multiple disconnected tools for configuration, diagnostics, and recovery. The fragmented experience created inefficiencies, increased training overhead, and introduced errors in critical workflows.',
     process: [
@@ -106,6 +165,7 @@ export const projects = [
       'Figma component library adopted by the team for ongoing iterations and future Surface tooling, reducing setup time for subsequent design work.',
       'Light and dark mode delivered via a Figma variables system — a first for this product area, achieved without additional resources.',
       'Leadership recognized the redesign as a model for future Surface tooling projects, validating both the product direction and the design-led process.',
+      "When my PM first presented the redesign to stakeholders, their opening question was \"Who's the designer?\" — the visual craft registered before the features did.",
     ],
     reflection: 'This was my first time as the sole designer embedded in a product team moving at engineering speed. The biggest lesson was designing systems, not just screens — the component library and variables work had more lasting impact than any individual interface decision. If I could revisit it, I\'d have documented design rationale more formally early on, so the team had a record of why decisions were made, not just what shipped.',
   },

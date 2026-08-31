@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Header from './components/Header'
-import Hero from './components/Hero'
 import About from './components/About'
 import Philosophy from './components/Philosophy'
 import Projects from './components/Projects'
@@ -12,6 +11,7 @@ import ProjectDetail from './pages/ProjectDetail'
 import SurfaceITCaseStudy from './pages/SurfaceITCaseStudy'
 import HomeDepotCaseStudy from './pages/HomeDepotCaseStudy'
 import PantryNoteCaseStudy from './pages/PantryNoteCaseStudy'
+import LandingPage from './pages/LandingPage'
 
 /* MOTION: page-level transition wrapper */
 function PageTransition({ children }) {
@@ -31,15 +31,17 @@ function PageTransition({ children }) {
   )
 }
 
-function HomePage({ darkMode }) {
-  return (
-    <>
-      <Hero darkMode={darkMode} />
-      <Projects />
-      <About />
-      <Contact />
-    </>
-  )
+/* Each top-level section is now its own route, not one long scroll */
+function WorkPage() {
+  return <Projects />
+}
+
+function AboutPage() {
+  return <About />
+}
+
+function ContactPage() {
+  return <Contact />
 }
 
 function AppContent() {
@@ -72,7 +74,13 @@ function AppContent() {
       <main id="main-content" tabIndex="-1">
         <PageTransition>
           <Routes>
-            <Route path="/"                                    element={<HomePage darkMode={darkMode} />} />
+            <Route path="/"                                    element={<LandingPage />} />
+            <Route path="/work"                                element={<WorkPage />} />
+            <Route path="/about"                               element={<AboutPage />} />
+            <Route path="/contact"                             element={<ContactPage />} />
+            {/* The walk used to live here. Kept as a redirect so shared or
+                bookmarked /landing links still land somewhere. */}
+            <Route path="/landing"                             element={<Navigate to="/" replace />} />
             <Route path="/project/surface-it-toolkit"        element={<SurfaceITCaseStudy />} />
             <Route path="/project/home-depot-protection-plan" element={<HomeDepotCaseStudy />} />
             <Route path="/project/pantry-note"               element={<PantryNoteCaseStudy />} />

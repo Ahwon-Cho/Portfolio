@@ -1,78 +1,10 @@
 /* Rich case study page for Surface IT Toolkit — Microsoft */
 /* ART: editorial layout, full-width image moments, alternating light/dark sections */
 /* MOTION: scroll reveals, staggered gallery, hero image fade-in */
-import { useState, useEffect, useCallback } from 'react'
+import { Zoomable } from '../components/Lightbox'
 import { useNavigate, Link } from 'react-router-dom'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { getAdjacentProjects } from '../data/projects'
-
-/* ── Lightbox ─────────────────────────────────────────────── */
-function Lightbox({ src, alt, onClose }) {
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onClose() }
-    document.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
-    }
-  }, [onClose])
-
-  return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-[200] flex items-center justify-center bg-zinc-950/95 backdrop-blur-md p-4 md:p-10 cursor-zoom-out"
-        onClick={onClose}
-        role="dialog"
-        aria-modal="true"
-        aria-label={`Full-size view: ${alt}`}
-      >
-        <motion.img
-          src={src}
-          alt={alt}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
-          onClick={(e) => e.stopPropagation()}
-        />
-        <button
-          onClick={onClose}
-          aria-label="Close image"
-          className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5" aria-hidden="true">
-            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
-      </motion.div>
-    </AnimatePresence>
-  )
-}
-
-/* Clickable image wrapper — shows zoom cursor, opens lightbox on click */
-function Zoomable({ src, alt, className, children }) {
-  const [open, setOpen] = useState(false)
-  const close = useCallback(() => setOpen(false), [])
-  return (
-    <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className={`block w-full text-left cursor-zoom-in focus-visible:outline-2 focus-visible:outline-amber-400 rounded-xl ${className ?? ''}`}
-        aria-label={`View full size: ${alt}`}
-      >
-        {children}
-      </button>
-      {open && <Lightbox src={src} alt={alt} onClose={close} />}
-    </>
-  )
-}
 
 const SLUG = 'surface-it-toolkit'
 
@@ -234,7 +166,7 @@ export default function SurfaceITCaseStudy() {
         <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20 py-8">
           <dl className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { term: 'Role',     detail: 'Sole Product Designer'  },
+              { term: 'Role',     detail: 'Sole designer — end-to-end UX, UI, and visual' },
               { term: 'Timeline', detail: 'Sep 2023 – Apr 2024'   },
               { term: 'Team',     detail: '2 PMs · 4 Engineers · 1 Designer' },
               { term: 'Type',     detail: 'Windows Enterprise App' },
@@ -488,6 +420,20 @@ export default function SurfaceITCaseStudy() {
               </motion.figure>
             ))}
           </motion.div>
+
+          {/* The reaction that came back from the first stakeholder review */}
+          <motion.blockquote
+            variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
+            className="mt-16 max-w-2xl mx-auto text-center"
+          >
+            <p className="font-display italic text-3xl md:text-4xl text-stone-100 leading-tight">
+              &ldquo;Who&rsquo;s the designer?&rdquo;
+            </p>
+            <footer className="mt-5 text-sm text-stone-400 leading-relaxed">
+              The first thing the stakeholder asked when my PM presented the redesign.
+              The visual craft landed before a single feature had been explained.
+            </footer>
+          </motion.blockquote>
         </div>
       </section>
 
@@ -592,7 +538,7 @@ export default function SurfaceITCaseStudy() {
           <motion.div variants={fadeUp}>
             <SectionEyebrow label="Visual Design" light />
             <h2 id="icons-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-4">
-              Custom icon set — built from scratch
+              Icons and hero imagery — built from scratch
             </h2>
           </motion.div>
           <div className="grid md:grid-cols-[1fr_2fr] gap-10 items-start">
@@ -607,6 +553,12 @@ export default function SurfaceITCaseStudy() {
                 sketching ideas by hand, to crafting the final vectors in Figma. Each icon was
                 designed to communicate a specific IT admin action at a glance, while staying
                 consistent with Fluent Design System conventions.
+              </p>
+              <p className="text-stone-600 leading-relaxed">
+                The same ownership extended to the hero images at the top of this page — the
+                product imagery used to present the toolkit was designed by me too. Across the
+                project I carried the work end to end: research and IA through UX, UI, and every
+                piece of visual craft that shipped with it.
               </p>
               {/* Process steps */}
               <div className="space-y-3 pt-2">

@@ -4,6 +4,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { getProjectBySlug, getAdjacentProjects } from '../data/projects'
+import { Zoomable } from '../components/Lightbox'
 
 function BackIcon() {
   return (
@@ -33,6 +34,170 @@ const PLACEHOLDER_GRADIENTS = [
   'from-emerald-950 via-teal-900 to-zinc-900',
 ]
 
+/* ART: the layered architecture, drawn as a ladder that widens as it composes —
+   foundations at the base, the assembled templates at the top. Makes the
+   "how the system works" argument readable in about five seconds. */
+function LayerLadder({ layers, fadeUp }) {
+  return (
+    <motion.ol variants={fadeUp} className="space-y-2.5" role="list">
+      {layers.map(({ tier, examples, note }, i) => (
+        <li
+          key={tier}
+          className="relative flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4 hover:bg-white/[0.06] transition-colors duration-300"
+          style={{ marginLeft: `${i * 4}%` }}
+        >
+          {/* Tier */}
+          <div className="flex flex-wrap items-center gap-2.5 flex-shrink-0 sm:w-44">
+            <span className="text-sm font-semibold text-stone-100 tracking-wide">{tier}</span>
+            {note && (
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-amber-400/10 text-amber-400 border border-amber-400/20">
+                {note}
+              </span>
+            )}
+          </div>
+
+          {/* Examples */}
+          <div className="min-w-0 flex-1 text-xs text-stone-500 leading-relaxed truncate">
+            {examples}
+          </div>
+        </li>
+      ))}
+    </motion.ol>
+  )
+}
+
+/* Optional image-led chapter — rendered only for projects that define
+   `featureSections` in projects.js. Lets any case study tell a visual story
+   without needing a bespoke page. `tone: 'dark'` promotes it to a full-bleed
+   feature chapter for the one story that carries the case study. */
+function FeatureSection({ section, fadeUp, shouldReduce }) {
+  const {
+    label, heading, intro, body = [], images = [], callout,
+    layers, layersHeading, layersNote, tone,
+  } = section
+
+  const dark = tone === 'dark'
+  const id   = `${label.replace(/\s+/g, '-').toLowerCase()}-heading`
+
+  return (
+    <motion.section
+      aria-labelledby={id}
+      variants={{ hidden: {}, show: { transition: { staggerChildren: shouldReduce ? 0 : 0.08 } } }}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: '-80px' }}
+      className={dark ? 'bg-ink-900 py-24 md:py-32' : ''}
+    >
+      <div className={dark ? 'max-w-5xl mx-auto px-6 md:px-12 lg:px-20' : ''}>
+
+        {/* Eyebrow */}
+        <div className="flex items-center gap-4 mb-10" aria-hidden="true">
+          <span className={`text-xs font-semibold tracking-[0.22em] uppercase ${dark ? 'text-amber-400' : 'text-stone-500'}`}>
+            {label}
+          </span>
+          <div className={`flex-1 h-px ${dark ? 'bg-white/10' : 'bg-stone-200'}`} />
+        </div>
+
+        <motion.h2
+          variants={fadeUp}
+          id={id}
+          className={`font-bold leading-tight mb-6 max-w-3xl ${
+            dark ? 'text-3xl md:text-5xl text-stone-100' : 'text-2xl md:text-3xl text-ink-900 font-semibold'
+          }`}
+        >
+          {heading}
+        </motion.h2>
+
+        {intro && (
+          <motion.p
+            variants={fadeUp}
+            className={`leading-relaxed max-w-2xl mb-5 ${dark ? 'text-lg text-stone-300' : 'text-stone-600'}`}
+          >
+            {intro}
+          </motion.p>
+        )}
+
+        {body.map((para, i) => (
+          <motion.p
+            key={i}
+            variants={fadeUp}
+            className={`leading-relaxed max-w-2xl mb-5 ${dark ? 'text-stone-400' : 'text-stone-600'}`}
+          >
+            {para}
+          </motion.p>
+        ))}
+
+        {/* The solution, drawn */}
+        {layers && (
+          <div className="mt-14">
+            {layersHeading && (
+              <motion.h3
+                variants={fadeUp}
+                className={`font-semibold text-xl md:text-2xl mb-3 ${dark ? 'text-stone-100' : 'text-ink-900'}`}
+              >
+                {layersHeading}
+              </motion.h3>
+            )}
+            {layersNote && (
+              <motion.p
+                variants={fadeUp}
+                className={`leading-relaxed max-w-2xl mb-8 ${dark ? 'text-stone-400' : 'text-stone-600'}`}
+              >
+                {layersNote}
+              </motion.p>
+            )}
+            <LayerLadder layers={layers} fadeUp={fadeUp} />
+          </div>
+        )}
+
+        {callout && (
+          <motion.div
+            variants={fadeUp}
+            className={`mt-14 p-7 rounded-2xl border-l-2 border-amber-400 ${
+              dark ? 'bg-white/[0.04] border-y border-r border-y-white/5 border-r-white/5' : 'bg-white border border-stone-100'
+            }`}
+          >
+            <div className={`text-xs font-semibold uppercase tracking-widest mb-2 ${dark ? 'text-amber-400' : 'text-stone-400'}`}>
+              {callout.label}
+            </div>
+            <p className={`text-lg md:text-xl font-medium leading-relaxed ${dark ? 'text-stone-100' : 'text-ink-800'}`}>
+              {callout.text}
+            </p>
+          </motion.div>
+        )}
+
+        {/* Evidence — each screenshot opens full size */}
+        <div className="mt-14 space-y-10">
+          {images.map(({ src, alt, caption, note }, i) => (
+            <motion.figure
+              key={i}
+              variants={fadeUp}
+              className={`rounded-2xl overflow-hidden border ${dark ? 'border-white/10 bg-white/[0.03]' : 'border-stone-200 bg-white'}`}
+            >
+              <Zoomable src={src} alt={alt}>
+                <img
+                  src={src}
+                  alt={alt}
+                  loading="lazy"
+                  className="w-full object-contain max-h-[560px] bg-stone-50"
+                />
+              </Zoomable>
+              <figcaption className={`px-5 py-4 border-t ${dark ? 'border-white/10' : 'border-stone-100'}`}>
+                <div className={`text-sm font-medium ${dark ? 'text-stone-100' : 'text-ink-800'}`}>{caption}</div>
+                {note && (
+                  <div className={`text-xs mt-1.5 leading-relaxed ${dark ? 'text-stone-400' : 'text-stone-500'}`}>
+                    {note}
+                  </div>
+                )}
+              </figcaption>
+            </motion.figure>
+          ))}
+        </div>
+      </div>
+    </motion.section>
+  )
+}
+
 export default function ProjectDetail() {
   const { slug }      = useParams()
   const navigate      = useNavigate()
@@ -44,7 +209,7 @@ export default function ProjectDetail() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-zinc-950">
         <h1 className="text-2xl font-semibold text-stone-100">Project not found</h1>
-        <Link to="/" className="btn-primary">← Back to Home</Link>
+        <Link to="/work" className="btn-primary">← Back to work</Link>
       </div>
     )
   }
@@ -191,6 +356,21 @@ export default function ProjectDetail() {
           </div>
         </section>
 
+      </div>
+
+      {/* ── Feature chapters — full-bleed, the centrepiece of the case study ── */}
+      {project.featureSections?.map((section) => (
+        <FeatureSection
+          key={section.label}
+          section={section}
+          fadeUp={fadeUp}
+          shouldReduce={shouldReduce}
+        />
+      ))}
+
+      {/* ── Body, continued ───────────────────────────────── */}
+      <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28 space-y-24">
+
         {/* Process */}
         <section aria-labelledby="process-heading">
           <div className="flex items-center gap-4 mb-10" aria-hidden="true">
@@ -267,7 +447,7 @@ export default function ProjectDetail() {
               <div className="flex-1 h-px bg-stone-200" />
             </div>
             <h2 id="reflection-heading" className="font-semibold text-2xl md:text-3xl text-ink-900 mb-6 leading-snug">
-              {project.wip ? 'More to Come' : "What I'd Do Differently"}
+              {project.reflectionHeading || (project.wip ? 'More to Come' : "What I'd Do Differently")}
             </h2>
             {/* ART: blockquote styling for reflection */}
             <blockquote className="border-l-2 border-indigo-400 pl-6">

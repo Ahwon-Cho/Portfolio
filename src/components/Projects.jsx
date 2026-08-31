@@ -7,11 +7,11 @@ import { projects as allData } from '../data/projects'
 
 /* UX: define which projects to feature and in what order */
 const FEATURED_SLUGS = [
-  'gpuflight',
   'surface-it-toolkit',
+  'gpuflight',
+  'pantry-note',
   'blue-cross-cost-estimator',
   'home-depot-protection-plan',
-  'pantry-note',
   'blue-connect-mobile-app',
 ]
 
@@ -53,18 +53,9 @@ export default function Projects() {
     <section
       id="projects"
       aria-label="Selected work"
-      className="py-28 md:py-36 bg-white"
+      className="min-h-[calc(100vh-3.5rem)] pt-32 pb-28 md:pt-40 md:pb-36 bg-ink-50"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-
-        {/* Section header */}
-        <motion.div
-          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
-          className="flex items-center gap-4 mb-20"
-        >
-          <span className="section-label text-stone-400">Selected Work</span>
-          <div className="flex-1 h-px bg-stone-200" aria-hidden="true" />
-        </motion.div>
 
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}

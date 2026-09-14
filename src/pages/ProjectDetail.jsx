@@ -170,15 +170,18 @@ function FeatureSection({ section, fadeUp, shouldReduce }) {
             <motion.figure
               key={i}
               variants={fadeUp}
-              className=""
+              className="max-w-3xl"
             >
-              {/* The image sits on the page, not inside a frame */}
+              {/* Sized by its own aspect ratio rather than forced to fill the
+                  column — object-contain plus a height cap was letterboxing
+                  these, leaving background bands down both sides. They are
+                  supporting evidence; the lightbox is where you read them. */}
               <Zoomable src={src} alt={alt}>
                 <img
                   src={src}
                   alt={alt}
                   loading="lazy"
-                  className={`w-full object-contain max-h-[620px] ${dark ? 'bg-white/[0.03]' : 'bg-stone-100'}`}
+                  className={`w-full h-auto ${dark ? 'bg-white/[0.03]' : 'bg-stone-100'}`}
                 />
               </Zoomable>
               {/* Caption stays at reading measure even though the image is wide */}

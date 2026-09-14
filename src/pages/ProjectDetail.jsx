@@ -43,7 +43,7 @@ function LayerLadder({ layers, fadeUp }) {
       {layers.map(({ tier, examples, note }, i) => (
         <li
           key={tier}
-          className="relative flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4 hover:bg-white/[0.06] transition-colors duration-300"
+          className="relative flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 border border-white/10 bg-white/[0.03] px-5 py-4 hover:bg-white/[0.06] transition-colors duration-300"
           style={{ marginLeft: `${i * 4}%` }}
         >
           {/* Tier */}
@@ -153,14 +153,12 @@ function FeatureSection({ section, fadeUp, shouldReduce }) {
         {callout && (
           <motion.div
             variants={fadeUp}
-            className={`mt-14 p-7 rounded-2xl border-l-2 border-amber-400 ${
-              dark ? 'bg-white/[0.04] border-y border-r border-y-white/5 border-r-white/5' : 'bg-white border border-stone-100'
-            }`}
+            className="mt-14 pl-6 border-l-2 border-amber-400"
           >
             <div className={`text-xs font-semibold uppercase tracking-widest mb-2 ${dark ? 'text-amber-400' : 'text-stone-400'}`}>
               {callout.label}
             </div>
-            <p className={`text-lg md:text-xl font-medium leading-relaxed ${dark ? 'text-stone-100' : 'text-ink-800'}`}>
+            <p className={`text-lg md:text-xl font-medium leading-relaxed max-w-2xl ${dark ? 'text-stone-100' : 'text-ink-800'}`}>
               {callout.text}
             </p>
           </motion.div>
@@ -172,20 +170,22 @@ function FeatureSection({ section, fadeUp, shouldReduce }) {
             <motion.figure
               key={i}
               variants={fadeUp}
-              className={`rounded-2xl overflow-hidden border ${dark ? 'border-white/10 bg-white/[0.03]' : 'border-stone-200 bg-white'}`}
+              className=""
             >
+              {/* The image sits on the page, not inside a frame */}
               <Zoomable src={src} alt={alt}>
                 <img
                   src={src}
                   alt={alt}
                   loading="lazy"
-                  className="w-full object-contain max-h-[560px] bg-stone-50"
+                  className={`w-full object-contain max-h-[620px] ${dark ? 'bg-white/[0.03]' : 'bg-stone-100'}`}
                 />
               </Zoomable>
-              <figcaption className={`px-5 py-4 border-t ${dark ? 'border-white/10' : 'border-stone-100'}`}>
+              {/* Caption stays at reading measure even though the image is wide */}
+              <figcaption className="pt-4">
                 <div className={`text-sm font-medium ${dark ? 'text-stone-100' : 'text-ink-800'}`}>{caption}</div>
                 {note && (
-                  <div className={`text-xs mt-1.5 leading-relaxed ${dark ? 'text-stone-400' : 'text-stone-500'}`}>
+                  <div className={`text-xs mt-1.5 leading-relaxed max-w-2xl ${dark ? 'text-stone-400' : 'text-stone-500'}`}>
                     {note}
                   </div>
                 )}
@@ -277,7 +277,7 @@ export default function ProjectDetail() {
             {/* TL;DR */}
             <motion.div
               variants={fadeUp}
-              className="inline-flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 rounded-2xl bg-indigo-50 border border-indigo-100"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pl-5 border-l-2 border-amber-400 max-w-2xl"
             >
               <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">TL;DR</span>
               <p className="text-sm text-indigo-900 leading-relaxed">{project.tldr}</p>
@@ -380,22 +380,26 @@ export default function ProjectDetail() {
           <h2 id="process-heading" className="font-semibold text-2xl md:text-3xl text-ink-900 mb-10 leading-snug">
             How I Approached It
           </h2>
-          <div className="grid md:grid-cols-2 gap-5">
+          {/* A numbered list, not a grid of boxes — the steps are sequential,
+              so reading them top to bottom matches how they happened. */}
+          <ol className="border-t border-stone-200" role="list">
             {project.process.map((step, i) => (
-              <div key={step.phase} className="p-6 rounded-2xl bg-white border border-stone-100">
-                <div className="flex items-center gap-3 mb-4">
-                  {/* ART: amber number for process steps */}
-                  <span className="w-7 h-7 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-700">
+              <li
+                key={step.phase}
+                className="grid md:grid-cols-[3rem_1fr] gap-x-6 gap-y-2 py-8 border-b border-stone-200"
+              >
+                <span className="text-sm font-medium text-stone-400 tabular-nums" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="max-w-2xl">
+                  <h3 className="text-base font-semibold text-ink-900 mb-2 leading-snug">
                     {step.phase}
                   </h3>
+                  <p className="text-stone-600 leading-relaxed">{step.description}</p>
                 </div>
-                <p className="text-sm text-stone-600 leading-relaxed">{step.description}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </section>
 
         {/* Challenges */}
@@ -407,11 +411,12 @@ export default function ProjectDetail() {
           <h2 id="challenges-heading" className="font-semibold text-2xl md:text-3xl text-ink-900 mb-8 leading-snug">
             What Made This Hard
           </h2>
-          <ul className="space-y-4" role="list">
+          <ul className="space-y-5" role="list">
             {project.challenges.map((c, i) => (
               <li key={i} className="flex items-start gap-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2.5 flex-shrink-0" aria-hidden="true" />
-                <p className="text-stone-600 leading-relaxed">{c}</p>
+                <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2.5 flex-shrink-0" aria-hidden="true" />
+                {/* Capped so the line never runs past a comfortable measure */}
+                <p className="text-stone-600 leading-relaxed max-w-2xl">{c}</p>
               </li>
             ))}
           </ul>
@@ -426,17 +431,15 @@ export default function ProjectDetail() {
           <h2 id="outcomes-heading" className="font-semibold text-2xl md:text-3xl text-ink-900 mb-8 leading-snug">
             Results &amp; Impact
           </h2>
-          <div className="grid sm:grid-cols-2 gap-4">
+          {/* Outcomes read as claims, one per line — the amber rule carries
+              the emphasis the dark boxes used to. */}
+          <ul className="space-y-6" role="list">
             {project.outcomes.map((outcome, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-ink-900 border border-ink-800">
-                {/* ART: amber check mark on dark outcome card */}
-                <div className="w-6 h-6 rounded-full bg-indigo-400/10 border border-indigo-400/20 flex items-center justify-center mb-4">
-                  <span className="text-xs font-bold text-indigo-400" aria-label="Achieved">✓</span>
-                </div>
-                <p className="text-sm text-stone-300 leading-relaxed">{outcome}</p>
-              </div>
+              <li key={i} className="border-l-2 border-amber-400 pl-5">
+                <p className="text-stone-700 leading-relaxed max-w-2xl">{outcome}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
 
         {/* Reflection */}
@@ -467,7 +470,7 @@ export default function ProjectDetail() {
             <Link
               to={`/project/${prev.slug}`}
               aria-label={`Previous project: ${prev.title}`}
-              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5"
+              className="group flex flex-col gap-1.5 py-2 transition-colors duration-200"
             >
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center gap-1">
                 <BackIcon /> Previous
@@ -482,7 +485,7 @@ export default function ProjectDetail() {
             <Link
               to={`/project/${next.slug}`}
               aria-label={`Next project: ${next.title}`}
-              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full"
+              className="group flex flex-col gap-1.5 py-2 transition-colors duration-200 text-right ml-auto w-full"
             >
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center justify-end gap-1">
                 Next <NextIcon />

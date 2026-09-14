@@ -60,8 +60,9 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        {/* All 6 projects — 2-col grid, each card animates individually */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* All 6 projects — 2-col grid, each card animates individually.
+            Generous gutters do the work the card borders used to. */}
+        <div className="grid md:grid-cols-2 gap-x-8 gap-y-14 lg:gap-x-12 lg:gap-y-16">
           {featured.map((project, i) => (
             <motion.div
               key={project.id}

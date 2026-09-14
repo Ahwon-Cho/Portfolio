@@ -148,7 +148,7 @@ export default function SurfaceITCaseStudy() {
             {/* TL;DR callout */}
             <motion.div
               variants={fadeUp}
-              className="inline-flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 rounded-2xl bg-indigo-50 border border-indigo-100"
+              className="inline-flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 bg-indigo-50 border border-indigo-100"
             >
               <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">TL;DR</span>
               <p className="text-sm text-indigo-900 leading-relaxed">
@@ -249,7 +249,7 @@ export default function SurfaceITCaseStudy() {
                 { value: '3',     label: 'Core workflows redesigned'},
                 { value: '2',     label: 'Theme modes (L + D)'     },
               ].map(({ value, label }) => (
-                <div key={label} className="p-5 rounded-2xl border border-stone-200 bg-white">
+                <div key={label} className="p-5 border border-stone-200 bg-white">
                   <div className="font-bold text-2xl text-ink-900 mb-1">{value}</div>
                   <div className="text-xs text-stone-500 leading-snug">{label}</div>
                 </div>
@@ -261,7 +261,7 @@ export default function SurfaceITCaseStudy() {
         {/* UEFI Screenshot — full width editorial moment */}
         <motion.figure
           variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}
-          className="rounded-2xl overflow-hidden shadow-2xl"
+          className="overflow-hidden shadow-2xl"
         >
           <Zoomable src={UEFI_SCREENSHOT} alt="UEFI Configurator — final redesign screenshot">
             <img
@@ -313,7 +313,7 @@ export default function SurfaceITCaseStudy() {
               <motion.div
                 key={n}
                 variants={fadeUp}
-                className="p-6 rounded-2xl bg-white border border-stone-100"
+                className="p-6 bg-white border border-stone-100"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <span className="w-7 h-7 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center flex-shrink-0" aria-hidden="true">
@@ -366,9 +366,9 @@ export default function SurfaceITCaseStudy() {
               <motion.div
                 key={n}
                 variants={fadeUp}
-                className="flex gap-6 p-6 rounded-2xl border border-stone-100 bg-white hover:border-stone-300 transition-colors duration-200"
+                className="flex gap-6 p-6 border border-stone-100 bg-white hover:border-stone-300 transition-colors duration-200"
               >
-                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+                <div className="flex-shrink-0 w-10 h-10 bg-indigo-50 border border-indigo-100 flex items-center justify-center">
                   <span className="text-indigo-600 font-bold text-sm">{n}</span>
                 </div>
                 <div>
@@ -407,7 +407,7 @@ export default function SurfaceITCaseStudy() {
               <motion.figure
                 key={i}
                 variants={fadeUp}
-                className="rounded-xl overflow-hidden aspect-video"
+                className="overflow-hidden aspect-video"
               >
                 <Zoomable src={img.src} alt={img.alt} className="h-full">
                   <img
@@ -457,7 +457,7 @@ export default function SurfaceITCaseStudy() {
           </motion.div>
           <div className="space-y-5">
             {LEGACY_DESIGNS.map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
+              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200 bg-stone-50">
                 <Zoomable src={img.src} alt={img.caption}>
                   <img
                     src={img.src}
@@ -489,7 +489,7 @@ export default function SurfaceITCaseStudy() {
           </motion.div>
           <div className="grid md:grid-cols-2 gap-5">
             {WIREFRAMES.map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200">
+              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200">
                 <Zoomable src={img.src} alt={img.caption}>
                   <img
                     src={img.src}
@@ -517,7 +517,7 @@ export default function SurfaceITCaseStudy() {
             Task flows mapped before wireframing to ensure each workflow had a clear entry
             point, decision tree, and exit state.
           </p>
-          <figure className="rounded-2xl overflow-hidden border border-stone-200">
+          <figure className="overflow-hidden border border-stone-200">
             <Zoomable src={FLOWCHART_IMG} alt="User flow diagram for Surface IT Toolkit workflows">
               <img
                 src={FLOWCHART_IMG}
@@ -579,7 +579,7 @@ export default function SurfaceITCaseStudy() {
                 ))}
               </div>
             </motion.div>
-            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200">
+            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-200">
               <Zoomable src={ICON_SET_IMG} alt="Customized icon set for Surface IT Toolkit">
                 <img
                   src={ICON_SET_IMG}
@@ -631,7 +631,7 @@ export default function SurfaceITCaseStudy() {
             <Link
               to={`/project/${prev.slug}`}
               aria-label={`Previous project: ${prev.title}`}
-              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5"
+              className="group flex flex-col gap-2 p-6 border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5"
             >
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center gap-1">
                 <BackIcon /> Previous
@@ -646,7 +646,7 @@ export default function SurfaceITCaseStudy() {
             <Link
               to={`/project/${next.slug}`}
               aria-label={`Next project: ${next.title}`}
-              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full"
+              className="group flex flex-col gap-2 p-6 border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full"
             >
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center justify-end gap-1">
                 Next <NextIcon />

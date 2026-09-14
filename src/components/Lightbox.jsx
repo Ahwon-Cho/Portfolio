@@ -34,7 +34,7 @@ export function Lightbox({ src, alt, onClose }) {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
+          className="max-w-full max-h-full object-contain shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         />
         <button
@@ -60,7 +60,7 @@ export function Zoomable({ src, alt, className, children }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`block w-full text-left cursor-zoom-in focus-visible:outline-2 focus-visible:outline-amber-400 rounded-xl ${className ?? ''}`}
+        className={`block w-full text-left cursor-zoom-in focus-visible:outline-2 focus-visible:outline-amber-400 ${className ?? ''}`}
         aria-label={`View full size: ${alt}`}
       >
         {children}

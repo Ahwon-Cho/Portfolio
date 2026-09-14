@@ -124,7 +124,7 @@ export default function HomeDepotCaseStudy() {
             </motion.p>
 
             <motion.div variants={fadeUp}
-              className="inline-flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 rounded-2xl bg-indigo-50 border border-indigo-100">
+              className="inline-flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 bg-indigo-50 border border-indigo-100">
               <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">TL;DR</span>
               <p className="text-sm text-indigo-900 leading-relaxed">
                 Sole designer on the post-purchase experience at The Home Depot. Shipped GM items in week one,
@@ -180,7 +180,7 @@ export default function HomeDepotCaseStudy() {
                 { value: '2',      label: 'Design systems navigated'        },
                 { value: '5 whys', label: 'Post-mortem method used'        },
               ].map(({ value, label }) => (
-                <div key={label} className="p-5 rounded-2xl border border-stone-200 bg-white">
+                <div key={label} className="p-5 border border-stone-200 bg-white">
                   <div className="font-bold text-2xl text-ink-900 mb-1">{value}</div>
                   <div className="text-xs text-stone-500 leading-snug">{label}</div>
                 </div>
@@ -215,7 +215,7 @@ export default function HomeDepotCaseStudy() {
               { src: IMG.challenge1, alt: 'During-purchase vs post-purchase flow comparison' },
               { src: IMG.challenge2, alt: 'General Merchandise vs Major Appliances item types' },
             ].map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-white">
+              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200 bg-white">
                 <ZoomImg src={img.src} alt={img.alt} className="w-full object-contain max-h-80" />
               </motion.figure>
             ))}
@@ -228,7 +228,7 @@ export default function HomeDepotCaseStudy() {
               { n: '03', title: 'GM vs. Major Appliances', body: 'The protection plan experience splits into GM and MA item categories. The system treats them differently, and the user flows for each were entirely distinct — each with its own edge cases.' },
               { n: '04', title: 'Mid-project design system transition', body: "The Home Depot was adopting Stencil, its new design system, mid-project. Required components weren't fully built yet — and there were no existing examples of drawers in the new system." },
             ].map(({ n, title, body }) => (
-              <motion.div key={n} variants={fadeUp} className="p-6 rounded-2xl bg-white border border-stone-100">
+              <motion.div key={n} variants={fadeUp} className="p-6 bg-white border border-stone-100">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="w-7 h-7 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center flex-shrink-0">{n}</span>
                   <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-700">{title}</h3>
@@ -256,7 +256,7 @@ export default function HomeDepotCaseStudy() {
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-40px' }}
             className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {DESIGN_COMPS.map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="rounded-xl overflow-hidden bg-zinc-900">
+              <motion.figure key={i} variants={fadeUp} className="overflow-hidden bg-zinc-900">
                 <Zoomable src={img.src} alt={img.alt}>
                   <img src={img.src} alt={img.alt} className="w-full object-contain" loading={i < 2 ? 'eager' : 'lazy'} />
                 </Zoomable>
@@ -266,7 +266,7 @@ export default function HomeDepotCaseStudy() {
 
           {/* Process overview */}
           <motion.figure variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}
-            className="mt-6 rounded-2xl overflow-hidden">
+            className="mt-6 overflow-hidden">
             <ZoomImg src={IMG.process} alt="Design process overview" className="w-full object-cover" />
           </motion.figure>
         </div>
@@ -289,7 +289,7 @@ export default function HomeDepotCaseStudy() {
                 <p>Instead of patching it, I ran a <strong className="text-ink-800">5-whys post-mortem</strong> on my own process. The root cause: I had designed for one scenario without mapping all five first. I was solving from inside the problem instead of stepping back to see the full system.</p>
               </div>
             </div>
-            <div className="p-6 rounded-2xl bg-stone-900 border border-stone-700 text-stone-300">
+            <div className="p-6 bg-stone-900 border border-stone-700 text-stone-300">
               <div className="text-xs font-bold uppercase tracking-widest text-stone-500 mb-4">5-Whys Root Cause</div>
               <div className="space-y-3">
                 {[
@@ -309,7 +309,7 @@ export default function HomeDepotCaseStudy() {
             </div>
           </div>
           {/* Post mortem image */}
-          <motion.figure className="mt-10 rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
+          <motion.figure className="mt-10 overflow-hidden border border-stone-200 bg-stone-50">
             <ZoomImg src={IMG.postmortem} alt="5-whys post-mortem activity" className="w-full object-contain max-h-[480px]" />
             <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Post-mortem — 5 whys activity</figcaption>
           </motion.figure>
@@ -329,8 +329,8 @@ export default function HomeDepotCaseStudy() {
               { n: '4', title: 'Intuitive naming convention for handoff', body: 'Created a shared naming system for components and layers so engineers and other designers could navigate the Figma files without a guided tour. Reduced implementation back-and-forth significantly.' },
             ].map(({ n, title, body }) => (
               <motion.div key={n} variants={fadeUp}
-                className="flex gap-6 p-6 rounded-2xl border border-stone-100 bg-white hover:border-stone-300 transition-colors duration-200">
-                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+                className="flex gap-6 p-6 border border-stone-100 bg-white hover:border-stone-300 transition-colors duration-200">
+                <div className="flex-shrink-0 w-10 h-10 bg-indigo-50 border border-indigo-100 flex items-center justify-center">
                   <span className="text-indigo-600 font-bold text-sm">{n}</span>
                 </div>
                 <div>
@@ -343,11 +343,11 @@ export default function HomeDepotCaseStudy() {
 
           {/* Solution + Flowchart images */}
           <motion.div variants={stagger} className="mt-10 space-y-5">
-            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200">
+            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-200">
               <ZoomImg src={IMG.solution} alt="Multi-component system with variants" className="w-full object-cover" />
               <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Component system with variants for rapid prototyping</figcaption>
             </motion.figure>
-            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200">
+            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-200">
               <ZoomImg src={IMG.flowchart} alt="Full post-purchase flowchart — bird's-eye view" className="w-full object-cover" />
               <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Full flowchart — bird's-eye view of the entire HDPP experience</figcaption>
             </motion.figure>
@@ -366,7 +366,7 @@ export default function HomeDepotCaseStudy() {
                 <p>After cross-team discussion, we landed on CTA buttons across the entire HDPP experience — aligning with how the rest of homedepot.com handles product additions.</p>
               </div>
             </div>
-            <figure className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
+            <figure className="overflow-hidden border border-stone-200 bg-stone-50">
               <ZoomImg src={IMG.collaboration} alt="GM multi-item vs MA interaction comparison" className="w-full object-contain max-h-[480px]" />
               <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Checkbox vs. CTA button — collaboration and consistency discussion</figcaption>
             </figure>
@@ -384,7 +384,7 @@ export default function HomeDepotCaseStudy() {
             <p className="text-stone-400 max-w-xl">After countless iterations and coordination across Home Depot teams, the design reached prototype stage — built to reflect both the legacy and Stencil design systems.</p>
           </motion.div>
           <motion.figure variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}
-            className="rounded-2xl overflow-hidden">
+            className="overflow-hidden">
             <ZoomImg src={IMG.prototype} alt="High-fidelity HDPP post-purchase prototype" className="w-full object-cover" />
           </motion.figure>
         </div>
@@ -404,13 +404,13 @@ export default function HomeDepotCaseStudy() {
             {[
               { src: IMG.usertest2, caption: 'User testing — session 2' },
             ].map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
+              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200 bg-stone-50">
                 <ZoomImg src={img.src} alt={img.caption} className="w-full object-contain max-h-80" />
                 <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">{img.caption}</figcaption>
               </motion.figure>
             ))}
           </div>
-          <motion.div variants={fadeUp} className="mt-8 p-6 rounded-2xl bg-white border border-stone-100">
+          <motion.div variants={fadeUp} className="mt-8 p-6 bg-white border border-stone-100">
             <div className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-2">Test Finding</div>
             <p className="text-lg font-medium text-ink-800">
               Users described the interaction as <span className="text-indigo-600">"easier than expected"</span> — a direct signal that the redesign successfully reduced the confusion between purchase and post-purchase flows.
@@ -435,7 +435,7 @@ export default function HomeDepotCaseStudy() {
               { src: IMG.devhandoff2, caption: 'Dev handoff — redlines with spacing and typography' },
               { src: IMG.devhandoff3, caption: 'Dev handoff — dual design system comps (legacy + Stencil)' },
             ].map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
+              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200 bg-stone-50">
                 <ZoomImg src={img.src} alt={img.caption} className="w-full object-contain max-h-[520px]" />
                 <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">{img.caption}</figcaption>
               </motion.figure>
@@ -463,12 +463,12 @@ export default function HomeDepotCaseStudy() {
                   I'm proud of what the team shipped together.
                 </p>
               </div>
-              <motion.figure className="mt-8 rounded-2xl overflow-hidden border border-stone-200">
+              <motion.figure className="mt-8 overflow-hidden border border-stone-200">
                 <ZoomImg src={IMG.reflection} alt="Reflection — project closing" className="w-full object-cover" />
               </motion.figure>
             </div>
             {/* Award card */}
-            <div className="p-7 rounded-2xl bg-zinc-950 border border-white/8 text-center">
+            <div className="p-7 bg-zinc-950 border border-white/8 text-center">
               <div className="w-14 h-14 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mx-auto mb-5">
                 <span className="text-2xl" role="img" aria-label="Award">🏅</span>
               </div>
@@ -491,14 +491,14 @@ export default function HomeDepotCaseStudy() {
         <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20 py-12 grid grid-cols-2 gap-4">
           {prev ? (
             <Link to={`/project/${prev.slug}`} aria-label={`Previous project: ${prev.title}`}
-              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5">
+              className="group flex flex-col gap-2 p-6 border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5">
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center gap-1"><BackIcon /> Previous</span>
               <span className="text-sm font-semibold text-ink-800 group-hover:text-ink-600 transition-colors line-clamp-1">{prev.title}</span>
             </Link>
           ) : <div aria-hidden="true" />}
           {next ? (
             <Link to={`/project/${next.slug}`} aria-label={`Next project: ${next.title}`}
-              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full">
+              className="group flex flex-col gap-2 p-6 border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full">
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center justify-end gap-1">Next <NextIcon /></span>
               <span className="text-sm font-semibold text-ink-800 group-hover:text-ink-600 transition-colors line-clamp-1">{next.title}</span>
             </Link>

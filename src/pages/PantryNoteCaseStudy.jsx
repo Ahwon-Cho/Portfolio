@@ -145,7 +145,7 @@ export default function PantryNoteCaseStudy() {
             </motion.p>
 
             <motion.div variants={fadeUp}
-              className="inline-flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 rounded-2xl bg-indigo-50 border border-indigo-100">
+              className="inline-flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 bg-indigo-50 border border-indigo-100">
               <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">TL;DR</span>
               <p className="text-sm text-indigo-900 leading-relaxed">
                 Solo UX design from problem to prototype. Ran 29-person survey, built persona + journey map,
@@ -179,7 +179,7 @@ export default function PantryNoteCaseStudy() {
       <div className="bg-stone-50 border-b border-stone-100 py-12">
         <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20">
           <motion.div variants={fadeUp} initial="hidden" animate="show">
-            <ZoomImg src={IMG.heroGif} alt="Pantry Note animated product overview" className="w-full rounded-2xl object-cover shadow-lg" />
+            <ZoomImg src={IMG.heroGif} alt="Pantry Note animated product overview" className="w-full object-cover shadow-lg" />
           </motion.div>
         </div>
       </div>
@@ -191,7 +191,7 @@ export default function PantryNoteCaseStudy() {
         <motion.section variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}>
           <motion.div variants={fadeUp}><Eyebrow label="Problem & Solution" /></motion.div>
           <div className="grid md:grid-cols-2 gap-8">
-            <motion.div variants={fadeUp} className="p-8 rounded-2xl bg-white border border-stone-100">
+            <motion.div variants={fadeUp} className="p-8 bg-white border border-stone-100">
               <div className="text-xs font-bold uppercase tracking-widest text-stone-400 mb-4">Problem</div>
               <p className="text-ink-800 leading-relaxed text-lg font-medium mb-4">
                 Busy people need an easier way to track their food items.
@@ -201,7 +201,7 @@ export default function PantryNoteCaseStudy() {
                 to check and track food items — improving budgetary planning without adding cognitive load.
               </p>
             </motion.div>
-            <motion.div variants={fadeUp} className="p-8 rounded-2xl bg-indigo-600 border border-indigo-700">
+            <motion.div variants={fadeUp} className="p-8 bg-indigo-600 border border-indigo-700">
               <div className="text-xs font-bold uppercase tracking-widest text-indigo-200 mb-4">Solution</div>
               <p className="text-white leading-relaxed text-lg font-medium mb-4">
                 Accurate food inventory with smart notifications.
@@ -233,7 +233,7 @@ export default function PantryNoteCaseStudy() {
                 the redesign toward more direct, contextual entry points.
               </p>
             </div>
-            <div className="p-6 rounded-2xl bg-stone-900 border border-stone-700">
+            <div className="p-6 bg-stone-900 border border-stone-700">
               <div className="text-xs font-bold uppercase tracking-widest text-stone-500 mb-4">Iteration Trigger</div>
               <blockquote className="text-stone-300 text-sm leading-relaxed italic">
                 "The plus button required cognitive effort — making users perceive the app as burdensome rather than helpful."
@@ -245,16 +245,16 @@ export default function PantryNoteCaseStudy() {
         {/* App Screens Showcase */}
         <motion.section variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}>
           <div className="space-y-5">
-            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-100">
+            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-100">
               <ZoomImg src={IMG.screens1} alt="Pantry Note app screens overview" className="w-full object-cover" />
             </motion.figure>
-            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-100">
+            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-100">
               <ZoomImg src={IMG.screens2} alt="Pantry Note UI detail screens" className="w-full object-cover" />
             </motion.figure>
-            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-100">
+            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-100">
               <ZoomImg src={IMG.inlineGif} alt="Pantry Note interaction animation" className="w-full object-cover" />
             </motion.figure>
-            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-100">
+            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-100">
               <ZoomImg src={IMG.screens3} alt="Pantry Note additional app screens" className="w-full object-cover" />
             </motion.figure>
           </div>
@@ -263,7 +263,7 @@ export default function PantryNoteCaseStudy() {
         {/* Process & Timeline */}
         <motion.section variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}>
           <motion.div variants={fadeUp}><Eyebrow label="Process & Timeline" /></motion.div>
-          <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-100">
+          <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-100">
             <ZoomImg src={IMG.timeline} alt="Pantry Note process and timeline diagram" className="w-full object-contain" />
           </motion.figure>
         </motion.section>
@@ -283,7 +283,7 @@ export default function PantryNoteCaseStudy() {
 
           {/* Methodology + Competitive Analysis */}
           <div className="grid md:grid-cols-2 gap-5 mb-12">
-            <motion.div variants={fadeUp} className="p-6 rounded-2xl bg-white border border-stone-100">
+            <motion.div variants={fadeUp} className="p-6 bg-white border border-stone-100">
               <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-700 mb-4">Methodology</h3>
               <ul className="space-y-2 text-sm text-stone-600">
                 {['Guerrilla interviews', 'Online data research', 'Competitive analysis', 'Participant survey (n=29)', 'Data analysis', 'Persona + journey mapping'].map(m => (
@@ -294,12 +294,12 @@ export default function PantryNoteCaseStudy() {
                 ))}
               </ul>
             </motion.div>
-            <motion.div variants={fadeUp} className="p-6 rounded-2xl bg-white border border-stone-100">
+            <motion.div variants={fadeUp} className="p-6 bg-white border border-stone-100">
               <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-700 mb-4">Competitive Analysis</h3>
               <div className="space-y-3 text-sm text-stone-600">
                 {['NoWaste', 'Pantry Check', 'Cozzo.app', 'Grocy.info'].map(app => (
                   <div key={app} className="flex items-center gap-3 py-2 border-b border-stone-100 last:border-0">
-                    <div className="w-7 h-7 rounded-lg bg-stone-100 flex items-center justify-center text-xs font-bold text-stone-500 flex-shrink-0">
+                    <div className="w-7 h-7 bg-stone-100 flex items-center justify-center text-xs font-bold text-stone-500 flex-shrink-0">
                       {app[0]}
                     </div>
                     <span>{app}</span>
@@ -321,7 +321,7 @@ export default function PantryNoteCaseStudy() {
                 { value: '24/29', label: 'Have discarded food previously', pct: '83%' },
                 { value: '21/29', label: 'Want inventory visibility in-app', pct: '72%' },
               ].map(({ value, label, pct }) => (
-                <motion.div key={label} variants={fadeUp} className="p-5 rounded-2xl bg-white border border-stone-100 text-center">
+                <motion.div key={label} variants={fadeUp} className="p-5 bg-white border border-stone-100 text-center">
                   <div className="font-bold text-3xl text-indigo-600 mb-1">{pct}</div>
                   <div className="font-medium text-sm text-ink-800 mb-1">{value}</div>
                   <div className="text-xs text-stone-500 leading-snug">{label}</div>
@@ -333,7 +333,7 @@ export default function PantryNoteCaseStudy() {
                 { src: IMG.survey1, alt: 'Survey data chart 1' },
                 { src: IMG.survey2, alt: 'Survey findings chart 2' },
               ].map((img, i) => (
-                <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
+                <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200 bg-stone-50">
                   <ZoomImg src={img.src} alt={img.alt} className="w-full object-contain max-h-72" />
                 </motion.figure>
               ))}
@@ -341,7 +341,7 @@ export default function PantryNoteCaseStudy() {
           </motion.div>
 
           {/* Key Takeaways */}
-          <motion.div variants={fadeUp} className="p-6 rounded-2xl bg-white border border-stone-100">
+          <motion.div variants={fadeUp} className="p-6 bg-white border border-stone-100">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-700 mb-5">Key Takeaways from Survey</h3>
             <div className="grid md:grid-cols-2 gap-3">
               {[
@@ -381,7 +381,7 @@ export default function PantryNoteCaseStudy() {
             {/* Persona */}
             <motion.div variants={fadeUp}>
               <p className="text-xs font-semibold uppercase tracking-widest text-stone-500 mb-3">Persona — Hailey Wilson</p>
-              <figure className="rounded-2xl overflow-hidden bg-zinc-900">
+              <figure className="overflow-hidden bg-zinc-900">
                 <ZoomImg src={IMG.persona} alt="Persona: Hailey Wilson" className="w-full h-64 object-cover object-top" />
                 <figcaption className="text-xs text-stone-500 px-4 py-3">
                   Chicago · Freelance designer · Two children
@@ -392,7 +392,7 @@ export default function PantryNoteCaseStudy() {
             {/* User Journey Map */}
             <motion.div variants={fadeUp}>
               <p className="text-xs font-semibold uppercase tracking-widest text-stone-500 mb-3">User Journey Map</p>
-              <figure className="rounded-2xl overflow-hidden bg-zinc-900">
+              <figure className="overflow-hidden bg-zinc-900">
                 <ZoomImg src={IMG.journey} alt="User journey map for Hailey" className="w-full h-64 object-cover object-top" />
                 <figcaption className="text-xs text-stone-500 px-4 py-3">
                   End-to-end journey managing food at home
@@ -416,11 +416,11 @@ export default function PantryNoteCaseStudy() {
           </motion.div>
 
           <motion.div variants={stagger} className="grid md:grid-cols-2 gap-5">
-            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
+            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-200 bg-stone-50">
               <ZoomImg src={IMG.mentalModel} alt="Mental model and user flow diagram" className="w-full h-56 object-cover object-top" />
               <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Mental model and user flow</figcaption>
             </motion.figure>
-            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
+            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-200 bg-stone-50">
               <ZoomImg src={IMG.userFlow} alt="Detailed user flow diagram" className="w-full h-56 object-cover object-top" />
               <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Detailed user flow</figcaption>
             </motion.figure>
@@ -444,13 +444,13 @@ export default function PantryNoteCaseStudy() {
                 { n: '4', goal: 'Make things easy to find — no buried features' },
                 { n: '5', goal: 'Efficient and streamlined — every tap should earn its place' },
               ].map(({ n, goal }) => (
-                <div key={n} className="flex items-start gap-3 p-4 rounded-xl bg-white border border-stone-100">
+                <div key={n} className="flex items-start gap-3 p-4 bg-white border border-stone-100">
                   <span className="w-6 h-6 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center flex-shrink-0">{n}</span>
                   <span className="text-sm text-stone-600 leading-relaxed">{goal}</span>
                 </div>
               ))}
             </motion.div>
-            <motion.div variants={fadeUp} className="p-6 rounded-2xl bg-white border border-stone-100">
+            <motion.div variants={fadeUp} className="p-6 bg-white border border-stone-100">
               <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-700 mb-4">Key Features</h3>
               <ul className="space-y-2 text-sm text-stone-600">
                 {[
@@ -471,7 +471,7 @@ export default function PantryNoteCaseStudy() {
           {/* Wireframe grid */}
           <motion.div variants={stagger} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 md:gap-3">
             {WIREFRAMES.map((src, i) => (
-              <motion.figure key={i} variants={fadeUp} className="rounded-xl overflow-hidden border border-stone-200 bg-stone-50 aspect-[9/16]">
+              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200 bg-stone-50 aspect-[9/16]">
                 <Zoomable src={src} alt={`Wireframe screen ${i + 1}`} className="h-full">
                   <img src={src} alt={`Wireframe screen ${i + 1}`} className="w-full h-full object-contain" loading="lazy" />
                 </Zoomable>
@@ -492,7 +492,7 @@ export default function PantryNoteCaseStudy() {
             <Eyebrow label="Challenge & Reflection" />
           </motion.div>
           <div className="grid md:grid-cols-2 gap-8">
-            <motion.div variants={fadeUp} className="p-8 rounded-2xl bg-white border border-stone-100">
+            <motion.div variants={fadeUp} className="p-8 bg-white border border-stone-100">
               <div className="text-xs font-bold uppercase tracking-widest text-stone-400 mb-4">Challenge</div>
               <p className="text-stone-600 leading-relaxed">
                 Making a clean, simple UI for what is fundamentally an inventory system — a category
@@ -502,7 +502,7 @@ export default function PantryNoteCaseStudy() {
                 ongoing problem that remains a focus for future iterations.
               </p>
             </motion.div>
-            <motion.div variants={fadeUp} className="p-8 rounded-2xl bg-ink-900 border border-ink-800">
+            <motion.div variants={fadeUp} className="p-8 bg-ink-900 border border-ink-800">
               <div className="text-xs font-bold uppercase tracking-widest text-stone-500 mb-4">Reflection</div>
               <blockquote className="text-stone-300 leading-relaxed mb-5">
                 "It was difficult to repeatedly solve problems found in the idea phase.
@@ -526,14 +526,14 @@ export default function PantryNoteCaseStudy() {
         <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20 py-12 grid grid-cols-2 gap-4">
           {prev ? (
             <Link to={`/project/${prev.slug}`} aria-label={`Previous project: ${prev.title}`}
-              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5">
+              className="group flex flex-col gap-2 p-6 border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5">
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center gap-1"><BackIcon /> Previous</span>
               <span className="text-sm font-semibold text-ink-800 group-hover:text-ink-600 transition-colors line-clamp-1">{prev.title}</span>
             </Link>
           ) : <div aria-hidden="true" />}
           {next ? (
             <Link to={`/project/${next.slug}`} aria-label={`Next project: ${next.title}`}
-              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full">
+              className="group flex flex-col gap-2 p-6 border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full">
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center justify-end gap-1">Next <NextIcon /></span>
               <span className="text-sm font-semibold text-ink-800 group-hover:text-ink-600 transition-colors line-clamp-1">{next.title}</span>
             </Link>

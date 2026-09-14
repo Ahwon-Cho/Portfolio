@@ -129,25 +129,29 @@ function FeaturedCard({ project }) {
   )
 }
 
-/* ── Default variant — vertical card ─────────────────────────── */
+/* ── Default variant — gallery thumbnail ─────────────────────────
+   The artwork carries the page; the caption stays out of its way.
+   Title plus "type · discipline" only — company, role, subtitle and the
+   metric all live in the case study, which is what the click is for. */
 function DefaultCard({ project, index = 0 }) {
-  const catStyle   = CATEGORY_STYLES[project.category] || CATEGORY_STYLES['UX Design']
-  const gradient   = PLACEHOLDER_GRADIENTS[index % PLACEHOLDER_GRADIENTS.length]
-  const metric     = metricFromTldr(project.tldr)
+  const gradient = PLACEHOLDER_GRADIENTS[index % PLACEHOLDER_GRADIENTS.length]
 
   return (
     <Link
       to={`/project/${project.slug}`}
       aria-label={`View case study: ${project.title}`}
-      className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-stone-100 hover:border-stone-300 card-hover cursor-pointer h-full"
+      className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400"
     >
-      {/* Image / placeholder */}
-      <div className="relative overflow-hidden h-80 flex-shrink-0">
+      {/* Artwork — square corners, no card chrome, so the image reads as the
+          work itself rather than as a UI card */}
+      <div className="relative overflow-hidden bg-stone-100 aspect-[3/2]">
         {project.image ? (
           <img
             src={project.image}
             alt={`${project.title} design preview`}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading={index < 2 ? 'eager' : 'lazy'}
+            decoding="async"
+            className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
           />
         ) : (
           <div className={`w-full h-full bg-gradient-to-br ${gradient} flex items-center justify-center`}>
@@ -159,45 +163,27 @@ function DefaultCard({ project, index = 0 }) {
             </span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
-        {/* Arrow reveal */}
-        <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white text-ink-900 flex items-center justify-center opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300 shadow-md">
-          <ArrowIcon />
-        </div>
       </div>
 
-      {/* Content */}
-      <div className="flex-1 flex flex-col p-6">
-        {/* Badges row */}
-        <div className="flex flex-wrap items-center gap-2 mb-4">
-          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${catStyle}`}>
-            {project.category}
-          </span>
-          {project.company && (
-            <span className="text-xs text-stone-400 font-medium">{project.company}</span>
-          )}
-          {project.wip && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border bg-amber-50 text-amber-700 border-amber-200">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" aria-hidden="true" />
-              WIP
-            </span>
-          )}
-        </div>
-
-        <h3 className="text-base font-semibold text-ink-900 mb-1 leading-snug group-hover:text-ink-700 transition-colors">
+      {/* Caption */}
+      <div className="mt-4">
+        <h3 className="text-base font-medium text-ink-900 leading-snug">
           {project.title}
+          <span
+            className="inline-block ml-1.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-stone-400"
+            aria-hidden="true"
+          >
+            →
+          </span>
         </h3>
-        <p className="text-xs text-stone-400 mb-3">{project.role}</p>
-        <p className="text-sm text-stone-500 leading-relaxed line-clamp-2 flex-1">
-          {project.subtitle}
+        <p className="text-sm text-stone-500 mt-1">
+          {project.type}
+          <span aria-hidden="true"> · </span>
+          {project.category}
+          {project.wip && (
+            <span className="text-stone-400"><span aria-hidden="true"> · </span>In progress</span>
+          )}
         </p>
-
-        {/* UX: metric — visible without clicking */}
-        {metric && (
-          <div className="mt-4 pt-4 border-t border-stone-100">
-            <p className="text-xs text-amber-700 font-medium line-clamp-1">{metric}</p>
-          </div>
-        )}
       </div>
     </Link>
   )

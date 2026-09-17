@@ -1,0 +1,117 @@
+{
+  "coffee-palm": {
+    "file": "coffee-palm-v1.webp",
+    "width": 662,
+    "height": 800
+  },
+  "coffee-person": {
+    "file": "coffee-person.webp",
+    "width": 397,
+    "height": 1000
+  },
+  "work-person": {
+    "file": "work-person.webp",
+    "width": 536,
+    "height": 1000
+  },
+  "work-seated": {
+    "file": "work-seated-mouse-v3.webp",
+    "width": 536,
+    "height": 1000
+  },
+  "work-standing": {
+    "file": "work-standing.webp",
+    "width": 340,
+    "height": 1000
+  },
+  "park-person": {
+    "file": "park-person.webp",
+    "width": 403,
+    "height": 1000
+  },
+  "garden-person": {
+    "file": "garden-person.webp",
+    "width": 338,
+    "height": 1000
+  },
+  "husband": {
+    "file": "husband.webp",
+    "width": 421,
+    "height": 1000
+  },
+  "dog-light-walk": {
+    "file": "dog-light-walk-round-ears-v2.webp",
+    "width": 500,
+    "height": 352
+  },
+  "dog-light-sit": {
+    "file": "dog-light-sit-round-ears-v2.webp",
+    "width": 377,
+    "height": 500
+  },
+  "dog-dark-walk": {
+    "file": "dog-dark-walk-breeds-v1.webp",
+    "width": 500,
+    "height": 374
+  },
+  "dog-dark-sit": {
+    "file": "dog-dark-sit-breeds-v1.webp",
+    "width": 380,
+    "height": 500
+  },
+  "chair": {
+    "file": "chair.webp",
+    "width": 486,
+    "height": 800
+  },
+  "table": {
+    "file": "table.webp",
+    "width": 800,
+    "height": 707
+  },
+  "mug": {
+    "file": "mug.webp",
+    "width": 800,
+    "height": 728
+  },
+  "desk": {
+    "file": "desk.webp",
+    "width": 800,
+    "height": 414
+  },
+  "monitor": {
+    "file": "monitor.webp",
+    "width": 536,
+    "height": 800
+  },
+  "laptop": {
+    "file": "laptop.webp",
+    "width": 800,
+    "height": 438
+  },
+  "bench": {
+    "file": "bench.webp",
+    "width": 800,
+    "height": 441
+  },
+  "desk-plant": {
+    "file": "desk-plant.webp",
+    "width": 662,
+    "height": 800
+  },
+  "tomato-pot": {
+    "file": "tomato-pot.webp",
+    "width": 399,
+    "height": 800
+  },
+  "zucchini-pot": {
+    "file": "zucchini-pot.webp",
+    "width": 719,
+    "height": 800
+  },
+  "watering-can": {
+    "file": "watering-can.webp",
+    "width": 800,
+    "height": 486
+  }
+}

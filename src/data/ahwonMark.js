@@ -62,7 +62,7 @@ export function createMarkSvg() {
     return '    <path d="M ' + start + ' ' + command + end + '"/>'
   })
   return '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '" role="img" aria-labelledby="title">\n'
-    + '  <title id="title">Ahwon Cho — personal mark</title>\n'
+    + '  <title id="title">Ahwon Cho: personal mark</title>\n'
     + '  <g fill="none" stroke="' + color + '" stroke-width="' + strokeWidth + '" stroke-linecap="round" stroke-linejoin="round">\n'
     + shapes.join('\n') + '\n  </g>\n</svg>\n'
 }

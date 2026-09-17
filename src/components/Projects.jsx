@@ -1,81 +1,19 @@
-/* ART: editorial project grid — featured hero card + supporting grid */
-/* UX: removed filter tabs (6 projects, no need to fragment), company + metric visible on cards */
-/* MOTION: staggered card entrance on scroll */
-import { motion, useReducedMotion } from 'framer-motion'
 import ProjectCard from './ProjectCard'
 import { featuredProjects } from '../data/projects'
 
-/* Order and membership live in projects.js so the grid and the prev/next
-   tour cannot drift apart. */
-const featured = featuredProjects
-  .map(p => ({
-    id:          p.id,
-    slug:        p.slug,
-    title:       p.title,
-    subtitle:    p.subtitle,
-    type:        p.type,
-    category:    p.category,
-    company:     p.company,
-    employment:  p.employment,
-    role:        p.role,
-    timeline:    p.timeline,
-    tldr:        p.tldr,
-    tags:        p.tags,
-    image:       p.thumbnail,
-  }))
-
 export default function Projects() {
-  const shouldReduce = useReducedMotion()
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: shouldReduce ? 0 : 32 },
-    show:   { opacity: 1, y: 0, transition: { duration: shouldReduce ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] } },
-  }
-
-  const stagger = {
-    hidden: {},
-    show:   { transition: { staggerChildren: shouldReduce ? 0 : 0.1 } },
-  }
-
-  const [featuredProject, ...rest] = featured
-
   return (
-    <section
-      id="projects"
-      aria-label="Selected work"
-      className="min-h-[calc(100vh-3.5rem)] pt-32 pb-28 md:pt-40 md:pb-36 bg-ink-50"
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-
-        <motion.div
-          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
-          className="mb-16"
-        >
-          <h2 className="font-bold text-4xl md:text-5xl text-ink-900 leading-tight mb-3">
-            Six selected projects.
-          </h2>
-          <p className="text-stone-500 text-base max-w-md">
-            Enterprise software, mobile apps, healthcare, and developer tools —
-            always shipped close to engineering.
-          </p>
-        </motion.div>
-
-        {/* All 6 projects — 2-col grid, each card animates individually.
-            Generous gutters do the work the card borders used to. */}
-        <div className="grid md:grid-cols-2 gap-x-8 gap-y-14 lg:gap-x-12 lg:gap-y-16">
-          {featured.map((project, i) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: shouldReduce ? 0 : 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: shouldReduce ? 0 : 0.6, delay: shouldReduce ? 0 : (i % 2) * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <ProjectCard project={project} variant="default" index={i} />
-            </motion.div>
+    <section id="projects" className="portfolio-page work-page" aria-labelledby="work-title">
+      <div className="portfolio-container">
+        <header className="portfolio-page-heading">
+          <h1 id="work-title">Selected work<span>.</span></h1>
+          <p>UX + visual design</p>
+        </header>
+        <div className="work-gallery">
+          {featuredProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
-
       </div>
     </section>
   )

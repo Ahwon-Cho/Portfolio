@@ -1,0 +1,68 @@
+.painted-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Interior scenery stops at the back edge; garden scenery extends to the
+     front of the pad. Both anchors follow the responsive circular floor. */
+  height: var(--painted-backdrop-floor, 65svh);
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 1;
+  background: transparent;
+}
+.painted-backdrop[data-visible='true'] { visibility: visible; }
+.painted-backdrop-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  background: transparent;
+  /* Assets contain only ink/color with alpha, not a paper rectangle. */
+  filter: blur(3px);
+  mask-image: linear-gradient(to bottom, #000 88%, transparent);
+}
+.painted-backdrop[data-backdrop-theme='nature'] .painted-backdrop-image {
+  object-position: right top;
+  /* Keep the blossoms especially light; all scenery shares the same blur. */
+  opacity: .6;
+  transform-origin: 98% 6%;
+  animation: painted-blossom-breeze 14s ease-in-out infinite;
+}
+.painted-page[data-motion='paused'] .painted-backdrop[data-backdrop-theme='nature'] .painted-backdrop-image { animation-play-state: paused; }
+@keyframes painted-blossom-breeze {
+  0%, 100% { transform: translateX(0) rotate(-.2deg); }
+  50% { transform: translateX(-2px) rotate(.55deg); }
+}
+.painted-backdrop[data-backdrop-theme='coffee'] .painted-backdrop-image { object-position: left top; opacity: .38; }
+.painted-backdrop[data-backdrop-theme='work'] .painted-backdrop-image { object-position: right top; opacity: .36; }
+.painted-backdrop[data-backdrop-theme='garden'] {
+  /* The artwork has a small transparent tail below the bushes. Allow that
+     space beyond the pad so the painted foliage itself reaches its base. */
+  height: calc(var(--painted-backdrop-pad-bottom, 85svh) + clamp(20px, 3.3vw, 64px));
+}
+.painted-backdrop[data-backdrop-theme='garden'] .painted-backdrop-image {
+  /* Fit the complete tree: cover was cropping it at desktop aspect ratios. */
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 0 clamp(12px, 2vw, 32px);
+  opacity: .62;
+  /* Its natural alpha edge already feathers the bottom. A vertical mask was
+     erasing the foliage before it could meet the pad. */
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+}
+/* Viewport-wide scenery stays behind both the figures and their circular set. */
+.painted-page .painted-header { position: relative; z-index: 4; }
+.painted-page .painted-stage { z-index: 1; }
+.painted-page .painted-perspective { z-index: 1; }
+.painted-scroll-guide { z-index: 2; }
+@media (max-aspect-ratio: 1 / 1) {
+  /* Keep the tree, bushes and blossom bough modest in size on phones. */
+  .painted-backdrop[data-backdrop-theme='garden'] .painted-backdrop-image,
+  .painted-backdrop[data-backdrop-theme='nature'] .painted-backdrop-image { object-fit: contain; }
+}

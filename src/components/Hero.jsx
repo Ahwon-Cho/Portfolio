@@ -65,16 +65,16 @@ export default function Hero({ darkMode = false }) {
           >
             I design complex
             <br />
-            software —
+            software.
             <br />
             {/* ART: lighter weight + stone-300 for the final line — elegant contrast within PJS */}
-            <span className="font-bold text-stone-400">simple, </span><span className="font-bold text-stone-300">crafted, </span><span className="font-bold text-white">human.</span>
+            <span className="font-bold text-stone-400">With a focus on </span><span className="font-bold text-stone-300">visual design </span><span className="font-bold text-white">and usability.</span>
           </motion.h1>
 
           {/* UX: concise, specific value prop — not generic */}
           <motion.p variants={item} className="text-base md:text-lg text-stone-400 leading-relaxed max-w-xl mb-12">
             Senior UX &amp; visual designer. 10+ years across enterprise software, e-commerce,
-            and admin tools — B2B and B2C, from discovery to shipped product.
+            and admin tools for businesses and consumers.
           </motion.p>
 
           {/* UX: two clear CTAs, primary action first */}

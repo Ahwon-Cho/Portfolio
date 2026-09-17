@@ -1,4 +1,4 @@
-import vibeCodingImg    from '../img/vibecoding01.png'
+import gpuFlightImg     from '../img/gpuflight01.png'
 import gpuThumbImg      from '../img/thumb-gpu.png'
 import gfSystemPalette  from '../img/system02.png'
 import gfSystemAtom     from '../img/system01.png'
@@ -8,218 +8,212 @@ import blueConnectImg   from '../img/blueconnect-redesign.png'
 import blueCrossImg     from '../img/bluecross-cost-estimator.png'
 import homeDepotImg     from '../img/homedepot-protection-plan.png'
 import pantryNoteImg    from '../img/pantry-note.png'
+import blueComparison   from '../img/blueconnect_comparison.png'
+import blueDirections   from '../img/bluecross_img1.png'
+import costWireflow     from '../img/bc_wireflow.png'
+import costFinal        from '../img/bc_final.png'
 
 export const projects = [
   {
     id: 9,
     slug: 'gpuflight',
     title: 'GPU Flight',
-    subtitle: 'My first vibe-coding project — a designer entering an unknown domain, building a React dashboard, and then building the design system that gave it an identity of its own and kept it coherent when I could not be in the room.',
+    subtitle: 'An interface for monitoring GPU performance.',
     type: 'Web Dashboard',
     category: 'Product Design',
-    company: null,
-    employment: 'Personal Project',
+    company: 'Offleash Lab',
+    employment: null,
     role: 'Product Designer & Frontend Developer',
     timeline: '2026',
     team: 'Andy Shin (Software Engineer)',
     tags: ['developer-tools', 'data-visualization', 'design-systems'],
     wip: true,
-    image: vibeCodingImg,
+    image: gpuFlightImg,
+    imageAlt: 'GPU Flight Insights dashboard exploration with device health, trends, and issue details',
+    imageCaption: 'Insights dashboard exploration. The product and its design system are still evolving.',
+    preserveHeroAspectRatio: true,
     thumbnail: gpuThumbImg,
-    tldr: 'My first vibe-coding project. I knew nothing about GPU engineering, and I could only work on it part-time. Generating screens turned out to be the easy part — keeping them consistent, and stopping them from looking like every other AI-generated product, was the real problem. So I built a design system to solve both.',
-    overview: 'GPU Flight is a GPU observability platform that gives developers a real-time window into CUDA application performance — think of it as a flight recorder for GPUs. I came into this project knowing nothing about CUDA, kernel execution, or GPU profiling. The backend engineer, Andy Shin, built the data layer. I owned everything else: understanding the domain, defining the product, designing the interface, and building the entire React + TypeScript dashboard using vibe coding. This is the story of what I learned doing it.',
-    problem: 'GPU performance engineers had no lightweight way to observe what their applications were doing in real time. Existing tools (NSight, nvprof) required stopping the process entirely — too disruptive for production use. The data they produced was dense and hard to read without deep CUDA expertise. My challenge was twofold: understand a highly technical domain I had never touched, then design an interface that made that complexity feel navigable to engineers who live in it every day.',
-    process: [
-      {
-        phase: 'Learning from AI is remarkable',
-        description: 'I had never touched CUDA, kernel profiling, or GPU engineering before this project. I used Claude as a real-time tutor — asking it to explain concepts, then asking follow-ups until I could think in the user\'s language. Within days I understood kernel occupancy, warp stall reasons, and NVML telemetry well enough to make real design decisions. What used to take months of ramp-up compressed into days. AI doesn\'t replace deep expertise — but it makes domain knowledge accessible to anyone willing to ask the right questions.',
-      },
-      {
-        phase: 'Design skills and a keen eye matter more, not less',
-        description: 'The biggest misconception about vibe coding is that AI does the design work. It doesn\'t. AI writes code — but it can\'t decide what to prioritize, what to cut, or how to create visual hierarchy that guides an engineer\'s eye to the right metric at the right moment. Every layout decision, every color choice, every spacing call was still mine. In fact, having more direct control made my design instincts more important — there was no design-to-dev translation layer to catch mistakes. The designer\'s eye became the last line of quality.',
-      },
-      {
-        phase: 'Front-end knowledge is a real advantage',
-        description: 'My basic HTML, CSS, and React knowledge — which I always thought of as a nice-to-have — turned out to be essential. When AI generated code I didn\'t understand, I could read it, spot the problems, and correct course. When a component looked wrong, I knew why and could describe the fix precisely. Designers with zero front-end context would struggle to direct AI effectively — you need just enough to know what good output looks like and what to ask for next.',
-      },
-      {
-        phase: 'Designing and building in the same breath',
-        description: 'This was my first time building production frontend as a designer. Using Claude Code and VS Code, the feedback loop was immediate — describe it, see it, refine it. No handoff. No translation loss. No waiting. It changed how I made decisions: I stopped designing things that looked perfect in Figma but would be painful to build, and started designing things I could actually build. The constraint became a creative tool — and I\'ll never go back to the old way.',
-      },
-      {
-        phase: 'Building the system that held it together',
-        description: 'Speed created two problems I did not expect. Every generated screen was plausible on its own and slightly different from the last — and left to its defaults, generation kept reaching for the same generic look every AI project has. I stopped adding features and built Verdant 2 instead: foundations first, then atoms, molecules, organisms, and the templates that compose them. Tokens gave the product a character that was actually chosen, and the component layer kept that character from eroding one screen at a time.',
-      },
-    ],
-    challenges: [
-      'Entering a completely unknown domain — CUDA and GPU profiling — and getting up to speed fast enough to make credible design decisions.',
-      'Keeping dense, low-level profiling data scannable without oversimplifying — every metric mattered to the user, nothing could be hidden.',
-      'Directing AI output effectively as a designer — knowing when the code was wrong, and having enough front-end knowledge to fix it.',
-      'Generation is fast, but it is not consistent. Ask for a button twice and you get two buttons — so the faster we moved, the faster the product drifted out of alignment.',
-      'Working part-time on a project that moved daily. Design had to survive my absence, because I was not there to defend it.',
-      'Escaping the default AI aesthetic. Left alone, generation produces the same indigo-and-drop-shadow look on every project — giving GPU Flight a character of its own meant encoding that character somewhere the next generated screen could not ignore.',
-    ],
-    outcomes: [
-      'Verdant 2 — a documented design system: 5 foundation pages, 20 atoms, 21 molecules, 13 organisms, and 11 page templates, each with live examples and a stable-or-planned status.',
-      'Chart palette built to hold 3:1 contrast against the page in both themes, with 36° minimum hue separation and an explicit color-vision advisory for two-series charts.',
-      'Every token remaps between light and dark automatically, so theme parity is a property of the system rather than something to re-check by hand.',
-      'Design decisions stopped being re-litigated. The system became the reference, which meant the product stayed coherent on the weeks I could not be there.',
-      'GPU Flight reads as an engineering instrument rather than a generated template — monospace where the machine speaks, a restrained sage-and-graphite palette, and density tuned for telemetry, all encoded as tokens so the look holds without me re-applying it.',
-    ],
+    tldr: 'I design GPU Flight and build its frontend with AI-assisted coding. I work with Andy Shin, the software engineer, on the dashboard and its Verdant 2 design system.',
+    overview: 'Developers use GPU telemetry to investigate application performance. I work on the interface for viewing device health, trends, and issues, while Andy Shin works on the data layer.',
+    problem: 'The dashboard needs to show a summary without hiding the detailed data engineers need. As we built screens with AI-assisted coding, spacing and controls also began to vary. I created shared components to keep them consistent.',
     featureSections: [
       {
-        label: 'The Core of This Project',
-        tone: 'dark',
-        heading: 'I built a design system so every page came out consistent — and looked like GPU Flight, not like AI.',
-        intro: 'This is the part of GPU Flight I care most about. Not the dashboard — the system underneath it that made the dashboard possible to build consistently, by two people who were rarely working at the same time.',
-        body: [
-          'The first problem showed up fast. Every generated screen was plausible on its own and slightly different from the last: ask for a button twice and you get two buttons. Because this was a side project, I was only on it part-time, so decisions I made one week were re-answered differently the next. Nobody was being careless — design decisions simply had nowhere durable to live. They existed in my head and in whichever file happened to be open, which meant anyone editing code was editing design, whether they meant to or not.',
-          'The second problem bothered me just as much: left to its defaults, generation produces a very particular look. The same indigo buttons, the same soft shadows, the same rounded cards you have seen on a hundred other projects. GPU Flight is an instrument for engineers watching kernels execute in real time — it should not look like a marketing site. But "make it feel like an engineering tool" is not something you can ask for once and expect to hold. The next generated screen quietly reverts to the defaults.',
-          'Both problems have the same fix. Tokens are how you overwrite a model\'s defaults permanently, and components are how you keep them overwritten. So I stopped adding features and built Verdant 2 instead, with a narrow goal: make the consistent, on-brand page the easiest one to build.',
-        ],
-        layersHeading: 'How the system produces consistency — and identity',
-        layersNote: 'I built it in the order the system actually depends on. Each layer can only use what is below it, so a decision made once at the bottom — a color, a spacing step, a focus ring — propagates everywhere above it automatically. The foundations layer is where GPU Flight\'s character is actually defined: a restrained sage-and-graphite palette, monospace for anything the machine produced, flat borders instead of drop shadows, and density tuned for reading dense telemetry rather than for whitespace. Once those became tokens, every component inherited them, and identity stopped being something I had to re-apply screen by screen.',
-        layers: [
-          { tier: 'Foundations', note: 'where the identity lives', examples: 'Tokens · Type scale · Color palette · A11y matrix · Chart palette' },
-          { tier: 'Atoms',       examples: 'VButton · VInput · VProgress · VTag · VIcon · VToggle · VSkeleton' },
-          { tier: 'Molecules',   examples: 'VCard · VStatCard · VSearchBar · VField · VMessageBar · VPagination' },
-          { tier: 'Organisms',   examples: 'VAppShell · VLeftNav · VTopBar · VTable · VDialog · VDrawer · VToast' },
-          { tier: 'Templates',   examples: 'Dashboard · Data table · L1 + tabs + inspector · States · Overlays' },
-        ],
-        callout: {
-          label: 'What actually changed',
-          text: 'Design stopped being an opinion I had to be present to defend and became a reference anyone could check. Pages stayed consistent on the weeks I was not there, and they stopped defaulting to a look I had not chosen. Specific requests became answerable too — I could make a change once in the system and have it hold everywhere it belonged, instead of hand-applying it screen by screen and watching it drift out again.',
-        },
+        label: '01 / Product interface',
+        heading: 'Organizing the Insights dashboard',
+        intro: 'I grouped summary indicators at the top, placed trend charts below them, and kept individual issues in a table. Engineers can scan the overview before inspecting the records.',
+        body: ['A next step is to evaluate a complete investigation task with an engineer, including loading, stale data, and error states.'],
+        images: [],
+      },
+      {
+        label: '02 / Visual foundations',
+        heading: 'Color and layout rules',
+        intro: 'I developed Verdant 2 to define the colors, typography, spacing, and components used across the frontend. I kept layouts compact to accommodate data tables and charts.',
+        body: ['Shared tokens let me update recurring styles in one place. I still need to review each screen in light and dark mode.'],
         images: [
           {
             src: gfSystemPalette,
-            alt: 'Verdant 2 chart palette documentation — ten categorical color tokens with bar and line samples, plus usage rules',
-            caption: '1 — Foundations: decide once, inherit everywhere',
-            note: 'The ten-color categorical sequence for data visualisation. Every value is a semantic token that remaps between light and dark automatically, holds at least 3:1 contrast against the page, and keeps 36° of hue separation from its neighbours. The usage rules go further than swatches — including a color-vision advisory against pairing crimson with olive as the only two series. Because the rules live here, no chart built later needs a judgement call, and no two charts can drift apart.',
+            alt: 'Verdant 2 chart palette documentation with color tokens and usage examples',
+            caption: 'Chart palette: color tokens, samples, and usage guidance',
+            note: 'Charts still need contrast checks and labels that can be understood without color.',
           },
+        ],
+      },
+      {
+        label: '03 / Reusable interface',
+        heading: 'Components and page templates',
+        intro: 'I documented component sizes and states, then combined them into templates for recurring layouts.',
+        images: [
           {
             src: gfSystemAtom,
-            alt: 'Verdant 2 VProgress component documentation showing live example, variants, and sizes',
-            caption: '2 — Components: every state answered in advance',
-            note: 'VProgress, one of twenty atoms. Determinate and indeterminate modes, default, warning, and error variants, two sizes, and a live example that can be toggled through each combination. This is where consistency is actually enforced: when every state a developer might need is already documented and working, there is no reason to invent a twenty-first way to show progress — and no gap for one to appear in.',
+            alt: 'VProgress documentation with variants, sizes, and a live example',
+            caption: 'VProgress: determinate and indeterminate progress states',
+            note: 'The examples show different sizes and progress states.',
           },
           {
             src: gfSystemTemplate,
-            alt: 'Verdant 2 template T05 — a full GPU Flight fleet host page assembled from system components',
-            caption: '3 — Templates: new pages start consistent by default',
-            note: 'T05 — an actual GPU Flight fleet host screen assembled entirely from system parts, with the layout grid specified down to the column widths (56px + 1fr + 320px). Eleven templates cover the product\'s real page types, so a new page never starts from a blank file — it starts from a layout that is already correct. That is the whole mechanism: consistency became the path of least resistance rather than something to enforce after the fact.',
+            alt: 'Verdant 2 component-gallery template for a fleet-host layout',
+            caption: 'Fleet-host template: a composition example, not a shipped product screen',
+            note: 'This template belongs to the component gallery. Features marked planned are still in development.',
           },
         ],
       },
     ],
-    reflectionHeading: 'What It Changed',
-    reflection: 'That constraint is not unique to side projects. At Microsoft I am the sole designer across six active products — I cannot be in every conversation there either. GPU Flight is where I learned to design for my own absence, and it changed what I reach for first on every project since. The dashboard itself is still in progress; I will share the full product story once it ships.',
+    processHeading: 'How I build and review the interface',
+    process: [
+      { phase: 'Understand the domain', description: 'Discussed GPU terminology and telemetry with the engineer and used AI to help me study unfamiliar concepts.' },
+      { phase: 'Prototype in code', description: 'Used AI-assisted coding in VS Code to try layouts, review their behavior, and adjust the design.' },
+      { phase: 'Document patterns', description: 'Documented recurring styles and components for reuse across the frontend.' },
+    ],
+    challengesHeading: 'What still needs attention',
+    challenges: [
+      'Balancing a compact overview with enough detail for technical investigation.',
+      'Reviewing generated code and interface states, not just the default appearance.',
+      'Keeping design-system examples and product screens aligned as both evolve.',
+    ],
+    outcomesHeading: 'Work produced so far',
+    outcomes: [
+      'Dashboard design explorations and frontend implementation work.',
+      'Verdant 2 foundations, component documentation, and composition templates.',
+      'A shared reference for visual and interaction decisions during development.',
+    ],
+    reflectionHeading: 'Next steps',
+    reflection: 'Working in code lets me try interactions while designing them. Next, I want to test a complete investigation task with engineers and review loading, stale-data, and error states. The product is still in development.',
   },
   {
     id: 1,
     slug: 'surface-it-toolkit',
     title: 'Surface IT Toolkit',
-    subtitle: 'Redesigning a fragmented enterprise tool into a unified, accessible experience for IT admins.',
+    subtitle: "Bringing Surface deployment, configuration, and recovery tools into one Windows app.",
     type: 'Windows Application',
     category: 'Product Design',
     company: 'Microsoft',
     employment: 'Contractor',
-    role: 'Sole Designer — end-to-end UX, UI, and visual',
-    timeline: 'September 2023 – April 2024',
+    role: "Sole designer for UX, UI, and visual design",
+    timeline: "September 2023 to April 2024",
     team: '2 PMs · 4 Engineers · 1 Designer',
     tags: ['enterprise', 'b2b'],
     image: surfaceImg,
     thumbnail: surfaceImg,
-    tldr: 'Redesigned a fragmented suite of enterprise IT tools into a single, consistent Windows application — end to end as sole designer, from IA and UX through UI, a custom icon set, and the hero imagery. Shipped in 7 months.',
-    overview: 'The Surface IT Toolkit is a Windows application built for IT administrators who manage Microsoft Surface devices at scale. Before this redesign, tools were scattered across multiple locations with inconsistent versioning, poor discoverability, and no unified design language — all built without formal design support.',
-    problem: 'IT professionals managing hundreds of Surface devices had to navigate multiple disconnected tools for configuration, diagnostics, and recovery. The fragmented experience created inefficiencies, increased training overhead, and introduced errors in critical workflows.',
+    tldr: 'Sole designer across all Surface IT Toolkit features, from workflows and interface design to custom icons and product imagery. Shipped in April 2024.',
+    overview: "Surface IT Toolkit brings together tools for IT administrators managing Surface devices. I designed all its features, including the workflows, interface, custom icons, and product imagery.",
+    problem: "The existing tools had different navigation and interaction patterns. I needed to organize them within a shared structure while preserving the controls admins use.",
     process: [
       {
-        phase: 'Discovery',
-        description: 'Partnered with PMs early to map all existing tools and real IT admin workflows. Audited the legacy UEFI Configurator and Data Eraser tools side by side — documenting inconsistent patterns, missing states, and structural gaps. These audit findings directly shaped every reorganization decision that followed.',
+        "phase": "Review the existing tools",
+        "description": "Audited UEFI Configurator and Data Eraser with the PMs to compare their flows and identify inconsistent patterns."
       },
       {
-        phase: 'Define',
-        description: 'Used the legacy audit to define a new information architecture that consolidated all tools under a single navigation model. Created a flowchart documenting the complete user journey across configuration, diagnostics, and recovery — giving engineers and PMs a shared reference before any visual design began.',
+        "phase": "Map the workflows",
+        "description": "Created the information architecture and task flows for the toolkit."
       },
       {
-        phase: 'Design',
-        description: 'Started wireframes from the IA flowchart, then evolved them iteratively in parallel with engineering. Built a scalable Figma component system early so engineers had something to build from while designs were still in progress. Implemented Figma variables for light/dark mode and designed a custom icon set scoped to the toolkit\'s specific patterns — aligned with the Windows design language.',
+        "phase": "Design the interface",
+        "description": "Developed wireframes, Figma components, light and dark themes, and custom icons while engineering work progressed."
       },
       {
-        phase: 'Deliver',
-        description: 'Moved from high-fidelity designs to final handoff through close collaboration with 4 engineers. Used iterative feedback loops to course-correct quickly as edge cases emerged. Shipped the complete redesign in April 2024, on schedule.',
-      },
+        "phase": "Support implementation",
+        "description": "Reviewed the designs with engineers through handoff. The toolkit shipped in April 2024."
+      }
     ],
     challenges: [
-      'With design and development running in parallel on a 7-month timeline, I built the Figma component library before finalizing every screen — giving engineers something to build from while I continued iterating. This reduced rework significantly in the final sprint.',
-      'The legacy UI was built without design involvement, leaving no shared visual language or UX structure. Rather than retrofitting the old patterns, I treated the audit as a clean slate — using documented inconsistencies to justify a full reorganization of the information architecture.',
-      'Supporting both light and dark mode as a solo designer under resource constraints felt unsustainable at the component level. Implementing Figma variables to manage theme switching system-wide meant I maintained one source of truth instead of two parallel files.',
-      'I had no prior exposure to IT administration workflows when I joined the project. I partnered directly with PMs in the first few weeks to map real user journeys before sketching any UI — so every design decision was grounded in how admins actually worked.',
+      "Designing while engineers were building the application.",
+      "Bringing tools with different patterns into one navigation structure.",
+      "Maintaining both light and dark themes."
     ],
     outcomes: [
-      'Shipped a polished, unified toolkit consolidating all Surface management tools into a single Windows application — delivered on time in April 2024.',
-      'Figma component library adopted by the team for ongoing iterations and future Surface tooling, reducing setup time for subsequent design work.',
-      'Light and dark mode delivered via a Figma variables system — a first for this product area, achieved without additional resources.',
-      'Leadership recognized the redesign as a model for future Surface tooling projects, validating both the product direction and the design-led process.',
-      "When my PM first presented the redesign to stakeholders, their opening question was \"Who's the designer?\" — the visual craft registered before the features did.",
+      "Designs for all toolkit features.",
+      "A Figma component library with variables for light and dark themes.",
+      "Custom icons and product imagery."
     ],
-    reflection: 'This was my first time as the sole designer embedded in a product team moving at engineering speed. The biggest lesson was designing systems, not just screens — the component library and variables work had more lasting impact than any individual interface decision. If I could revisit it, I\'d have documented design rationale more formally early on, so the team had a record of why decisions were made, not just what shipped.',
+    reflection: "I would document the reasons behind decisions earlier, so future changes can be reviewed against the original requirements.",
   },
   {
     id: 2,
     slug: 'blue-cross-cost-estimator',
     title: 'Blue Cross NC Cost Estimator',
-    subtitle: 'Helping members understand healthcare costs before they receive care — in 4 weeks.',
+    subtitle: 'Designing a flow for requesting a healthcare cost estimate.',
     type: 'Product Feature',
     category: 'Product Design',
     company: 'Blue Cross NC',
     employment: 'Contractor',
     role: 'Product Designer',
-    timeline: '4 weeks (2 sprints) · January 2022',
+    timeline: '4 weeks · January 2022',
     team: 'Sydney Sample · Lamar Lundy · Leslie Carter',
-    tags: ['healthcare', 'fintech'],
+    status: 'Prototype',
+    tags: ['healthcare', 'enterprise'],
     image: blueCrossImg,
     thumbnail: blueCrossImg,
-    tldr: '4/4 usability participants found the design intuitive. Stakeholder alignment achieved in 1 month vs. 6 months of prior discussion.',
-    overview: 'The Advance EOB (Cost Estimator) is a regulatory-mandated feature requiring health insurers to provide good faith cost estimates before patients receive care. Blue Cross NC had 4 weeks to go from user flow to high-fidelity prototype — with requirements still being finalized when design work began.',
-    problem: 'Members had no way to understand out-of-pocket healthcare costs before receiving care, leading to billing surprises. After 6 months of stakeholder discussions with no resolution, the project needed a design-led approach to drive alignment and meet a hard regulatory deadline.',
+    preserveHeroAspectRatio: true,
+    tldr: 'I designed wireflows and a prototype for requesting an Advance Explanation of Benefits (EOB). Providers and internal support staff use this flow to prepare a request for an estimate.',
+    overview: 'An Advance EOB request includes member details, requester information, and claim details. The form changes depending on who submits it and the type of claim.',
+    problem: 'The requirements were changing during a four-week design period. I used wireflows to discuss the order of the form, the different claim paths, and the final review step with the team.',
+    featureSections: [
+      {
+        label: '01 / Structure',
+        heading: 'Mapping the request',
+        intro: 'The wireflow starts with member and requester details, then branches by claim type before returning to a shared review step.',
+        steps: ['Member details', 'Requester details', 'Claim type and form', 'Review', 'Submit'],
+        images: [
+          {
+            src: costWireflow,
+            alt: 'Advance EOB wireflow from member details through requester and claim information to review and submission',
+            caption: 'Wireflow: a shared reference for the request sequence',
+            note: 'Professional and institutional claims have different form requirements. Open the original to inspect the branches.',
+          },
+        ],
+      },
+      {
+        label: '02 / Interface',
+        heading: 'Developing the prototype',
+        intro: 'Wireframes and Figma components supported revisions during stakeholder discussions. The final design board shows how the request sequence developed into interface screens.',
+        images: [
+          {
+            src: costFinal,
+            alt: 'Advance EOB high-fidelity design board with request screens',
+            caption: 'High-fidelity prototype screens',
+            note: 'Prototype screens prepared for review.',
+          },
+        ],
+      },
+    ],
+    processHeading: 'How I worked with the team',
     process: [
-      {
-        phase: 'Discovery',
-        description: 'Mapped the regulatory requirements and identified the core user need: give members a clear, trustworthy cost estimate before any service. Aligned with stakeholders on scope and MVP constraints.',
-      },
-      {
-        phase: 'Define',
-        description: 'Applied the strategy "Find the right people → Visualize fast → Fail fast → Test → Iterate." Prioritized early visualization to unblock 6 months of stalled discussions.',
-      },
-      {
-        phase: 'Design',
-        description: 'Used Figma auto-layout to enable real-time adjustments during live stakeholder meetings. Created wireflows, user flows, and two scenario-based prototypes covering both provider and member perspectives.',
-      },
-      {
-        phase: 'Test & Deliver',
-        description: 'Conducted usability testing via UserZoom and Zoom with 3 internal CSP users and 1 external provider. Iterated based on findings and presented final designs to 20+ stakeholders for sign-off.',
-      },
+      { phase: 'Map the request', description: 'Outlined the information needed at each stage and the differences between requester and claim paths.' },
+      { phase: 'Visualize and revise', description: 'Revised the wireflows and Figma components as the team reviewed the requirements.' },
+      { phase: 'Evaluate the prototype', description: 'Prototype sessions included three internal support users and one external provider. Member testing would be needed to evaluate any member-facing flow.' },
     ],
-    challenges: [
-      'Requirements were not finalized when design work began',
-      'Hard regulatory deadline with only 4 weeks end-to-end',
-      'Needed to unblock 6 months of stalled stakeholder alignment',
-      'Balancing MVP constraints with ideal user experience',
-    ],
-    outcomes: [
-      '4/4 usability test participants found the interface intuitive',
-      '20+ team members endorsed the final user flow',
-      'Stakeholder alignment achieved in 1 month vs. 6 months of prior discussions',
-      'Regulatory deadline met with high-fidelity prototype delivered on time',
-    ],
+    challengesHeading: 'Constraints that shaped the work',
+    challenges: ['Requirements were still being defined while design progressed.', 'Different claim forms had to fit within a coherent request sequence.', 'The prototype needed to support discussion across multiple stakeholders.'],
+    outcomesHeading: 'Design deliverables',
+    outcomes: ['A mapped request flow with explicit branches and review states.', 'High-fidelity prototype screens for stakeholder review and evaluation.'],
+    reflectionHeading: 'What I would check next',
+    reflection: 'The prototype gave the team a complete request sequence to review. I would next check how well it handles incomplete information and changes made during the final review.',
   },
   {
     id: 3,
     slug: 'home-depot-protection-plan',
     title: 'Home Depot Protection Plan',
-    subtitle: 'Creating a seamless post-purchase protection plan experience across multiple entry points.',
+    subtitle: "Designing how customers add a protection plan after checkout.",
     type: 'Post-Purchase Experience',
     category: 'UX Design',
     company: 'Home Depot',
@@ -230,26 +224,26 @@ export const projects = [
     tags: ['e-commerce', 'conversion'],
     image: homeDepotImg,
     thumbnail: homeDepotImg,
-    tldr: 'User testing validated the design as "easier than expected." Received the "Caught Orange Handed" award from management for design quality.',
+    tldr: "I designed the post-purchase flows, prototype, and handoff for General Merchandise and Major Appliances.",
     overview: 'Home Depot customers who declined a protection plan at checkout had no way to add it afterward. This project designed a complete post-purchase protection plan experience accessible from both the Thank You page and Order Details page, covering multiple product types and edge cases.',
-    problem: 'The system treated protection plans differently depending on purchase phase — as an "option" during checkout, but as an "individual item" post-purchase. This inconsistency created UX fragmentation across 5 distinct user scenarios: General Merchandise (single and multi-item), Major Appliance (single), and mixed-item drawers.',
+    problem: "A plan is attached to a product during checkout but becomes a separate item afterward. The drawer had to account for single products, multiple products, and mixed orders.",
     process: [
       {
-        phase: 'Discovery',
-        description: 'Mapped all entry points and product categories. Discovered that initial designs for General Merchandise failed for other scenarios. Conducted a "5 Whys" post-mortem to understand the root cause of the fragmentation.',
+        "phase": "Review the scenarios",
+        "description": "Compared the two entry points and the plan choices for General Merchandise and Major Appliances."
       },
       {
-        phase: 'Define',
-        description: 'Defined 5 distinct user scenarios requiring separate flows: GM single item, GM multi-item, MA single item, MA multi-item, and mixed-item drawers. Created comprehensive flowcharts to facilitate cross-team communication.',
+        "phase": "Map the flows",
+        "description": "Mapped all five product scenarios after the first GM design missed other cases."
       },
       {
-        phase: 'Design',
-        description: 'Built a multi-component system with variants for rapid prototyping. Replaced checkboxes with CTA buttons to match website-wide interaction patterns. Adopted Stencil (Home Depot\'s new design system) with Figma auto-layout, accelerating iteration speed.',
+        "phase": "Revise the drawer",
+        "description": "Built Figma variants and separated choosing coverage from adding a plan to the cart."
       },
       {
-        phase: 'Deliver',
-        description: 'Created detailed redlines for typography, spacing, and developer handoff. Established intuitive naming conventions for developer collaboration. Delivered designs faster than peer teams adopting the same design system.',
-      },
+        "phase": "Prepare handoff",
+        "description": "Annotated the designs and provided versions for the legacy design system and Stencil."
+      }
     ],
     challenges: [
       'Two different system treatments for the same protection plan across purchase phases',
@@ -258,17 +252,16 @@ export const projects = [
       'Mid-project design system transition to Stencil',
     ],
     outcomes: [
-      'User testing validated the drawer design as intuitive and "easier than expected"',
-      'Faster design system adoption than peer teams at Home Depot',
-      'Received "Caught Orange Handed" management award for design excellence',
-      'Comprehensive component library and naming system adopted by the team',
+      "Flows and prototype for the post-purchase experience.",
+      "Figma component variants and annotated handoff files.",
+      "Recognition from the Home Depot design team."
     ],
   },
   {
     id: 4,
     slug: 'microsoft-teams-anywhere',
     title: 'Microsoft Teams Anywhere',
-    subtitle: 'Envisioning the future of hybrid work through narrative storyboards for B2B IT professionals.',
+    subtitle: "Storyboards for a concept about managing IT equipment remotely.",
     type: 'Storyboards & Concept Design',
     category: 'UX Design',
     company: 'Microsoft',
@@ -279,93 +272,94 @@ export const projects = [
     tags: ['future-of-work', 'narrative'],
     image: null,      // 32x19 stub on disk — placeholder renders instead
     thumbnail: null,
-    tldr: 'Concept storyboards communicating a new B2B product vision for IT professionals managing distributed networks through Microsoft Teams.',
-    overview: 'Microsoft Teams Anywhere is a concept initiative exploring a new B2B product that would make it easier for IT professionals to manage their company\'s network and equipment in a remote work environment — targeting existing Microsoft 365 and Teams customers.',
-    problem: 'As hybrid and remote work became the norm, IT professionals faced increasing complexity managing distributed networks and devices without being physically present. There was no unified, Teams-integrated solution for remote network and equipment management.',
+    tldr: "I created storyboards to explain a B2B concept for managing distributed networks through Microsoft Teams.",
+    overview: "Teams Anywhere explored how IT professionals might manage networks and equipment remotely through Teams. My work focused on communicating the concept through storyboards.",
+    problem: "The team needed to explain the proposed workflows before the detailed interface was defined.",
     process: [
       {
-        phase: 'Research',
-        description: 'Explored the needs of IT professionals operating in hybrid environments. Identified core scenarios: remote device monitoring, network troubleshooting, equipment provisioning, and on-call incident response.',
+        "phase": "Develop the concept",
+        "description": "Organized scenarios across home, office, and remote work settings."
       },
       {
-        phase: 'Concept Development',
-        description: 'Developed a narrative framework showing how Teams could extend beyond communication into operational IT management. Defined key user journeys across home, office, and on-the-go contexts.',
+        "phase": "Draw the storyboards",
+        "description": "Illustrated how IT admins might monitor devices and respond to issues in those settings."
       },
       {
-        phase: 'Storyboarding',
-        description: 'Created a series of storyboards visualizing seamless transitions between work contexts — illustrating how IT admins could manage infrastructure from anywhere through an integrated Teams experience.',
-      },
-      {
-        phase: 'Communication',
-        description: 'Used storyboards as strategic alignment tools to communicate the product vision to stakeholders, illustrating user value and product opportunity without requiring high-fidelity prototypes.',
-      },
+        "phase": "Present the idea",
+        "description": "Used the storyboards to discuss the proposed experience with stakeholders."
+      }
     ],
     challenges: [
-      'Translating a complex B2B technical product into an approachable narrative',
-      'Covering diverse remote work scenarios across different user contexts',
-      'Communicating product vision without finalized feature specifications',
+      "Explaining a technical concept through a short sequence of scenes.",
+      "Showing different work settings before the features were fully defined."
     ],
     outcomes: [
-      'Storyboard series successfully communicated the product vision to stakeholders',
-      'Established a shared narrative framework for the product team',
-      'Demonstrated how Teams could expand into operational IT management',
+      "Concept storyboards for stakeholder discussions."
     ],
   },
   {
     id: 5,
     slug: 'blue-connect-mobile-app',
     title: 'Blue Connect Mobile App Redesign',
-    subtitle: 'A full visual redesign that raised user satisfaction from 65 to 96 out of 100.',
+    subtitle: 'Redesigning the home screen for health-plan tasks and benefits.',
     type: 'Mobile Application',
     category: 'Visual Design',
-    categories: ['Visual Design'],
+    categories: ['UX Design', 'Visual Design'],
     company: 'Blue Cross NC',
     employment: 'Contractor',
     role: 'Visual Interface Designer',
     timeline: '2022',
     team: 'Alan Tarrant · Arnie Mariano',
-    tags: ['healthcare', 'rebrand'],
+    status: 'Design proposal',
+    tags: ['healthcare', 'mobile'],
     image: blueConnectImg,
     thumbnail: blueConnectImg,
-    tldr: 'User testing score jumped from 65 → 96 out of 100 after redesign. 50 unmoderated tests + qualitative interviews validated the new design.',
-    overview: 'Blue Cross NC held a strong market reputation, but the Blue Connect mobile app underperformed competitively with low user satisfaction scores. Users struggled with confusing navigation and a visually outdated interface. As sole visual interface designer, I led a full redesign of the main screen experience.',
-    problem: '"How might we improve the main screen design to make it more visually appealing and user-friendly, with better navigation and easy scanning features?" Users with limited health insurance knowledge needed a simpler, clearer way to understand their status and access information on mobile.',
+    preserveHeroAspectRatio: true,
+    tldr: 'I redesigned the main-screen experience, exploring three visual directions and a new hierarchy for tasks, plan information, and benefits.',
+    overview: 'The existing home screen mixed plan details, provider information, and navigation in a long sequence. Members needed access to everyday tasks alongside information about their coverage.',
+    problem: 'The visual challenge was to establish priorities within a constrained palette: make actions discoverable, distinguish plan types, and give financial information a clearer structure without removing the details.',
+    featureSections: [
+      {
+        label: '01 / Information hierarchy',
+        heading: 'Task shortcuts and plan information',
+        intro: 'I moved six task shortcuts toward the top and grouped plan information under tabs. Labeled bars sit beside benefit amounts so members can read the numbers as well as see their relative sizes.',
+        layout: 'comparison',
+        images: [
+          { src: blueComparison, alt: 'Earlier Blue Connect home-screen design', caption: 'Before: navigation and plan details share a long stack', sourceWidth: 1920, crop: { x: 70, y: 278, width: 485, height: 2006 } },
+          { src: blueComparison, alt: 'Proposed Blue Connect home-screen design', caption: 'Proposal: task shortcuts, plan tabs, and benefit summaries', sourceWidth: 1920, crop: { x: 619, y: 278, width: 479, height: 2148 } },
+        ],
+      },
+      {
+        label: '02 / Visual exploration',
+        heading: 'Comparing three visual directions',
+        intro: 'I explored different ways to present shortcuts, switch plans, and group benefit information. The screens below show the three directions.',
+        layout: 'directions',
+        images: [
+          { src: blueDirections, alt: 'Blue Connect first visual direction with circular task shortcuts', caption: '01: Prominent shortcuts and grouped plan cards', sourceWidth: 1920, crop: { x: 36, y: 132, width: 602, height: 2618 } },
+          { src: blueDirections, alt: 'Blue Connect second visual direction with a six-action grid', caption: '02: An action grid and flatter information sections', sourceWidth: 1920, crop: { x: 659, y: 132, width: 600, height: 2690 } },
+          { src: blueDirections, alt: 'Blue Connect third visual direction emphasizing the active plan', caption: '03: Plan-first navigation and account details', sourceWidth: 1920, crop: { x: 1281, y: 132, width: 602, height: 2650 } },
+        ],
+        callout: { label: 'Design intent', text: 'Keep common tasks visible while leaving room to read balances and coverage.' },
+      },
+    ],
+    processHeading: 'My contribution',
     process: [
-      {
-        phase: 'Audit',
-        description: 'Audited the existing app against competitive benchmarks. Identified core friction points: cluttered information hierarchy, low visual contrast, confusing navigation patterns, and lack of clear status indicators.',
-      },
-      {
-        phase: 'Wireframing',
-        description: 'Conducted collaborative wireframing sessions with the team. Explored three distinct visual directions to present to stakeholders, each proposing different approaches to navigation and information hierarchy.',
-      },
-      {
-        phase: 'Visual Design',
-        description: 'Designed three high-fidelity visual mockups. Applied strategic visual hierarchy and motion design within a constrained color palette. Built a Figma component library with auto-layout for maintainability and consistency.',
-      },
-      {
-        phase: 'Testing',
-        description: 'Conducted 50 unmoderated survey-style assessments via UserZoom, supplemented by interview-based evaluations capturing both quantitative scores and qualitative insights.',
-      },
+      { phase: 'Review the existing interface', description: 'Examined navigation, hierarchy, and the presentation of plan information with the team.' },
+      { phase: 'Explore visual directions', description: 'Developed three high-fidelity directions and reusable Figma components to compare layout, navigation, and emphasis.' },
+      { phase: 'Prepare for evaluation', description: 'Prepared the interface designs for team review and prototype evaluation.' },
     ],
-    challenges: [
-      'Limited color palette constraints requiring creative visual hierarchy solutions',
-      'Designing for users with limited health insurance literacy',
-      'Maintaining consistency while proposing three distinct visual directions',
-      'Final design not implemented due to business decisions despite strong test results',
-    ],
-    outcomes: [
-      'User satisfaction score: 65 → 96 out of 100 (31-point improvement)',
-      '50 unmoderated usability tests plus qualitative interview validation',
-      'Figma component library built for future maintainability',
-      'Strongest-performing redesign direction selected for stakeholder presentation',
-    ],
+    challengesHeading: 'Balancing clarity and detail',
+    challenges: ['Working within the brand palette while giving actions and data distinct emphasis.', 'Presenting deductible and out-of-pocket information without relying on color alone.', 'Keeping important tasks visible alongside detailed plan information.'],
+    outcomesHeading: 'Design work delivered',
+    outcomes: ['Three visual directions for the mobile main-screen experience.', 'A before-and-after hierarchy comparison and a reusable Figma component library.'],
+    reflectionHeading: 'What I would evaluate next',
+    reflection: 'I would test whether members can find a common task and correctly interpret the deductible and out-of-pocket amounts. A preferred visual direction alone would not answer those questions.',
   },
   {
     id: 6,
     slug: 'pantry-note',
     title: 'Pantry Note',
-    subtitle: 'A mobile app that makes food inventory management feel effortless — not like a chore.',
+    subtitle: "A prototype for keeping track of food at home.",
     type: 'Mobile Application',
     category: 'Product Design',
     company: null,
@@ -376,44 +370,43 @@ export const projects = [
     tags: ['mobile', 'consumer'],
     image: pantryNoteImg,
     thumbnail: pantryNoteImg,
-    tldr: 'Key insight: "users don\'t want to think about how to use the app." Validated through 29 guerrilla interviews. Prototyped in Figma + Framer.',
-    overview: 'PantryNote helps busy households organize and track pantry items, reducing food waste and improving meal planning. The core challenge was making inventory management feel so effortless that users forget they\'re tracking anything at all.',
-    problem: 'Busy individuals lack efficient smartphone solutions to monitor food inventory, leading to wasted groceries and inefficient meal planning. Existing apps required too much cognitive effort — users had to remember to update them and figure out how to use them.',
+    tldr: "I designed Pantry Note and prototyped the flows in Figma, with particular attention to adding the first item.",
+    overview: "Pantry Note explores how people could track food, storage locations, and dates at home. It is an independent design and prototype.",
+    problem: "People have to keep an inventory current for it to be useful. The first version also left some participants unsure how to add an item to an empty pantry.",
     process: [
       {
-        phase: 'Research',
-        description: 'Conducted guerrilla interviews with 29 screened participants. Ran competitive analysis of NoWaste, Pantry Check, Cozzo, and Grocy. Gathered survey data via Google Forms and Zoom. Key finding: 24/29 participants had discarded food, and 21/29 wanted better inventory visibility.',
+        "phase": "Research",
+        "description": "Reviewed household food-management habits and compared existing pantry apps."
       },
       {
-        phase: 'Define',
-        description: 'Developed personas and user journey maps. Primary persona: Hailey Wilson, a freelance designer managing food for a family of four in Chicago. Established 5 core design principles: minimal effort, limited options, easy undo/redo, findability, and streamlined efficiency.',
+        "phase": "Map the tasks",
+        "description": "Created personas, a household journey map, and flows for adding and managing food."
       },
       {
-        phase: 'Design',
-        description: 'Moved away from the plus-button input model (which required too much cognitive effort) to multiple low-friction entry points: typing, voice recognition, and camera/barcode scanning. Applied a green/yellow/orange palette reflecting health and warmth. Kept backgrounds white with food imagery for fast visual scanning.',
+        "phase": "Revise the first-use screen",
+        "description": "Explored an add-items screen with search, popular items, and categories."
       },
       {
-        phase: 'Prototype',
-        description: 'Built interactive prototypes in Figma for static flows and Framer for dynamic interactions. Tested the barcode scanning and voice input flows specifically for friction reduction.',
-      },
+        "phase": "Prototype",
+        "description": "Built prototypes in Figma."
+      }
     ],
     challenges: [
-      'The initial plus-button interface required too much cognitive effort from users',
-      'Balancing feature richness (sharing, notifications, analysis) with simplicity',
-      'Single user flows required extensive screen design to cover all states',
+      "Helping someone add their first item without assistance.",
+      "Keeping the inventory current after shopping and cooking.",
+      "Covering item details and the supporting screens."
     ],
     outcomes: [
-      'Critical insight: "users don\'t want to think about how to use the app" — drove the entire design direction',
-      '3 low-friction input methods: typing, voice recognition, barcode scanning',
-      'Family sharing, expiration notifications, and eating habit analysis features designed',
-      'High-fidelity Framer prototype with real dynamic interactions',
+      "Task flows, sketches, and wireframes.",
+      "A blue visual identity and interface explorations.",
+      "Interactive prototypes for further testing."
     ],
   },
   {
     id: 7,
     slug: 'samsung-crazy',
     title: 'Samsung Crazy',
-    subtitle: 'A bold motion-driven micro website built to launch a Samsung product with viral energy.',
+    subtitle: "Visual and motion design for a Samsung campaign microsite.",
     type: 'Micro Website',
     category: 'Visual Design',
     company: 'Samsung',
@@ -424,43 +417,36 @@ export const projects = [
     tags: ['motion', 'campaign'],
     image: null,      // 32x19 stub on disk — placeholder renders instead
     thumbnail: null,
-    tldr: 'High-impact motion design micro website for a Samsung product launch — built with Photoshop, Illustrator, and Flash.',
-    overview: 'Samsung Crazy is a micro website campaign designed to generate buzz around a Samsung product launch. The project demanded bold, immersive visual design and motion-driven interactions to create an experience that felt as energetic as the product itself.',
-    problem: 'Product launch campaigns need to stand out in crowded digital environments. A standard product page wouldn\'t generate the viral energy Samsung needed — the experience had to be as bold and unexpected as the "Crazy" brand positioning.',
+    tldr: "I designed campaign visuals and motion using Photoshop, Illustrator, and Flash.",
+    overview: "Samsung Crazy was a promotional microsite. My work combined visual design with interactive motion.",
+    problem: "The campaign needed to present the product through a short interactive experience.",
     process: [
       {
-        phase: 'Concept',
-        description: 'Developed a visual concept around bold, unexpected moments — using motion and contrast to create an experience that felt "crazy" in the best way. Defined the emotional arc: surprise → delight → desire.',
+        "phase": "Visual concept",
+        "description": "Explored typography, color, and composition for the campaign."
       },
       {
-        phase: 'Visual Design',
-        description: 'Designed high-impact visuals using Adobe Photoshop and Illustrator. Applied bold typography, saturated color, and dynamic composition to create visual tension that drives engagement.',
+        "phase": "Design",
+        "description": "Created the visual assets in Photoshop and Illustrator."
       },
       {
-        phase: 'Motion & Interaction',
-        description: 'Built interactive motion sequences using Flash, creating immersive micro-interactions triggered by user behavior. Timed animations to maintain energy without overwhelming the product message.',
-      },
-      {
-        phase: 'Production',
-        description: 'Optimized assets for web delivery, ensuring smooth playback across target browsers and connection speeds. Collaborated with the Samsung marketing team on final brand alignment.',
-      },
+        "phase": "Motion",
+        "description": "Built interactive animation sequences in Flash."
+      }
     ],
     challenges: [
-      'Creating motion that amplifies the product without overshadowing it',
-      'Balancing visual boldness with brand guidelines',
-      'Optimizing heavy motion assets for web performance',
+      "Keeping the product visible within the animation.",
+      "Preparing motion assets for web delivery."
     ],
     outcomes: [
-      'Immersive motion-driven product launch experience delivered',
-      'Visual design aligned with Samsung\'s "Crazy" campaign positioning',
-      'Demonstrated expertise in motion design and interactive visual storytelling',
+      "Campaign visuals and interactive motion assets."
     ],
   },
   {
     id: 8,
     slug: 'ergo-daum-insurance',
     title: 'Ergo Daum Insurance',
-    subtitle: 'A refined, trust-building micro website translating complex insurance into a clear visual language.',
+    subtitle: "Visual design for an insurance microsite.",
     type: 'Micro Website',
     category: 'Visual Design',
     company: 'Ergo Daum',
@@ -471,36 +457,29 @@ export const projects = [
     tags: ['insurance', 'brand'],
     image: null,      // 32x19 stub on disk — placeholder renders instead
     thumbnail: null,
-    tldr: 'Visual design for an insurance micro website — balancing Korean design sensibilities with trust, clarity, and modern aesthetics.',
-    overview: 'Ergo Daum Insurance needed a micro website that communicated complex insurance products simply and built trust with Korean consumers. The challenge was balancing a modern visual aesthetic with the credibility and warmth that insurance customers expect.',
-    problem: 'Insurance products are inherently complex and emotionally charged. The design needed to reduce cognitive load, build immediate trust, and make policy information feel accessible — all while maintaining the sophisticated aesthetic expected of a financial brand.',
+    tldr: "I designed the visual interface for an Ergo Daum Insurance microsite.",
+    overview: "The microsite presented insurance information for a Korean audience. My contribution focused on visual design and page layouts.",
+    problem: "The page needed to make policy information readable while following the brand.",
     process: [
       {
-        phase: 'Brand Analysis',
-        description: 'Analyzed Ergo Daum\'s brand values and target audience. Identified the core tension: insurance needs to feel both secure (trustworthy, stable) and modern (approachable, clean). Mapped visual references from leading Korean financial brands.',
+        "phase": "Visual direction",
+        "description": "Reviewed the brand and explored typography, color, and layout."
       },
       {
-        phase: 'Visual Direction',
-        description: 'Developed a visual direction that paired a refined color palette with clear typographic hierarchy. Used spatial generosity and white space to reduce visual noise and communicate confidence.',
+        "phase": "Design",
+        "description": "Created page layouts and image assets in Photoshop."
       },
       {
-        phase: 'Design',
-        description: 'Created high-fidelity layouts using Adobe Photoshop. Designed information modules that made policy details scannable without oversimplifying. Incorporated imagery that humanized the insurance product.',
-      },
-      {
-        phase: 'Delivery',
-        description: 'Delivered production-ready assets and style documentation for the Ergo Daum development team. Ensured visual consistency across all breakpoints and device targets.',
-      },
+        "phase": "Handoff",
+        "description": "Prepared visual assets and design specifications for development."
+      }
     ],
     challenges: [
-      'Making complex financial products feel simple without losing important detail',
-      'Balancing modern Korean visual aesthetics with financial brand credibility',
-      'Communicating trust through visual design alone',
+      "Organizing policy details so readers could scan them.",
+      "Keeping the layouts consistent with the brand."
     ],
     outcomes: [
-      'Delivered a refined micro website that simplified complex insurance communication',
-      'Visual design aligned with Ergo Daum\'s brand standards and target audience',
-      'Demonstrated ability to work across enterprise B2C and Korean market contexts',
+      "Page designs and visual assets for the microsite."
     ],
   },
 ]
@@ -514,11 +493,11 @@ export function getProjectBySlug(slug) {
    work and into projects that were deliberately left off the grid. */
 export const FEATURED_SLUGS = [
   'surface-it-toolkit',
-  'gpuflight',
-  'pantry-note',
-  'blue-cross-cost-estimator',
-  'home-depot-protection-plan',
   'blue-connect-mobile-app',
+  'home-depot-protection-plan',
+  'gpuflight',
+  'blue-cross-cost-estimator',
+  'pantry-note',
 ]
 
 export const featuredProjects = FEATURED_SLUGS

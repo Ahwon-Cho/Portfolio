@@ -31,9 +31,9 @@ export default function Philosophy() {
           <div className="w-8 h-px bg-amber-400 mx-auto mb-10" aria-hidden="true" />
 
           <blockquote className="text-3xl md:text-4xl lg:text-5xl font-semibold text-stone-100 leading-[1.2] mb-8">
-            Complexity is the problem.
+            I like to make ideas visible.
             <br />
-            <span className="font-light text-stone-400">Clarity is the work.</span>
+            <span className="font-light text-stone-400">Then try them and see what needs to change.</span>
           </blockquote>
 
         </motion.div>

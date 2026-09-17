@@ -1,0 +1,56 @@
+/* Separate draft: no styles escape this page. */
+.ink-story,
+.ink-story .planet-sticky {
+  background-color: #fbfaf5;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(130, 115, 82, 0.016) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(130, 115, 82, 0.013) 0 1px, transparent 1px 4px);
+  color: #303c3b;
+}
+
+.ink-story .planet-title,
+.ink-story .planet-brand-name { color: #303c3b; }
+.ink-story .planet-title em { color: #516d83; }
+.ink-story .planet-description,
+.ink-story .planet-context,
+.ink-story .planet-brand-role { color: #5b6864; }
+.ink-story .planet-brand-role { font-size: 12px; letter-spacing: 0.09em; }
+.ink-story .planet-description { font-size: 16px; }
+.ink-story .planet-context { font-size: 14px; }
+
+.ink-preview-controls { display: flex; align-items: center; gap: 14px; pointer-events: auto; }
+.ink-original-link { color: #516d83; font-size: 14px; padding: 12px 0; text-underline-offset: 4px; }
+.ink-original-link:hover { text-decoration: underline; }
+.ink-original-link:focus-visible { outline: 2px solid #516d83; outline-offset: 4px; }
+
+.ink-story .planet-sentence-bubble {
+  border-color: #a7b2a6;
+  background: rgba(255, 254, 248, 0.94);
+  box-shadow: none;
+  backdrop-filter: none;
+  border-radius: 49% 51% 48% 52%;
+}
+.ink-story .planet-sentence-bubble p { color: #45534f; }
+.ink-story .planet-sentence-bubble::before { border-left-color: #a7b2a6; }
+.ink-story .planet-sentence-bubble::after { border-left-color: #fffef8; }
+.ink-story .planet-skip,
+.ink-story .planet-playback {
+  color: #45534f;
+  border-color: #b7bfb2;
+  background: rgba(255, 254, 248, 0.88);
+  box-shadow: none;
+  font-size: 14px;
+}
+.ink-story .planet-index { color: #65756e; }
+.ink-story .planet-index-current { color: #45534f; }
+.ink-story .planet-scroll-hint { color: #53655f; font-size: 12px; letter-spacing: 0.09em; }
+.ink-story .planet-scroll-dot { background: #516d83; }
+.ink-story .planet-scroll-track { border-color: #829287; background: #fffef8; }
+
+@media (max-width: 700px) {
+  .ink-story .planet-description { font-size: 14px; line-height: 1.48; }
+  .ink-story .planet-context { font-size: 12px; }
+  .ink-preview-controls { gap: 10px; }
+  .ink-original-link { font-size: 12px; }
+  .ink-story .planet-brand-role { font-size: 10px; }
+}

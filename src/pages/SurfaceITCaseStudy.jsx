@@ -2,6 +2,7 @@
 /* ART: editorial layout, full-width image moments, alternating light/dark sections */
 /* MOTION: scroll reveals, staggered gallery, hero image fade-in */
 import { Zoomable } from '../components/Lightbox'
+import CaseStudyFigure from '../components/CaseStudyFigure'
 import { useNavigate, Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { getAdjacentProjects } from '../data/projects'
@@ -30,33 +31,36 @@ import sitFlowchart  from '../img/sit_flowchart.png'
 import sitIconset    from '../img/sit_iconset.png'
 
 const HERO_IMAGES = [
-  { src: sitHero1, alt: 'Surface IT Toolkit — home screen redesign' },
-  { src: sitHero2, alt: 'Surface IT Toolkit — tool navigation redesign' },
-  { src: sitHero3, alt: 'Surface IT Toolkit — device management panel' },
+  { src: sitFinal1, alt: 'Dark mode: Recovery Tool with Create New and Manage Existing actions' },
+  { src: sitFinal4, alt: 'Dark mode: UEFI dock configuration package creation complete' },
+  { src: sitFinal6, alt: 'Dark mode: UEFI dock configuration and component policies' },
 ]
 
 const UEFI_SCREENSHOT = sitUefi
 
 const FINAL_DESIGNS = [
-  { src: sitFinal1, alt: 'Final design — home dashboard' },
-  { src: sitFinal2, alt: 'Final design — tool list view' },
-  { src: sitFinal3, alt: 'Final design — UEFI Configurator' },
-  { src: sitFinal4, alt: 'Final design — Data Eraser workflow' },
-  { src: sitFinal5, alt: 'Final design — First Run Experience' },
-  { src: sitFinal6, alt: 'Final design — device diagnostics' },
-  { src: sitFinal7, alt: 'Final design — dark mode variant' },
-  { src: sitFinal8, alt: 'Final design — settings screen' },
-  { src: sitFinal9, alt: 'Final design — recovery workflow' },
+  { src: sitFinal2, alt: 'Dark mode: managed device family and model selection' },
+  { src: sitFinal9, alt: 'Dark mode: Data Eraser device selection and compatibility notice' },
+  { src: sitFinal3, alt: 'Dark mode: Data Eraser USB Builder final review' },
+  { src: sitFinal5, alt: 'Dark mode: UEFI dock setup and certificate validation' },
+  { src: sitFinal7, alt: 'Dark mode: UEFI dock configuration final review' },
+  { src: sitFinal8, alt: 'Dark mode: UEFI device configuration and certification' },
+]
+
+const LIGHT_DESIGNS = [
+  { src: sitHero1, alt: 'Light mode: Data Eraser USB Builder and sanitization certificate', caption: 'Data Eraser' },
+  { src: sitHero2, alt: 'Light mode: UEFI Configurator device and dock tools', caption: 'UEFI Configurator' },
+  { src: sitHero3, alt: 'Light mode: Tool Library and Surface Asset Tag details', caption: 'Tool Library' },
 ]
 
 const LEGACY_DESIGNS = [
-  { src: sitLegacy1,    caption: 'Legacy Design and flow — UEFI Configurator' },
-  { src: sitLegacy2,    caption: 'Legacy Design and flow — Data Eraser' },
+  { src: sitLegacy1,    caption: 'Legacy Design and flow: UEFI Configurator' },
+  { src: sitLegacy2,    caption: 'Legacy Design and flow: Data Eraser' },
 ]
 
 const WIREFRAMES = [
-  { src: sitWireframe1, caption: 'Wireframes — Data Eraser' },
-  { src: sitWireframe2, caption: 'Wireframes — First Run Experience' },
+  { src: sitWireframe1, caption: 'Wireframes: Data Eraser' },
+  { src: sitWireframe2, caption: 'Wireframes: First Run Experience' },
 ]
 
 const FLOWCHART_IMG = sitFlowchart
@@ -107,7 +111,7 @@ export default function SurfaceITCaseStudy() {
   }
 
   return (
-    <article className="min-h-screen bg-ink-50 pt-14" aria-label="Case study: Surface IT Toolkit">
+    <article className="case-study" aria-label="Case study: Surface IT Toolkit">
 
       {/* ── PROJECT HEADER ──────────────────────────────────── */}
       <header className="bg-white border-b border-stone-100">
@@ -117,7 +121,7 @@ export default function SurfaceITCaseStudy() {
           >
             <motion.div variants={fadeUp}>
               <button
-                onClick={() => navigate(-1)}
+                onClick={() => navigate('/work')}
                 className="inline-flex items-center gap-2 text-sm text-stone-400 hover:text-stone-900 transition-colors mb-12 group"
                 aria-label="Go back to all work"
               >
@@ -141,20 +145,19 @@ export default function SurfaceITCaseStudy() {
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-lg text-stone-500 leading-relaxed max-w-2xl mb-10">
-              A Windows application consolidating enterprise IT admin tools into a single,
-              centralized interface — redesigned from a developer-built legacy UI in under 8 months.
+              Bringing Surface deployment, configuration, and recovery tools into one
+              consistent Windows experience.
             </motion.p>
 
             {/* TL;DR callout */}
             <motion.div
               variants={fadeUp}
-              className="inline-flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 bg-indigo-50 border border-indigo-100"
+              className="case-study-summary"
             >
-              <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">TL;DR</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">At a glance</span>
               <p className="text-sm text-indigo-900 leading-relaxed">
-                Sole product designer on a Microsoft enterprise tool used by IT admins worldwide.
-                Used existing system components + Figma variables to accelerate the timeline,
-                redesigned three core workflows, and shipped in April 2024.
+                I designed all features across the toolkit, from workflows and interface design
+                to custom icons and product imagery. The examples below show some of that work.
               </p>
             </motion.div>
           </motion.div>
@@ -166,8 +169,8 @@ export default function SurfaceITCaseStudy() {
         <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20 py-8">
           <dl className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { term: 'Role',     detail: 'Sole designer — end-to-end UX, UI, and visual' },
-              { term: 'Timeline', detail: 'Sep 2023 – Apr 2024'   },
+              { term: 'Role',     detail: 'Sole designer for UX, UI, and visual design' },
+              { term: 'Timeline', detail: 'Sep 2023 to Apr 2024'   },
               { term: 'Team',     detail: '2 PMs · 4 Engineers · 1 Designer' },
               { term: 'Type',     detail: 'Windows Enterprise App' },
             ].map(({ term, detail }) => (
@@ -180,30 +183,30 @@ export default function SurfaceITCaseStudy() {
         </div>
       </div>
 
-      {/* ── HERO IMAGE TRIPTYCH ──────────────────────────────── */}
-      <div className="bg-zinc-950 overflow-hidden">
+      {/* Dark mode leads with one large screen and two supporting designs. */}
+      <section className="surface-dark-showcase" aria-label="Dark-mode design showcase">
         <motion.div
           variants={stagger} initial="hidden" animate="show"
-          className="grid grid-cols-1 md:grid-cols-3 gap-px"
+          className="surface-dark-showcase__grid"
         >
           {HERO_IMAGES.map((img, i) => (
             <motion.div
               key={i}
               variants={fadeUp}
-              className="overflow-hidden"
+              className={i === 0 ? 'surface-dark-showcase__lead' : 'surface-dark-showcase__support'}
             >
               <Zoomable src={img.src} alt={img.alt}>
                 <img
                   src={img.src}
                   alt={img.alt}
-                  className="w-full h-72 md:h-96 object-cover object-top hover:scale-[1.02] transition-transform duration-700"
+                  className="surface-design-image"
                   loading={i === 0 ? 'eager' : 'lazy'}
                 />
               </Zoomable>
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </section>
 
       {/* ── BODY ────────────────────────────────────────────── */}
       <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28 space-y-24">
@@ -217,39 +220,33 @@ export default function SurfaceITCaseStudy() {
           <div className="grid md:grid-cols-[2fr_1fr] gap-12 items-start">
             <div>
               <h2 id="background-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-6">
-                Enterprise tools built without designers.
-                <span className="font-light text-ink-500"> We changed that.</span>
+                Bringing the Surface tools together
               </h2>
               <div className="space-y-4 text-stone-600 leading-relaxed">
                 <p>
-                  The Surface IT Toolkit is a Windows application designed to support enterprise IT
-                  administrators managing Microsoft Surface devices. For many commercial customers,
-                  managing a fleet of devices requires the right tools for deployment, configuration,
-                  and troubleshooting — but those tools were scattered across multiple locations,
-                  inconsistent in versioning, and difficult to discover or use efficiently.
+                  IT administrators use Surface tools to deploy, configure, and troubleshoot devices.
+                  Those tools were spread across different locations, with inconsistent versions
+                  and navigation. The toolkit brings them into one Windows application.
                 </p>
                 <p>
-                  When I joined the team, the existing tool had been developed without design support —
-                  a common scenario for legacy tools at Microsoft. It lacked visual consistency, clear
-                  structure, and user-centered design principles.
+                  The existing tools used different navigation and interaction patterns. My role
+                  was to give them a shared structure without losing the detail expert admins need.
                 </p>
                 <p>
-                  Despite the scale and complexity, the team was committed to delivering within a tight
-                  timeline. I partnered closely with PMs from day one to structure the experience and
-                  align on scope, then worked directly with engineers as wireframes and prototypes took
-                  shape — staying slightly ahead of implementation while keeping an iterative workflow.
+                  I worked with the PMs to define the scope and organize the tools. Design and
+                  development ran in parallel, so I reviewed wireframes and prototypes with
+                  engineers while they built the application.
                 </p>
               </div>
             </div>
             {/* Sidebar stat card */}
             <div className="space-y-4">
               {[
-                { value: '8 mo',  label: 'Design-to-ship timeline' },
                 { value: '1',     label: 'Designer on the team'    },
-                { value: '3',     label: 'Core workflows redesigned'},
+                { value: 'All',   label: 'Features designed end to end'},
                 { value: '2',     label: 'Theme modes (L + D)'     },
               ].map(({ value, label }) => (
-                <div key={label} className="p-5 border border-stone-200 bg-white">
+                <div key={label} className="p-5 rounded-2xl border border-stone-200 bg-white">
                   <div className="font-bold text-2xl text-ink-900 mb-1">{value}</div>
                   <div className="text-xs text-stone-500 leading-snug">{label}</div>
                 </div>
@@ -258,131 +255,103 @@ export default function SurfaceITCaseStudy() {
           </div>
         </motion.section>
 
-        {/* UEFI Screenshot — full width editorial moment */}
-        <motion.figure
-          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}
-          className="overflow-hidden shadow-2xl"
-        >
-          <Zoomable src={UEFI_SCREENSHOT} alt="UEFI Configurator — final redesign screenshot">
-            <img
-              src={UEFI_SCREENSHOT}
-              alt="UEFI Configurator — final redesign screenshot"
-              className="w-full object-cover"
-              loading="lazy"
-            />
-          </Zoomable>
-          <figcaption className="text-xs text-stone-400 text-center pt-3 pb-1">
-            UEFI Configurator — final design
-          </figcaption>
-        </motion.figure>
+        <section aria-labelledby="device-decision-heading">
+          <SectionEyebrow label="A closer look / Data Eraser" light />
+          <h2 id="device-decision-heading">Start with the device, not its architecture</h2>
+          <p className="text-stone-600 max-w-2xl mt-5">
+            The legacy selector asked admins to choose an architecture such as x64 or ARM.
+            The redesigned selector names Surface families and models, alongside a compatibility
+            notice. Admins can select the device model they recognize.
+          </p>
+          <div className="case-evidence-grid case-evidence-grid--pair">
+            <CaseStudyFigure src={sitLegacy2} sourceWidth={1920}
+              crop={{ x: 776, y: 254, width: 334, height: 298 }}
+              alt="Legacy Data Eraser architecture selection dialog"
+              caption="Before: architecture-based selection" />
+            <CaseStudyFigure src={sitFinal9}
+              alt="Redesigned Data Eraser device selection with family, model, and compatibility guidance"
+              caption="Redesign: named devices and compatibility guidance" />
+          </div>
+        </section>
 
-        {/* Challenges */}
+        <section aria-labelledby="review-decision-heading">
+          <SectionEyebrow label="A closer look / UEFI configuration" light />
+          <h2 id="review-decision-heading">Make configuration and review distinct steps</h2>
+          <p className="text-stone-600 max-w-2xl mt-5">The UEFI flow separates policy choices from
+            the final review and completion states. Each screen keeps the tool context visible
+            while giving the current step a clear heading and action.</p>
+          <div className="case-evidence-grid case-evidence-grid--pair">
+            <CaseStudyFigure src={sitFinal6} alt="UEFI dock configuration and component policies" caption="Configure: set the component policies" />
+            <CaseStudyFigure src={sitFinal7} alt="UEFI dock configuration final review" caption="Review: inspect the configuration before proceeding" />
+          </div>
+          <details className="case-artifact-details">
+            <summary>Explore the full UEFI workflow canvas</summary>
+            <CaseStudyFigure src={UEFI_SCREENSHOT} alt="UEFI Configurator workflow canvas" caption="Full UEFI workflow" />
+          </details>
+        </section>
+
+
+        {/* Icon Set */}
         <motion.section
           variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
-          aria-labelledby="challenges-heading"
+          aria-labelledby="icons-heading"
         >
           <motion.div variants={fadeUp}>
-            <SectionEyebrow label="Challenges" light />
-            <h2 id="challenges-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-10">
-              What made this hard
+            <SectionEyebrow label="Visual Design" light />
+            <h2 id="icons-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-4">
+              Custom icons and product imagery
             </h2>
           </motion.div>
-          <div className="grid md:grid-cols-2 gap-5">
-            {[
-              {
-                n: '01',
-                title: 'Parallel tracks',
-                body: 'Design and development ran simultaneously — no buffer. Decisions had to be made fast and final, leaving minimal room for iteration.',
-              },
-              {
-                n: '02',
-                title: 'Developer-built UI',
-                body: 'The existing interface was created by engineers without design support — inconsistent components, unclear hierarchy, no foundational UX structure.',
-              },
-              {
-                n: '03',
-                title: 'Dual-mode in tight scope',
-                body: 'Light and dark modes were required, but limited time and resources meant the theming system had to be architected for efficiency, not just aesthetics.',
-              },
-              {
-                n: '04',
-                title: 'Domain knowledge gap',
-                body: 'The tool was built for expert IT admins. As a non-user, I had limited domain context — and no time for full onboarding before design work began.',
-              },
-            ].map(({ n, title, body }) => (
-              <motion.div
-                key={n}
-                variants={fadeUp}
-                className="p-6 bg-white border border-stone-100"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="w-7 h-7 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                    {n}
-                  </span>
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-700">
-                    {title}
-                  </h3>
-                </div>
-                <p className="text-sm text-stone-600 leading-relaxed">{body}</p>
-              </motion.div>
-            ))}
+          <div className="grid md:grid-cols-[1fr_2fr] gap-10 items-start">
+            <motion.div variants={fadeUp} className="space-y-5">
+              <p className="text-stone-600 leading-relaxed">
+                The lead PM asked for custom icons. I designed them around the toolkit’s
+                operations, using Fluent conventions to keep them consistent with Windows.
+              </p>
+              <p className="text-stone-600 leading-relaxed">
+                I sketched ideas by hand, then drew the final vectors in Figma. Each icon
+                represents a specific action an IT admin can take.
+              </p>
+              <p className="text-stone-600 leading-relaxed">
+                I also created the product imagery shown throughout the toolkit.
+              </p>
+              {/* Process steps */}
+              <div className="space-y-3 pt-2">
+                {[
+                  { n: '1', step: 'Brainstorm', desc: 'Defined the concept and metaphor for each action' },
+                  { n: '2', step: 'Sketch',     desc: 'Hand-drawn explorations to find the right form' },
+                  { n: '3', step: 'Figma',      desc: 'Drew the final vectors using Fluent conventions' },
+                ].map(({ n, step, desc }) => (
+                  <div key={n} className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                      {n}
+                    </span>
+                    <div>
+                      <span className="text-sm font-semibold text-ink-800">{step}: </span>
+                      <span className="text-sm text-stone-500">{desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200">
+              <Zoomable src={ICON_SET_IMG} alt="Customized icon set for Surface IT Toolkit">
+                <img
+                  src={ICON_SET_IMG}
+                  alt="Customized icon set for Surface IT Toolkit"
+                  className="w-full object-cover"
+                  loading="lazy"
+                />
+              </Zoomable>
+              <figcaption className="text-xs text-stone-400 px-5 py-3">Customized icon set: designed from scratch</figcaption>
+            </motion.figure>
           </div>
         </motion.section>
 
-        {/* Design Solutions */}
-        <motion.section
-          variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
-          aria-labelledby="solutions-heading"
-        >
-          <motion.div variants={fadeUp}>
-            <SectionEyebrow label="Design Solutions" light />
-            <h2 id="solutions-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-10">
-              How I solved them
-            </h2>
-          </motion.div>
-          <div className="space-y-5">
-            {[
-              {
-                n: '1',
-                title: 'Scalable Figma component system',
-                body: 'Built a comprehensive component library from the ground up — reducing rework across screens and enabling rapid updates in the final stages without rebuilding from scratch.',
-              },
-              {
-                n: '2',
-                title: 'Figma variables for simultaneous light/dark design',
-                body: 'Adopted Figma variables shortly after their release to design both light and dark modes in parallel — not as a retrofit. A single source of truth let engineers implement themes directly from the file with no translation layer.',
-              },
-              {
-                n: '3',
-                title: 'Workflow restructuring for clarity',
-                body: 'Reorganized the three core workflows (UEFI Configurator, Data Eraser, First Run Experience) to align with WCAG accessibility principles, reduce cognitive load, and reflect how admins actually think about tasks.',
-              },
-              {
-                n: '4',
-                title: 'Adaptive collaboration rhythm',
-                body: 'Established a fast feedback loop with PMs and engineers — daily check-ins during critical phases, with designs always one sprint ahead. Adjusted quickly to technical constraints without sacrificing design intent.',
-              },
-            ].map(({ n, title, body }) => (
-              <motion.div
-                key={n}
-                variants={fadeUp}
-                className="flex gap-6 p-6 border border-stone-100 bg-white hover:border-stone-300 transition-colors duration-200"
-              >
-                <div className="flex-shrink-0 w-10 h-10 bg-indigo-50 border border-indigo-100 flex items-center justify-center">
-                  <span className="text-indigo-600 font-bold text-sm">{n}</span>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-ink-800 mb-2">{title}</h3>
-                  <p className="text-sm text-stone-600 leading-relaxed">{body}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
 
       </div>
 
-      {/* ── FINAL DESIGNS GALLERY (full bleed dark) ─────────── */}
+      {/* Further dark-mode details precede the light-mode examples. */}
       <section aria-labelledby="final-designs-heading" className="bg-zinc-950 py-24">
         <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20">
           <motion.div
@@ -394,26 +363,26 @@ export default function SurfaceITCaseStudy() {
               <div className="flex-1 h-px bg-white/10" />
             </div>
             <h2 id="final-designs-heading" className="font-bold text-3xl md:text-4xl text-stone-100 leading-tight">
-              Surface IT Toolkit — final designs
+              Dark mode: workflow details
             </h2>
           </motion.div>
 
-          {/* 3×3 grid — 9 images, perfectly even */}
+          {/* Keep the complete screenshots visible; lightbox opens full size. */}
           <motion.div
             variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-40px' }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
           >
             {FINAL_DESIGNS.map((img, i) => (
               <motion.figure
                 key={i}
                 variants={fadeUp}
-                className="overflow-hidden aspect-video"
+                className="overflow-hidden"
               >
-                <Zoomable src={img.src} alt={img.alt} className="h-full">
+                <Zoomable src={img.src} alt={img.alt}>
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-full object-cover object-top hover:scale-[1.03] transition-transform duration-500"
+                    className="surface-design-image"
                     loading="lazy"
                   />
                 </Zoomable>
@@ -430,16 +399,37 @@ export default function SurfaceITCaseStudy() {
               &ldquo;Who&rsquo;s the designer?&rdquo;
             </p>
             <footer className="mt-5 text-sm text-stone-400 leading-relaxed">
-              The first thing the stakeholder asked when my PM presented the redesign.
-              The visual craft landed before a single feature had been explained.
+              A stakeholder’s reaction when my PM presented the redesign.
             </footer>
           </motion.blockquote>
+        </div>
+      </section>
+
+      <section className="surface-light-showcase" aria-labelledby="light-designs-heading">
+        <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20">
+          <h2 id="light-designs-heading">One component system, two themes</h2>
+          <p className="text-stone-600 max-w-2xl mb-10">Figma variables connected the light and dark
+            designs within a shared component system. The goal was to maintain the same hierarchy
+            and interaction patterns across both appearances.</p>
+          <div className="surface-light-showcase__grid">
+            {LIGHT_DESIGNS.map(img => (
+              <figure key={img.src}>
+                <Zoomable src={img.src} alt={img.alt}>
+                  <img src={img.src} alt={img.alt} className="surface-design-image" loading="lazy" />
+                </Zoomable>
+                <figcaption>{img.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── PROCESS ARTIFACTS ───────────────────────────────── */}
       <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28 space-y-24">
 
+        <details className="case-artifact-details">
+          <summary>Explore the original flows, wireframes, and information architecture</summary>
+          <div className="space-y-16">
         {/* Legacy Designs */}
         <motion.section
           variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
@@ -451,13 +441,13 @@ export default function SurfaceITCaseStudy() {
               Legacy designs
             </h2>
             <p className="text-stone-500 mb-10 max-w-xl">
-              Developer-built UI from before design joined the team. Inconsistent components,
-              no clear hierarchy, and no user-centered structure.
+              The original UEFI Configurator and Data Eraser flows used different patterns.
+              These canvases document the starting point, not the redesigned experience.
             </p>
           </motion.div>
           <div className="space-y-5">
             {LEGACY_DESIGNS.map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200 bg-stone-50">
+              <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
                 <Zoomable src={img.src} alt={img.caption}>
                   <img
                     src={img.src}
@@ -483,13 +473,13 @@ export default function SurfaceITCaseStudy() {
               Wireframes
             </h2>
             <p className="text-stone-500 mb-10 max-w-xl">
-              Low-fidelity explorations used to align with PMs and engineers before moving to
-              high-fidelity components — kept simple to maximize iteration speed.
+              I used these wireframes to discuss the flows with PMs and engineers before
+              developing the detailed interface.
             </p>
           </motion.div>
           <div className="grid md:grid-cols-2 gap-5">
             {WIREFRAMES.map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200">
+              <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200">
                 <Zoomable src={img.src} alt={img.caption}>
                   <img
                     src={img.src}
@@ -517,7 +507,7 @@ export default function SurfaceITCaseStudy() {
             Task flows mapped before wireframing to ensure each workflow had a clear entry
             point, decision tree, and exit state.
           </p>
-          <figure className="overflow-hidden border border-stone-200">
+          <figure className="rounded-2xl overflow-hidden border border-stone-200">
             <Zoomable src={FLOWCHART_IMG} alt="User flow diagram for Surface IT Toolkit workflows">
               <img
                 src={FLOWCHART_IMG}
@@ -530,68 +520,8 @@ export default function SurfaceITCaseStudy() {
           </figure>
         </motion.section>
 
-        {/* Icon Set */}
-        <motion.section
-          variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
-          aria-labelledby="icons-heading"
-        >
-          <motion.div variants={fadeUp}>
-            <SectionEyebrow label="Visual Design" light />
-            <h2 id="icons-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-4">
-              Icons and hero imagery — built from scratch
-            </h2>
-          </motion.div>
-          <div className="grid md:grid-cols-[1fr_2fr] gap-10 items-start">
-            <motion.div variants={fadeUp} className="space-y-5">
-              <p className="text-stone-600 leading-relaxed">
-                The lead PM made a clear call: no stock icons. The Surface IT Toolkit needed
-                its own visual language — one that felt native to the Windows ecosystem while
-                being specific to the tool's operations.
-              </p>
-              <p className="text-stone-600 leading-relaxed">
-                I owned the entire process — from brainstorming the concept for each icon,
-                sketching ideas by hand, to crafting the final vectors in Figma. Each icon was
-                designed to communicate a specific IT admin action at a glance, while staying
-                consistent with Fluent Design System conventions.
-              </p>
-              <p className="text-stone-600 leading-relaxed">
-                The same ownership extended to the hero images at the top of this page — the
-                product imagery used to present the toolkit was designed by me too. Across the
-                project I carried the work end to end: research and IA through UX, UI, and every
-                piece of visual craft that shipped with it.
-              </p>
-              {/* Process steps */}
-              <div className="space-y-3 pt-2">
-                {[
-                  { n: '1', step: 'Brainstorm', desc: 'Defined the concept and metaphor for each action' },
-                  { n: '2', step: 'Sketch',     desc: 'Hand-drawn explorations to find the right form' },
-                  { n: '3', step: 'Figma',      desc: 'Pixel-perfect vector production with Fluent alignment' },
-                ].map(({ n, step, desc }) => (
-                  <div key={n} className="flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
-                      {n}
-                    </span>
-                    <div>
-                      <span className="text-sm font-semibold text-ink-800">{step} — </span>
-                      <span className="text-sm text-stone-500">{desc}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-200">
-              <Zoomable src={ICON_SET_IMG} alt="Customized icon set for Surface IT Toolkit">
-                <img
-                  src={ICON_SET_IMG}
-                  alt="Customized icon set for Surface IT Toolkit"
-                  className="w-full object-cover"
-                  loading="lazy"
-                />
-              </Zoomable>
-              <figcaption className="text-xs text-stone-400 px-5 py-3">Customized icon set — designed from scratch</figcaption>
-            </motion.figure>
           </div>
-        </motion.section>
+        </details>
 
         {/* Reflection */}
         <motion.section
@@ -600,22 +530,20 @@ export default function SurfaceITCaseStudy() {
         >
           <SectionEyebrow label="Reflection" light />
           <h2 id="reflection-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-6">
-            Against the odds — and on time
+            Designing the whole experience
           </h2>
           <div className="space-y-6 max-w-2xl">
             <blockquote className="border-l-2 border-indigo-500 pl-8">
               <p className="text-stone-600 leading-relaxed text-lg">
-                "There were real doubts — internally and externally — about whether this project
-                could be finished. The scope was large, the timeline tight, and design was added
-                late. We proved them wrong. We shipped on time, and the response from leadership
-                and users was overwhelmingly positive."
+                Owning every feature meant looking beyond individual screens. Navigation,
+                components, themes, and icons needed to work as one experience.
               </p>
             </blockquote>
             <p className="text-stone-500 leading-relaxed pl-8">
-              This fast-paced redesign demanded clarity, precision, and efficiency. Being the sole
-              product designer, I focused on establishing coherence and usability quickly —
-              without slowing down engineering. I'm grateful for a team that trusted my design
-              judgement and delivered on the vision together.
+              The toolkit shipped in April 2024. A next step would be to evaluate the workflows
+              with admins and connect task-level feedback to further iterations. I would also
+              document the rationale alongside components earlier, so future changes preserve
+              the reasoning as well as the appearance.
             </p>
           </div>
         </motion.section>
@@ -631,7 +559,7 @@ export default function SurfaceITCaseStudy() {
             <Link
               to={`/project/${prev.slug}`}
               aria-label={`Previous project: ${prev.title}`}
-              className="group flex flex-col gap-2 p-6 border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5"
+              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5"
             >
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center gap-1">
                 <BackIcon /> Previous
@@ -646,7 +574,7 @@ export default function SurfaceITCaseStudy() {
             <Link
               to={`/project/${next.slug}`}
               aria-label={`Next project: ${next.title}`}
-              className="group flex flex-col gap-2 p-6 border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full"
+              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full"
             >
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center justify-end gap-1">
                 Next <NextIcon />

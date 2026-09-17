@@ -2,6 +2,7 @@
 /* ART: editorial layout, honest narrative arc including the failure moment */
 /* MOTION: scroll reveals, staggered sections */
 import { Zoomable } from '../components/Lightbox'
+import CaseStudyFigure from '../components/CaseStudyFigure'
 import { useNavigate, Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { getAdjacentProjects } from '../data/projects'
@@ -26,10 +27,10 @@ import hdReflection   from '../img/hd_reflection.png'
 const SLUG = 'home-depot-protection-plan'
 
 const DESIGN_COMPS = [
-  { src: hdDesignComp1, alt: 'GM item design — option 1' },
-  { src: hdDesignComp2, alt: 'GM item design — option 2' },
-  { src: hdDesignComp3, alt: 'GM item design — option 3' },
-  { src: hdDesignComp4, alt: 'GM item design — final selected' },
+  { src: hdDesignComp1, alt: 'GM item design: option 1' },
+  { src: hdDesignComp2, alt: 'GM item design: option 2' },
+  { src: hdDesignComp3, alt: 'GM item design: option 3' },
+  { src: hdDesignComp4, alt: 'GM item design: final selected' },
 ]
 
 const IMG = {
@@ -94,7 +95,7 @@ export default function HomeDepotCaseStudy() {
   const stagger = { hidden: {}, show: { transition: { staggerChildren: shouldReduce ? 0 : 0.08 } } }
 
   return (
-    <article className="min-h-screen bg-ink-50 pt-14" aria-label="Case study: Home Depot Protection Plan">
+    <article className="case-study" aria-label="Case study: Home Depot Protection Plan">
 
       {/* ── HEADER ──────────────────────────────────────────── */}
       <header className="bg-white border-b border-stone-100">
@@ -102,7 +103,7 @@ export default function HomeDepotCaseStudy() {
           <motion.div variants={stagger} initial="hidden" animate="show">
 
             <motion.div variants={fadeUp}>
-              <button onClick={() => navigate(-1)}
+              <button onClick={() => navigate('/work')}
                 className="inline-flex items-center gap-2 text-sm text-stone-400 hover:text-stone-900 transition-colors mb-12 group"
                 aria-label="Go back to all work">
                 <BackIcon /><span className="group-hover:underline">All Work</span>
@@ -119,16 +120,17 @@ export default function HomeDepotCaseStudy() {
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-lg text-stone-500 leading-relaxed max-w-2xl mb-10">
-              Designing the post-purchase protection plan experience — enabling customers
-              to add coverage after checkout across a complex web of flows, item types, and two design systems in parallel.
+              Helping customers add a protection plan after checkout, from the Thank You
+              or Order Details page.
             </motion.p>
 
             <motion.div variants={fadeUp}
-              className="inline-flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 bg-indigo-50 border border-indigo-100">
-              <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">TL;DR</span>
+              className="case-study-summary">
+              <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">At a glance</span>
               <p className="text-sm text-indigo-900 leading-relaxed">
-                Sole designer on the post-purchase experience at The Home Depot. Shipped GM items in week one,
-                hit edge cases, ran a 5-whys post-mortem, rebuilt flowchart-first — and earned the company design award.
+                Sole UX designer for the post-purchase experience. I expanded an initial
+                General Merchandise design into flows for multiple product types, then
+                supported prototype testing and engineering handoff.
               </p>
             </motion.div>
           </motion.div>
@@ -142,8 +144,8 @@ export default function HomeDepotCaseStudy() {
             {[
               { term: 'Role',     detail: 'UX Designer (Sole)'            },
               { term: 'PM',       detail: 'Carrie Samples'                },
-              { term: 'Platform', detail: 'Web — homedepot.com'           },
-              { term: 'Outcome',  detail: '"CAUGHT ORANGE HANDED" Award'  },
+              { term: 'Platform', detail: 'Web: homedepot.com'           },
+              { term: 'Scope',    detail: 'Design, prototype & handoff'  },
             ].map(({ term, detail }) => (
               <div key={term}>
                 <dt className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-1">{term}</dt>
@@ -154,6 +156,21 @@ export default function HomeDepotCaseStudy() {
         </div>
       </div>
 
+      <section className="case-early-showcase" aria-label="Protection plan interface preview">
+        <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20">
+          <div className="case-evidence-grid case-evidence-grid--comparison">
+            <CaseStudyFigure src={hdCollaboration} sourceWidth={3840}
+              crop={{ x: 118, y: 359, width: 316, height: 655 }}
+              alt="Protection plan drawer with plan options and add-to-cart actions"
+              caption="Choose coverage for each purchased item" />
+            <CaseStudyFigure src={hdCollaboration} sourceWidth={3840}
+              crop={{ x: 505, y: 359, width: 316, height: 655 }}
+              alt="Protection plan drawer with one plan added and another available to add"
+              caption="Keep added and available plans distinguishable" />
+          </div>
+        </div>
+      </section>
+
       {/* ── BODY ────────────────────────────────────────────── */}
       <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28 space-y-24">
 
@@ -163,24 +180,23 @@ export default function HomeDepotCaseStudy() {
           <div className="grid md:grid-cols-[2fr_1fr] gap-12 items-start">
             <div>
               <h2 id="bg-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-6">
-                You declined the protection plan.
-                <span className="font-light text-ink-500"> Then changed your mind.</span>
+                Adding coverage after checkout
               </h2>
               <div className="space-y-4 text-stone-600 leading-relaxed">
-                <p>Imagine you're buying a new freezer. At checkout, a popup offers you a protection plan. You skip it — over budget. But while waiting for delivery, you start to worry. You have a bit extra. Now you want the plan.</p>
-                <p>Until this project, The Home Depot had no way to do that. Protection plans were only available at point of purchase. Once you declined, that was it — even in unforeseen circumstances.</p>
-                <p>User research confirmed this was a real pain point: customers wanted post-purchase protection but couldn't get it. The business opportunity was clear: add a protection plan button to Order History and open a new revenue stream. No one had built the UX for it yet.</p>
-                <p className="text-stone-500 italic">When I joined, the team had been working without UX support for months and had already started building parts of the post-purchase experience.</p>
+                <p>A customer who declined coverage at checkout may still want to add it later.
+                  This project created a post-purchase path from the Thank You and Order Details pages.</p>
+                <p>After checkout, a protection plan becomes
+                  a separate item, and different product categories require different choices.
+                  I needed to account for those choices within the same drawer.</p>
               </div>
             </div>
             <div className="space-y-4">
               {[
-                { value: '1 wk',   label: 'To deliver the first GM design' },
                 { value: '3',      label: 'Options presented, 1 selected'  },
                 { value: '2',      label: 'Design systems navigated'        },
                 { value: '5 whys', label: 'Post-mortem method used'        },
               ].map(({ value, label }) => (
-                <div key={label} className="p-5 border border-stone-200 bg-white">
+                <div key={label} className="p-5 rounded-2xl border border-stone-200 bg-white">
                   <div className="font-bold text-2xl text-ink-900 mb-1">{value}</div>
                   <div className="text-xs text-stone-500 leading-snug">{label}</div>
                 </div>
@@ -194,9 +210,8 @@ export default function HomeDepotCaseStudy() {
           <Eyebrow label="Problem Statement" />
           <blockquote className="border-l-2 border-indigo-500 pl-8 max-w-3xl">
             <p className="text-xl md:text-2xl text-ink-800 leading-relaxed font-medium">
-              "How might we create a post-purchase protection plan experience with intuitive UI and
-              streamlined flow — so customers can add coverage without confusion between the
-              purchase and post-purchase experience?"
+              Customers need to know which product a plan covers, what it costs,
+              and whether they have added it to their cart.
             </p>
           </blockquote>
         </motion.section>
@@ -205,8 +220,8 @@ export default function HomeDepotCaseStudy() {
         <motion.section variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} aria-labelledby="challenges-heading">
           <motion.div variants={fadeUp}>
             <Eyebrow label="Challenges" />
-            <h2 id="challenges-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-4">Four layers of complexity</h2>
-            <p className="text-stone-500 mb-10 max-w-xl">This wasn't a simple add-a-button project. The flows were deeply branched — and the edge cases multiplied fast.</p>
+            <h2 id="challenges-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-4">Different products needed different choices</h2>
+            <p className="text-stone-500 mb-10 max-w-xl">The drawer had to account for product types, entry points, and the transition to a new design system.</p>
           </motion.div>
 
           {/* Challenge images */}
@@ -215,7 +230,7 @@ export default function HomeDepotCaseStudy() {
               { src: IMG.challenge1, alt: 'During-purchase vs post-purchase flow comparison' },
               { src: IMG.challenge2, alt: 'General Merchandise vs Major Appliances item types' },
             ].map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200 bg-white">
+              <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-white">
                 <ZoomImg src={img.src} alt={img.alt} className="w-full object-contain max-h-80" />
               </motion.figure>
             ))}
@@ -223,12 +238,12 @@ export default function HomeDepotCaseStudy() {
 
           <div className="grid md:grid-cols-2 gap-5">
             {[
-              { n: '01', title: 'Same goal, two different flows', body: "Buying a plan during checkout vs. after checkout puts the system in completely different states. During purchase, HDPP is attached to the anchor item. Post-purchase, it becomes its own individual item — different logic, different flow." },
-              { n: '02', title: 'Two entry points, two interactions', body: "The post-purchase experience could start from the Thank You page or the Order Details page. Each has a different purpose — and therefore a different interaction model, even though they're reaching the same end state." },
-              { n: '03', title: 'GM vs. Major Appliances', body: 'The protection plan experience splits into GM and MA item categories. The system treats them differently, and the user flows for each were entirely distinct — each with its own edge cases.' },
-              { n: '04', title: 'Mid-project design system transition', body: "The Home Depot was adopting Stencil, its new design system, mid-project. Required components weren't fully built yet — and there were no existing examples of drawers in the new system." },
+              { n: '01', title: 'Before and after checkout', body: 'During checkout, a protection plan is attached to the purchased product. After checkout, the plan is a separate item. The flows needed to reflect that difference.' },
+              { n: '02', title: 'Two entry points', body: 'Customers could start from the Thank You page or return later through Order Details. Both paths needed to lead to the relevant products and plans.' },
+              { n: '03', title: 'General Merchandise and Major Appliances', body: 'General Merchandise (GM) and Major Appliances (MA) have different plan options. I needed to cover single items, multiple items, and orders containing both categories.' },
+              { n: '04', title: 'A design system in transition', body: 'Home Depot was adopting Stencil during the project. Some components were still being built, and there was no existing drawer example to follow.' },
             ].map(({ n, title, body }) => (
-              <motion.div key={n} variants={fadeUp} className="p-6 bg-white border border-stone-100">
+              <motion.div key={n} variants={fadeUp} className="p-6 rounded-2xl bg-white border border-stone-100">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="w-7 h-7 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center flex-shrink-0">{n}</span>
                   <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-700">{title}</h3>
@@ -245,18 +260,18 @@ export default function HomeDepotCaseStudy() {
       <section className="bg-zinc-950 py-24" aria-labelledby="first-solution-heading">
         <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20">
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} className="mb-12">
-            <DarkEyebrow label="The First Win" />
-            <h2 id="first-solution-heading" className="font-bold text-3xl md:text-4xl text-stone-100 leading-tight mb-4">One week. Three options. One decision.</h2>
+            <DarkEyebrow label="First exploration" />
+            <h2 id="first-solution-heading" className="font-bold text-3xl md:text-4xl text-stone-100 leading-tight mb-4">Three options for the first scenario</h2>
             <p className="text-stone-400 max-w-2xl">
-              My first task: review and redesign the GM item UI the dev team was about to ship.
-              The PM and design manager wanted a layout that clearly showed the relationship between
-              the protection plan and the anchor item. I delivered three options in a week — everyone liked the direction.
+              The first exploration focused on General Merchandise. The PM and design manager
+              wanted a clearer relationship between the plan and the purchased item.
+              I developed three options, then refined the selected direction.
             </p>
           </motion.div>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-40px' }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {DESIGN_COMPS.map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="overflow-hidden bg-zinc-900">
+              <motion.figure key={i} variants={fadeUp} className="rounded-xl overflow-hidden bg-zinc-900">
                 <Zoomable src={img.src} alt={img.alt}>
                   <img src={img.src} alt={img.alt} className="w-full object-contain" loading={i < 2 ? 'eager' : 'lazy'} />
                 </Zoomable>
@@ -266,7 +281,7 @@ export default function HomeDepotCaseStudy() {
 
           {/* Process overview */}
           <motion.figure variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}
-            className="mt-6 overflow-hidden">
+            className="mt-6 rounded-2xl overflow-hidden">
             <ZoomImg src={IMG.process} alt="Design process overview" className="w-full object-cover" />
           </motion.figure>
         </div>
@@ -281,15 +296,14 @@ export default function HomeDepotCaseStudy() {
           <div className="grid md:grid-cols-[3fr_2fr] gap-12 items-start">
             <div>
               <h2 id="failure-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-6">
-                The GM design worked perfectly.
-                <span className="font-light text-ink-500"> For GM items only.</span>
+                The first design missed other product scenarios
               </h2>
               <div className="space-y-4 text-stone-600 leading-relaxed">
-                <p>The design solved the problem — but only for the scenario I had designed it for. When applied to MA single items, MA multi items, and mixed GM/MA drawers, it broke down. The flows were different enough that my solution didn't generalize.</p>
-                <p>Instead of patching it, I ran a <strong className="text-ink-800">5-whys post-mortem</strong> on my own process. The root cause: I had designed for one scenario without mapping all five first. I was solving from inside the problem instead of stepping back to see the full system.</p>
+                <p>My initial GM design did not account for the choices needed for appliances or mixed orders. I had developed one scenario in detail before mapping the others.</p>
+                <p>I used a <strong className="text-ink-800">5-whys review</strong> to examine where my approach had gone wrong. I then mapped all five scenarios before revising the drawer.</p>
               </div>
             </div>
-            <div className="p-6 bg-stone-900 border border-stone-700 text-stone-300">
+            <div className="p-6 rounded-2xl bg-stone-900 border border-stone-700 text-stone-300">
               <div className="text-xs font-bold uppercase tracking-widest text-stone-500 mb-4">5-Whys Root Cause</div>
               <div className="space-y-3">
                 {[
@@ -309,9 +323,9 @@ export default function HomeDepotCaseStudy() {
             </div>
           </div>
           {/* Post mortem image */}
-          <motion.figure className="mt-10 overflow-hidden border border-stone-200 bg-stone-50">
+          <motion.figure className="mt-10 rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
             <ZoomImg src={IMG.postmortem} alt="5-whys post-mortem activity" className="w-full object-contain max-h-[480px]" />
-            <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Post-mortem — 5 whys activity</figcaption>
+            <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Post-mortem: 5 whys activity</figcaption>
           </motion.figure>
         </motion.section>
 
@@ -323,14 +337,14 @@ export default function HomeDepotCaseStudy() {
           </motion.div>
           <div className="space-y-5">
             {[
-              { n: '1', title: 'Flowchart-first, from start to finish', body: "Created a detailed flowchart covering the entire experience — during-purchase and post-purchase, all five item type scenarios, both entry points. Starting from the post-purchase section and working outward until every path was mapped. This became the team's shared reference and single source of truth for all collaboration." },
-              { n: '2', title: 'Multi-component system for rapid iteration', body: "Built a Figma component system with variants for every state and scenario. This dramatically sped up prototyping and ensured every screen stayed aligned with The Home Depot's design system — no one-off decisions that would cause drift." },
-              { n: '3', title: 'CTA over checkbox — interaction consistency', body: 'MA items originally used a checkbox for adding plans, while the rest of the site used CTA buttons for adding products. After discussion, the team agreed on CTA buttons across the board — consistent with interaction patterns users already understood.' },
-              { n: '4', title: 'Intuitive naming convention for handoff', body: 'Created a shared naming system for components and layers so engineers and other designers could navigate the Figma files without a guided tour. Reduced implementation back-and-forth significantly.' },
+              { n: '1', title: 'Map the complete flow', body: 'I mapped the five product scenarios and both entry points, including how protection plans behave before and after checkout. The team used this flowchart when reviewing changes.' },
+              { n: '2', title: 'Component variants for the different states', body: "Built Figma component variants to represent item categories and selection states within the same design system." },
+              { n: '3', title: 'Use a button to add coverage', body: 'The team agreed to replace the add-plan checkbox with a button, matching how customers add products elsewhere on the site.' },
+              { n: '4', title: 'Shared naming for handoff', body: 'Created a naming system for components and layers so engineers and designers had a consistent reference when discussing the files.' },
             ].map(({ n, title, body }) => (
               <motion.div key={n} variants={fadeUp}
-                className="flex gap-6 p-6 border border-stone-100 bg-white hover:border-stone-300 transition-colors duration-200">
-                <div className="flex-shrink-0 w-10 h-10 bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+                className="flex gap-6 p-6 rounded-2xl border border-stone-100 bg-white hover:border-stone-300 transition-colors duration-200">
+                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
                   <span className="text-indigo-600 font-bold text-sm">{n}</span>
                 </div>
                 <div>
@@ -342,14 +356,23 @@ export default function HomeDepotCaseStudy() {
           </div>
 
           {/* Solution + Flowchart images */}
+          <table className="case-scenario-table">
+            <caption className="sr-only">How product categories affected the post-purchase design</caption>
+            <thead><tr><th scope="col">Scenario</th><th scope="col">What the design needed to account for</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">General Merchandise</th><td>Single- and multi-item states; keep each plan associated with its purchased item.</td></tr>
+              <tr><th scope="row">Major Appliances</th><td>Single- and multi-item states; distinguish choosing a coverage option from adding it.</td></tr>
+              <tr><th scope="row">Mixed items</th><td>Show different plan choices together without losing the relationship to each product.</td></tr>
+            </tbody>
+          </table>
           <motion.div variants={stagger} className="mt-10 space-y-5">
-            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-200">
+            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200">
               <ZoomImg src={IMG.solution} alt="Multi-component system with variants" className="w-full object-cover" />
               <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Component system with variants for rapid prototyping</figcaption>
             </motion.figure>
-            <motion.figure variants={fadeUp} className="overflow-hidden border border-stone-200">
-              <ZoomImg src={IMG.flowchart} alt="Full post-purchase flowchart — bird's-eye view" className="w-full object-cover" />
-              <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Full flowchart — bird's-eye view of the entire HDPP experience</figcaption>
+            <motion.figure variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200">
+              <ZoomImg src={IMG.flowchart} alt="Full post-purchase flowchart: bird's-eye view" className="w-full object-cover" />
+              <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Full flowchart: bird's-eye view of the entire HDPP experience</figcaption>
             </motion.figure>
           </motion.div>
         </motion.section>
@@ -359,16 +382,16 @@ export default function HomeDepotCaseStudy() {
           <Eyebrow label="Collaboration" />
           <div className="grid md:grid-cols-[1fr_1fr] gap-12 items-start">
             <div>
-              <h2 id="collab-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-6">Aligning across teams on interaction consistency</h2>
+              <h2 id="collab-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-6">Separating plan selection from adding to cart</h2>
               <div className="space-y-4 text-stone-600 leading-relaxed">
-                <p>GM multi-item interactions felt intuitive — checkboxes worked fine there, and the "Protection Plan Added" green label was clear. But Major Appliance items with two options were a different story.</p>
-                <p>The checkbox in the top-left looked cluttered next to two radio buttons. There was extensive debate about whether to add a "reject" radio button. Meanwhile, the product listing and detail pages already used CTA buttons for adding items — so using a checkbox for protection plans was an inconsistency that would confuse users.</p>
-                <p>After cross-team discussion, we landed on CTA buttons across the entire HDPP experience — aligning with how the rest of homedepot.com handles product additions.</p>
+                <p>The GM design used a checkbox to add a plan. For appliances, that checkbox sat beside two radio buttons for choosing coverage. It mixed two different actions in a small space.</p>
+                <p>We discussed adding a “reject” option, but the site already used buttons to add products. A separate add-to-cart button gave selecting coverage and buying it distinct controls.</p>
+                <p>I worked with the other teams to use that button pattern throughout the protection plan flow.</p>
               </div>
             </div>
-            <figure className="overflow-hidden border border-stone-200 bg-stone-50">
+            <figure className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
               <ZoomImg src={IMG.collaboration} alt="GM multi-item vs MA interaction comparison" className="w-full object-contain max-h-[480px]" />
-              <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Checkbox vs. CTA button — collaboration and consistency discussion</figcaption>
+              <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">Checkbox vs. CTA button: collaboration and consistency discussion</figcaption>
             </figure>
           </div>
         </motion.section>
@@ -381,10 +404,10 @@ export default function HomeDepotCaseStudy() {
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} className="mb-10">
             <DarkEyebrow label="Prototype" />
             <h2 id="prototype-heading" className="font-bold text-3xl md:text-4xl text-stone-100 leading-tight mb-4">High-fidelity prototype</h2>
-            <p className="text-stone-400 max-w-xl">After countless iterations and coordination across Home Depot teams, the design reached prototype stage — built to reflect both the legacy and Stencil design systems.</p>
+            <p className="text-stone-400 max-w-xl">I built the prototype with versions for both the legacy design system and Stencil.</p>
           </motion.div>
           <motion.figure variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}
-            className="overflow-hidden">
+            className="rounded-2xl overflow-hidden">
             <ZoomImg src={IMG.prototype} alt="High-fidelity HDPP post-purchase prototype" className="w-full object-cover" />
           </motion.figure>
         </div>
@@ -397,23 +420,24 @@ export default function HomeDepotCaseStudy() {
         <motion.section variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} aria-labelledby="testing-heading">
           <motion.div variants={fadeUp}>
             <Eyebrow label="User Testing" />
-            <h2 id="testing-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-4">"Easier than expected."</h2>
-            <p className="text-stone-500 mb-10 max-w-xl">The simplified HDPP post-purchase drawer was user-tested before launch. The result validated the interaction redesign.</p>
+            <h2 id="testing-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-4">Testing raised questions about pricing</h2>
+            <p className="text-stone-500 mb-10 max-w-xl">Some participants responded positively, while others had questions about the price and plan choices. The session notes below show that mixed feedback.</p>
           </motion.div>
           <div className="grid md:grid-cols-1 gap-5">
             {[
-              { src: IMG.usertest2, caption: 'User testing — session 2' },
+              { src: IMG.usertest2, caption: 'User testing: session 2' },
             ].map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200 bg-stone-50">
+              <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
                 <ZoomImg src={img.src} alt={img.caption} className="w-full object-contain max-h-80" />
                 <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">{img.caption}</figcaption>
               </motion.figure>
             ))}
           </div>
-          <motion.div variants={fadeUp} className="mt-8 p-6 bg-white border border-stone-100">
-            <div className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-2">Test Finding</div>
+          <motion.div variants={fadeUp} className="mt-8 p-6 rounded-2xl bg-white border border-stone-100">
+            <div className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-2">What I would test next</div>
             <p className="text-lg font-medium text-ink-800">
-              Users described the interaction as <span className="text-indigo-600">"easier than expected"</span> — a direct signal that the redesign successfully reduced the confusion between purchase and post-purchase flows.
+              Check whether customers understand
+              which item is covered, the plan price, and the difference between selecting and adding coverage.
             </p>
           </motion.div>
         </motion.section>
@@ -422,20 +446,20 @@ export default function HomeDepotCaseStudy() {
         <motion.section variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} aria-labelledby="handoff-heading">
           <motion.div variants={fadeUp}>
             <Eyebrow label="Dev Handoff & Reviews" />
-            <h2 id="handoff-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-4">Closing the implementation gap</h2>
+            <h2 id="handoff-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-4">Specs for both design systems</h2>
             <p className="text-stone-500 mb-10 max-w-xl">
               During the Stencil transition, some design assets weren't being implemented correctly.
-              I took initiative to redline every screen with detailed annotations — and created two final comp sets
-              (legacy + Stencil) so engineering had what they needed regardless of where implementation stood.
+              I added spacing and typography annotations and supplied designs for both systems,
+              so engineers could use the version they were implementing.
             </p>
           </motion.div>
           <div className="space-y-5">
             {[
-              { src: IMG.devhandoff1, caption: 'Dev handoff — annotated spec' },
-              { src: IMG.devhandoff2, caption: 'Dev handoff — redlines with spacing and typography' },
-              { src: IMG.devhandoff3, caption: 'Dev handoff — dual design system comps (legacy + Stencil)' },
+              { src: IMG.devhandoff1, caption: 'Dev handoff: annotated spec' },
+              { src: IMG.devhandoff2, caption: 'Dev handoff: redlines with spacing and typography' },
+              { src: IMG.devhandoff3, caption: 'Dev handoff: dual design system comps (legacy + Stencil)' },
             ].map((img, i) => (
-              <motion.figure key={i} variants={fadeUp} className="overflow-hidden border border-stone-200 bg-stone-50">
+              <motion.figure key={i} variants={fadeUp} className="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50">
                 <ZoomImg src={img.src} alt={img.caption} className="w-full object-contain max-h-[520px]" />
                 <figcaption className="text-xs text-stone-400 px-5 py-3 border-t border-stone-100">{img.caption}</figcaption>
               </motion.figure>
@@ -448,37 +472,33 @@ export default function HomeDepotCaseStudy() {
           <Eyebrow label="Reflection" />
           <div className="grid md:grid-cols-[2fr_1fr] gap-12 items-start">
             <div>
-              <h2 id="reflection-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-6">The failure was the turning point</h2>
+              <h2 id="reflection-heading" className="font-bold text-3xl md:text-4xl text-ink-900 leading-tight mb-6">What I would do differently</h2>
               <div className="space-y-6">
                 <blockquote className="border-l-2 border-indigo-500 pl-8">
                   <p className="text-stone-600 leading-relaxed text-lg">
-                    "The GM design working felt like a win. But it was failing at the edges that taught me the most.
-                    Running the 5-whys on my own process — not as a blame exercise, but as a diagnostic —
-                    changed how I approach complex, multi-state design problems."
+                    I would map all product scenarios before refining the first screen.
+                    The initial GM design looked ready, but it did not cover appliance and mixed orders.
                   </p>
                 </blockquote>
                 <p className="text-stone-500 leading-relaxed">
-                  Our team completed Stencil Ops reviews faster than peer teams at Home Depot — among the first to do so.
-                  Although I left before the final product launched, user testing confirmed the design worked.
-                  I'm proud of what the team shipped together.
+                  My contribution covered the designs, prototype, review feedback, and handoff.
+                  Reviewing those flows together earlier would have helped me spot the missing
+                  states before developing the detailed UI.
                 </p>
               </div>
-              <motion.figure className="mt-8 overflow-hidden border border-stone-200">
-                <ZoomImg src={IMG.reflection} alt="Reflection — project closing" className="w-full object-cover" />
+              <motion.figure className="mt-8 rounded-2xl overflow-hidden border border-stone-200">
+                <ZoomImg src={IMG.reflection} alt="Reflection: project closing" className="w-full object-cover" />
               </motion.figure>
             </div>
             {/* Award card */}
-            <div className="p-7 bg-zinc-950 border border-white/8 text-center">
+            <div className="p-7 rounded-2xl bg-zinc-950 border border-white/8 text-center">
               <div className="w-14 h-14 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mx-auto mb-5">
                 <span className="text-2xl" role="img" aria-label="Award">🏅</span>
               </div>
               <div className="text-xs font-semibold uppercase tracking-widest text-stone-500 mb-2">Recognition</div>
               <div className="font-bold text-stone-100 text-lg mb-2 leading-snug">"CAUGHT ORANGE HANDED"</div>
               <div className="text-xs text-stone-400 leading-relaxed">
-                Home Depot Design Team award<br />from Senior Manager Maggie Bruns<br />and Director Kristina Bosland
-              </div>
-              <div className="mt-5 pt-4 border-t border-white/8 text-xs text-stone-500">
-                Awarded for adopting Stencil faster than peer teams and driving design consistency across a complex, multi-team project.
+                Recognition from the Home Depot design team
               </div>
             </div>
           </div>
@@ -491,14 +511,14 @@ export default function HomeDepotCaseStudy() {
         <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20 py-12 grid grid-cols-2 gap-4">
           {prev ? (
             <Link to={`/project/${prev.slug}`} aria-label={`Previous project: ${prev.title}`}
-              className="group flex flex-col gap-2 p-6 border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5">
+              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5">
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center gap-1"><BackIcon /> Previous</span>
               <span className="text-sm font-semibold text-ink-800 group-hover:text-ink-600 transition-colors line-clamp-1">{prev.title}</span>
             </Link>
           ) : <div aria-hidden="true" />}
           {next ? (
             <Link to={`/project/${next.slug}`} aria-label={`Next project: ${next.title}`}
-              className="group flex flex-col gap-2 p-6 border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full">
+              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full">
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center justify-end gap-1">Next <NextIcon /></span>
               <span className="text-sm font-semibold text-ink-800 group-hover:text-ink-600 transition-colors line-clamp-1">{next.title}</span>
             </Link>

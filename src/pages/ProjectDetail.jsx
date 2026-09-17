@@ -5,6 +5,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { getProjectBySlug, getAdjacentProjects } from '../data/projects'
 import { Zoomable } from '../components/Lightbox'
+import CaseStudyFigure from '../components/CaseStudyFigure'
 
 function BackIcon() {
   return (
@@ -43,7 +44,7 @@ function LayerLadder({ layers, fadeUp }) {
       {layers.map(({ tier, examples, note }, i) => (
         <li
           key={tier}
-          className="relative flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 border border-white/10 bg-white/[0.03] px-5 py-4 hover:bg-white/[0.06] transition-colors duration-300"
+          className="relative flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4 hover:bg-white/[0.06] transition-colors duration-300"
           style={{ marginLeft: `${i * 4}%` }}
         >
           {/* Tier */}
@@ -73,7 +74,7 @@ function LayerLadder({ layers, fadeUp }) {
 function FeatureSection({ section, fadeUp, shouldReduce }) {
   const {
     label, heading, intro, body = [], images = [], callout,
-    layers, layersHeading, layersNote, tone,
+    layers, layersHeading, layersNote, tone, layout, steps,
   } = section
 
   const dark = tone === 'dark'
@@ -86,9 +87,9 @@ function FeatureSection({ section, fadeUp, shouldReduce }) {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: '-80px' }}
-      className={dark ? 'bg-ink-900 py-24 md:py-32' : ''}
+      className="case-study-feature"
     >
-      <div className={dark ? 'max-w-5xl mx-auto px-6 md:px-12 lg:px-20' : ''}>
+      <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20">
 
         {/* Eyebrow */}
         <div className="flex items-center gap-4 mb-10" aria-hidden="true">
@@ -127,6 +128,10 @@ function FeatureSection({ section, fadeUp, shouldReduce }) {
           </motion.p>
         ))}
 
+        {steps && <ol className="case-flow" aria-label="Request sequence">
+          {steps.map((step, i) => <li key={step}><span>{String(i + 1).padStart(2, '0')}</span>{step}</li>)}
+        </ol>}
+
         {/* The solution, drawn */}
         {layers && (
           <div className="mt-14">
@@ -153,49 +158,23 @@ function FeatureSection({ section, fadeUp, shouldReduce }) {
         {callout && (
           <motion.div
             variants={fadeUp}
-            className="mt-14 pl-6 border-l-2 border-amber-400"
+            className={`mt-14 p-7 rounded-2xl border-l-2 border-amber-400 ${
+              dark ? 'bg-white/[0.04] border-y border-r border-y-white/5 border-r-white/5' : 'bg-white border border-stone-100'
+            }`}
           >
             <div className={`text-xs font-semibold uppercase tracking-widest mb-2 ${dark ? 'text-amber-400' : 'text-stone-400'}`}>
               {callout.label}
             </div>
-            <p className={`text-lg md:text-xl font-medium leading-relaxed max-w-2xl ${dark ? 'text-stone-100' : 'text-ink-800'}`}>
+            <p className={`text-lg md:text-xl font-medium leading-relaxed ${dark ? 'text-stone-100' : 'text-ink-800'}`}>
               {callout.text}
             </p>
           </motion.div>
         )}
 
         {/* Evidence — each screenshot opens full size */}
-        <div className="mt-14 space-y-10">
-          {images.map(({ src, alt, caption, note }, i) => (
-            <motion.figure
-              key={i}
-              variants={fadeUp}
-              className="max-w-3xl"
-            >
-              {/* Sized by its own aspect ratio rather than forced to fill the
-                  column — object-contain plus a height cap was letterboxing
-                  these, leaving background bands down both sides. They are
-                  supporting evidence; the lightbox is where you read them. */}
-              <Zoomable src={src} alt={alt}>
-                <img
-                  src={src}
-                  alt={alt}
-                  loading="lazy"
-                  className={`w-full h-auto ${dark ? 'bg-white/[0.03]' : 'bg-stone-100'}`}
-                />
-              </Zoomable>
-              {/* Caption stays at reading measure even though the image is wide */}
-              <figcaption className="pt-4">
-                <div className={`text-sm font-medium ${dark ? 'text-stone-100' : 'text-ink-800'}`}>{caption}</div>
-                {note && (
-                  <div className={`text-xs mt-1.5 leading-relaxed max-w-2xl ${dark ? 'text-stone-400' : 'text-stone-500'}`}>
-                    {note}
-                  </div>
-                )}
-              </figcaption>
-            </motion.figure>
-          ))}
-        </div>
+        {images.length > 0 && <div className={`case-evidence-grid case-evidence-grid--${layout || 'stack'}`}>
+          {images.map((img, i) => <CaseStudyFigure key={i} {...img} />)}
+        </div>}
       </div>
     </motion.section>
   )
@@ -210,9 +189,9 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-zinc-950">
-        <h1 className="text-2xl font-semibold text-stone-100">Project not found</h1>
-        <Link to="/work" className="btn-primary">← Back to work</Link>
+      <div className="portfolio-not-found">
+        <h1 className="portfolio-not-found__title">Project not found</h1>
+        <Link to="/work" className="portfolio-text-link">← Back to work</Link>
       </div>
     )
   }
@@ -226,7 +205,7 @@ export default function ProjectDetail() {
   }
 
   return (
-    <article className="min-h-screen bg-ink-50 pt-14" aria-label={`Case study: ${project.title}`}>
+    <article className="case-study" aria-label={`Case study: ${project.title}`}>
 
       {/* ── Project hero ──────────────────────────────────── */}
       <header className="bg-white border-b border-stone-100">
@@ -238,9 +217,9 @@ export default function ProjectDetail() {
             {/* Back button */}
             <motion.div variants={fadeUp}>
               <button
-                onClick={() => navigate(-1)}
+                onClick={() => navigate('/work')}
                 className="inline-flex items-center gap-2 text-sm text-stone-400 hover:text-stone-900 transition-colors mb-12 group"
-                aria-label="Go back to previous page"
+                aria-label="Go back to all work"
               >
                 <BackIcon />
                 <span className="group-hover:underline">All Work</span>
@@ -257,6 +236,7 @@ export default function ProjectDetail() {
               {project.company && (
                 <span className="text-sm font-medium text-stone-400">{project.company}</span>
               )}
+              {project.status && <span className="case-status">{project.status}</span>}
               {project.wip && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border bg-indigo-50 text-indigo-700 border-indigo-200">
                   <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" aria-hidden="true" />
@@ -280,9 +260,9 @@ export default function ProjectDetail() {
             {/* TL;DR */}
             <motion.div
               variants={fadeUp}
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pl-5 border-l-2 border-amber-400 max-w-2xl"
+              className="case-study-summary"
             >
-              <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">TL;DR</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-indigo-700 flex-shrink-0">At a glance</span>
               <p className="text-sm text-indigo-900 leading-relaxed">{project.tldr}</p>
             </motion.div>
           </motion.div>
@@ -293,11 +273,12 @@ export default function ProjectDetail() {
       <div className="bg-stone-100">
         <div className="max-w-5xl mx-auto">
           {project.image ? (
-            <img
-              src={project.image}
-              alt={`${project.title} — design preview`}
-              className="w-full object-cover max-h-[520px]"
-            />
+            <figure>
+              <Zoomable src={project.image} alt={project.imageAlt || `${project.title}: design preview`}>
+                <img src={project.image} alt={project.imageAlt || `${project.title}: design preview`} className="w-full h-auto object-contain" />
+              </Zoomable>
+              {project.imageCaption && <figcaption className="case-hero-caption">{project.imageCaption}</figcaption>}
+            </figure>
           ) : (
             /* UX: null image handled — no broken img tag */
             <div className={`w-full h-64 md:h-96 bg-gradient-to-br ${PLACEHOLDER_GRADIENTS[projectIndex]} flex items-center justify-center relative overflow-hidden`}>
@@ -381,28 +362,24 @@ export default function ProjectDetail() {
             <div className="flex-1 h-px bg-stone-200" />
           </div>
           <h2 id="process-heading" className="font-semibold text-2xl md:text-3xl text-ink-900 mb-10 leading-snug">
-            How I Approached It
+            {project.processHeading || 'How I Approached It'}
           </h2>
-          {/* A numbered list, not a grid of boxes — the steps are sequential,
-              so reading them top to bottom matches how they happened. */}
-          <ol className="border-t border-stone-200" role="list">
+          <div className="grid md:grid-cols-2 gap-5">
             {project.process.map((step, i) => (
-              <li
-                key={step.phase}
-                className="grid md:grid-cols-[3rem_1fr] gap-x-6 gap-y-2 py-8 border-b border-stone-200"
-              >
-                <span className="text-sm font-medium text-stone-400 tabular-nums" aria-hidden="true">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div className="max-w-2xl">
-                  <h3 className="text-base font-semibold text-ink-900 mb-2 leading-snug">
+              <div key={step.phase} className="p-6 rounded-2xl bg-white border border-stone-100">
+                <div className="flex items-center gap-3 mb-4">
+                  {/* ART: amber number for process steps */}
+                  <span className="w-7 h-7 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-ink-700">
                     {step.phase}
                   </h3>
-                  <p className="text-stone-600 leading-relaxed">{step.description}</p>
                 </div>
-              </li>
+                <p className="text-sm text-stone-600 leading-relaxed">{step.description}</p>
+              </div>
             ))}
-          </ol>
+          </div>
         </section>
 
         {/* Challenges */}
@@ -412,14 +389,13 @@ export default function ProjectDetail() {
             <div className="flex-1 h-px bg-stone-200" />
           </div>
           <h2 id="challenges-heading" className="font-semibold text-2xl md:text-3xl text-ink-900 mb-8 leading-snug">
-            What Made This Hard
+            {project.challengesHeading || 'What Made This Hard'}
           </h2>
-          <ul className="space-y-5" role="list">
+          <ul className="space-y-4" role="list">
             {project.challenges.map((c, i) => (
               <li key={i} className="flex items-start gap-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2.5 flex-shrink-0" aria-hidden="true" />
-                {/* Capped so the line never runs past a comfortable measure */}
-                <p className="text-stone-600 leading-relaxed max-w-2xl">{c}</p>
+                <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2.5 flex-shrink-0" aria-hidden="true" />
+                <p className="text-stone-600 leading-relaxed">{c}</p>
               </li>
             ))}
           </ul>
@@ -428,21 +404,20 @@ export default function ProjectDetail() {
         {/* Outcomes */}
         <section aria-labelledby="outcomes-heading">
           <div className="flex items-center gap-4 mb-10" aria-hidden="true">
-            <span className="section-label">Outcomes</span>
+            <span className="section-label">{project.outcomesHeading ? 'Deliverables' : 'Outcomes'}</span>
             <div className="flex-1 h-px bg-stone-200" />
           </div>
           <h2 id="outcomes-heading" className="font-semibold text-2xl md:text-3xl text-ink-900 mb-8 leading-snug">
-            Results &amp; Impact
+            {project.outcomesHeading || 'Results & Impact'}
           </h2>
-          {/* Outcomes read as claims, one per line — the amber rule carries
-              the emphasis the dark boxes used to. */}
-          <ul className="space-y-6" role="list">
+          <div className="grid sm:grid-cols-2 gap-4">
             {project.outcomes.map((outcome, i) => (
-              <li key={i} className="border-l-2 border-amber-400 pl-5">
-                <p className="text-stone-700 leading-relaxed max-w-2xl">{outcome}</p>
-              </li>
+              <div key={i} className="p-6 rounded-2xl bg-ink-900 border border-ink-800">
+                {/* ART: amber check mark on dark outcome card */}
+                <p className="text-sm text-stone-300 leading-relaxed">{outcome}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
 
         {/* Reflection */}
@@ -473,7 +448,7 @@ export default function ProjectDetail() {
             <Link
               to={`/project/${prev.slug}`}
               aria-label={`Previous project: ${prev.title}`}
-              className="group flex flex-col gap-1.5 py-2 transition-colors duration-200"
+              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5"
             >
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center gap-1">
                 <BackIcon /> Previous
@@ -488,7 +463,7 @@ export default function ProjectDetail() {
             <Link
               to={`/project/${next.slug}`}
               aria-label={`Next project: ${next.title}`}
-              className="group flex flex-col gap-1.5 py-2 transition-colors duration-200 text-right ml-auto w-full"
+              className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-100 hover:border-stone-300 transition-all duration-200 hover:-translate-y-0.5 text-right ml-auto w-full"
             >
               <span className="text-xs text-stone-400 uppercase tracking-wide flex items-center justify-end gap-1">
                 Next <NextIcon />

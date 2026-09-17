@@ -1,0 +1,55 @@
+/* The selected 3D direction. Keep the separate ink draft unchanged. */
+.modern-story,
+.modern-story .planet-sticky {
+  background: #f7f8fa;
+}
+
+.modern-story .planet-brand-role {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #515b69;
+}
+
+.modern-story .planet-copy .planet-description {
+  font-size: 16px;
+  color: #3e4856;
+}
+.modern-story .planet-copy .planet-context {
+  font-size: 14px;
+  color: #535f70;
+}
+
+.modern-story .planet-sentence-bubble {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: #d8dee9;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.modern-story .planet-sentence-bubble::before { border-left-color: #d8dee9; }
+.modern-story .planet-sentence-bubble::after { border-left-color: #fff; }
+.modern-story .planet-sentence-bubble p { color: #3e4856; }
+
+.modern-story .planet-skip,
+.modern-story .planet-playback {
+  background: #fff;
+  border-color: #d5dbe4;
+  box-shadow: none;
+  color: #333e4d;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.modern-story .planet-skip:hover,
+.modern-story .planet-playback:hover { border-color: #8292af; }
+.modern-story .planet-skip:focus-visible { outline: 2px solid #2949a9; outline-offset: 4px; }
+.modern-story .planet-scroll-hint { font-size: 12px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+.modern-story .planet-index { color: #627085; }
+.modern-story .planet-index-current { font-size: 15px; color: #333e4d; }
+
+@media (max-width: 700px) {
+  .modern-story .planet-copy .planet-description { font-size: 14px; line-height: 1.48; }
+  .modern-story .planet-copy .planet-context { font-size: 12px; }
+}
+

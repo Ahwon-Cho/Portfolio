@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Analytics } from '@vercel/analytics/react'
@@ -12,6 +12,11 @@ import SurfaceITCaseStudy from './pages/SurfaceITCaseStudy'
 import HomeDepotCaseStudy from './pages/HomeDepotCaseStudy'
 import PantryNoteCaseStudy from './pages/PantryNoteCaseStudy'
 import LandingPage from './pages/LandingPage'
+
+// An unlinked local preview; keep the current home page unchanged.
+const Landing2 = lazy(() => import('./pages/Landing2'))
+const WorkPreview = lazy(() => import('./pages/WorksGallery'))
+const CaseStudyPreview = lazy(() => import('./pages/PortfolioPreview').then(module => ({ default: module.CaseStudyPreview })))
 
 /* MOTION: page-level transition wrapper */
 function PageTransition({ children }) {
@@ -75,6 +80,8 @@ function AppContent() {
   const [darkMode, setDarkMode] = useState(false)
   const location = useLocation()
 
+  const isPortfolioPreview = location.pathname === '/work2' || location.pathname.startsWith('/project2/')
+
   /* Detect system dark mode preference */
   useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)')
@@ -97,12 +104,19 @@ function AppContent() {
   return (
     /* ART: zinc-950 base keeps the dark-dominant aesthetic consistent */
     <div className="min-h-screen bg-zinc-950 text-stone-900">
-      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+      {location.pathname !== '/landing2' && !isPortfolioPreview && <Header darkMode={darkMode} setDarkMode={setDarkMode} />}
       <main id="main-content" tabIndex="-1">
         <PageTransition>
           <Routes>
             <Route path="/"                                    element={<LandingPage />} />
+            <Route path="/landing2" element={
+              <Suspense fallback={<div className="min-h-screen bg-ink-50 grid place-items-center" role="status">Loading preview…</div>}>
+                <Landing2 />
+              </Suspense>
+            } />
             <Route path="/work"                                element={<WorkPage />} />
+            <Route path="/work2" element={<Suspense fallback={<div className="min-h-screen bg-white" role="status">Loading work preview…</div>}><WorkPreview /></Suspense>} />
+            <Route path="/project2/:slug" element={<Suspense fallback={<div className="min-h-screen bg-white" role="status">Loading case-study preview…</div>}><CaseStudyPreview /></Suspense>} />
             <Route path="/about"                               element={<AboutPage />} />
             <Route path="/contact"                             element={<ContactPage />} />
             <Route path="/resume"                              element={<ResumeRedirect />} />

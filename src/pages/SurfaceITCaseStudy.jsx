@@ -398,13 +398,17 @@ export default function SurfaceITCaseStudy() {
             Two decisions that made complex work feel lighter
           </h2>
           <p className="text-stone-600 max-w-2xl mb-16">
-            I focused on the moments that most affected comprehension and pace instead of documenting every design step.
+            Two principles shaped the toolkit as a whole rather than any single tool: say things in
+            the admin&rsquo;s words, and never ask them to hold more than the task requires. Both
+            ran through every flow in the product; the screens below are just where the contrast
+            shows most clearly.
           </p>
 
           <div className="space-y-24">
             <section aria-labelledby="device-decision-heading">
-              <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-4">Decision 01 · Data Eraser</p>
-              <h3 id="device-decision-heading" className="font-bold text-2xl md:text-3xl text-ink-900">Match how admins already think about their devices</h3>
+              <h3 id="device-decision-heading" className="font-bold text-2xl md:text-3xl text-ink-900">
+                <span className="text-indigo-600">Decision 01</span> · Match how admins already think about their devices
+              </h3>
               <p className="text-stone-600 max-w-2xl mt-5">
                 The legacy flow opened by asking whether the device was x64 or ARM — a question
                 phrased in the system&rsquo;s terms, not the admin&rsquo;s. Admins think in the devices
@@ -424,8 +428,9 @@ export default function SurfaceITCaseStudy() {
             </section>
 
             <section aria-labelledby="review-decision-heading">
-              <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-4">Decision 02 · UEFI configuration</p>
-              <h3 id="review-decision-heading" className="font-bold text-2xl md:text-3xl text-ink-900">Reduce what admins have to hold in their head</h3>
+              <h3 id="review-decision-heading" className="font-bold text-2xl md:text-3xl text-ink-900">
+                <span className="text-indigo-600">Decision 02</span> · Reduce what admins have to hold in their head
+              </h3>
               <p className="text-stone-600 max-w-2xl mt-5">
                 Shown all at once, the configuration form asks admins to keep every dependency in
                 working memory while they fill it in. Progressive disclosure removes that burden:

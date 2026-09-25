@@ -404,10 +404,13 @@ export default function SurfaceITCaseStudy() {
           <div className="space-y-24">
             <section aria-labelledby="device-decision-heading">
               <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-4">Decision 01 · Data Eraser</p>
-              <h3 id="device-decision-heading" className="font-bold text-2xl md:text-3xl text-ink-900">Start with the device, not its architecture</h3>
+              <h3 id="device-decision-heading" className="font-bold text-2xl md:text-3xl text-ink-900">Match how admins already think about their devices</h3>
               <p className="text-stone-600 max-w-2xl mt-5">
-                The legacy flow asked admins to choose x64 or ARM. The redesign starts with
-                recognizable Surface families and models, then provides compatibility guidance.
+                The legacy flow opened by asking whether the device was x64 or ARM — a question
+                phrased in the system&rsquo;s terms, not the admin&rsquo;s. Admins think in the devices
+                sitting on their shelves. The redesign starts with recognizable Surface families and
+                models and handles the architecture quietly, surfacing compatibility guidance only
+                where it affects the outcome.
               </p>
               <div className="case-evidence-grid case-evidence-grid--pair">
                 <CaseStudyFigure src={sitLegacy2} sourceWidth={1920}
@@ -422,11 +425,13 @@ export default function SurfaceITCaseStudy() {
 
             <section aria-labelledby="review-decision-heading">
               <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-4">Decision 02 · UEFI configuration</p>
-              <h3 id="review-decision-heading" className="font-bold text-2xl md:text-3xl text-ink-900">Use a dynamic form to reduce cognitive load</h3>
+              <h3 id="review-decision-heading" className="font-bold text-2xl md:text-3xl text-ink-900">Reduce what admins have to hold in their head</h3>
               <p className="text-stone-600 max-w-2xl mt-5">
-                I used progressive disclosure to keep a complex technical form focused. Choices such
-                as deployment build, package type, or dock type reveal only the fields relevant to
-                that path, making the configuration easier to scan and understand.
+                Shown all at once, the configuration form asks admins to keep every dependency in
+                working memory while they fill it in. Progressive disclosure removes that burden:
+                choices such as deployment build, package type, or dock type reveal only the fields
+                that choice actually requires, so the page never carries more than the decision in
+                front of them.
               </p>
               <div className="case-evidence-grid case-evidence-grid--pair">
                 <CaseStudyFigure src={sitFinal8}

@@ -95,6 +95,9 @@
 .case-study :is(.text-ink-900, .text-ink-800, .text-ink-700, .text-stone-900, .text-stone-100, .text-white, .text-indigo-900) { color: var(--folio-ink); }
 .case-study :is(.text-stone-300, .text-stone-400, .text-stone-500, .text-stone-600, .text-ink-500, .text-ink-600) { color: var(--folio-muted); }
 .case-study :is(.text-amber-400, .text-indigo-200, .text-indigo-300, .text-indigo-400, .text-indigo-600, .text-indigo-700, .text-emerald-700, .text-blue-700, .text-violet-700) { color: var(--folio-accent); }
+.case-study .case-outcome-quote { background: #20204f; color: #fff; border: 1px solid #35366f; }
+.case-study .case-outcome-quote p { color: #fff; }
+.case-study .case-outcome-quote footer { color: #dce3ff; }
 .case-study :is(.border-stone-100, .border-stone-200, .border-stone-300, .border-stone-700, .border-ink-800, .border-white\/10, .border-white\/8, .border-indigo-100, .border-indigo-200, .border-indigo-700) { border-color: var(--folio-rule); }
 .case-study :is(.border-indigo-400, .border-amber-400) { border-color: #8194ae; }
 .case-study figure { border: 0; background: transparent; }

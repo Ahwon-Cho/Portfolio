@@ -12,7 +12,7 @@ import art07 from '../img/art07.png'
 
 const ART_WORKS = [art01, art02, art03, art04, art05, art06, art07]
 const SKILLS = [
-  { category: 'Design', items: ['Visual Design', 'Interaction Design', 'Design Systems', 'Information Architecture', 'High-fidelity UI', 'Prototyping', 'Accessibility'] },
+  { category: 'Design', items: ['Visual Design', 'Interaction Design', 'Design Systems', 'Information Architecture', 'High-fidelity UI', 'Prototyping', 'Accessibility specifications'] },
   { category: 'AI & Tools', items: ['AI-assisted prototyping', 'Claude Code', 'VS Code', 'Figma'] },
   { category: 'Research', items: ['User Research', 'Usability Testing', 'Journey Mapping', 'Wireframing', 'User Flows'] },
 ]
@@ -47,6 +47,7 @@ export default function About() {
           <div>
             <h2>How I work</h2>
             <p>I work with product managers to understand the problem, then use flows and prototypes to discuss possible solutions. I stay involved while engineers build the design.</p>
+            <p>I create accessibility design specifications for developers, including keyboard tab order, color contrast requirements, and responsive behavior.</p>
             <p>At Microsoft, I adapt the existing design system into local Figma libraries where components need modernization, so designs are easier to update and collaborate on.</p>
             <p>I’m also interested in how people’s habits influence their use of a product, and how AI changes the way we design and build.</p>
             <a className="about-writing" href="https://medium.com/@acho_24144/my-team-used-ai-to-skip-design-for-mvp-heres-what-i-learned-98d13787fb91" target="_blank" rel="noopener noreferrer">

@@ -1,4 +1,4 @@
-export const RESUME_FILE = '/Resume/AhwonCho_SeniorUXVisualDesigner.pdf'
+import { RESUME_FILE } from '../data/resume'
 
 export default function ResumePage() {
   return (

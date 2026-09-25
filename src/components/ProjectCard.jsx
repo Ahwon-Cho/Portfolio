@@ -6,8 +6,8 @@ export default function ProjectCard({ project, index = 0 }) {
   return (
     <Link to={`/project/${project.slug}`} className="work-project" aria-label={`View case study: ${project.title}`}>
       <div className="work-project__image">
-        <img src={project.thumbnail || project.image} alt={`${project.title}: design preview`}
-          width="1600" height="980" loading={index < 2 ? 'eager' : 'lazy'} />
+        <img src={project.thumbnail || project.image} alt={project.thumbnailAlt || `${project.title}: design preview`}
+          width={project.thumbnailWidth || 1600} height={project.thumbnailHeight || 980} loading={index < 2 ? 'eager' : 'lazy'} />
       </div>
       <div className="work-project__caption">
         <h2>

@@ -14,6 +14,7 @@ const Contact = lazy(() => import('./components/Contact'))
 const ResumePage = lazy(() => import('./pages/ResumePage'))
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const SurfaceITCaseStudy = lazy(() => import('./pages/SurfaceITCaseStudy'))
+const GPUFlightCaseStudy = lazy(() => import('./pages/GPUFlightCaseStudy'))
 const HomeDepotCaseStudy = lazy(() => import('./pages/HomeDepotCaseStudy'))
 const PantryNoteCaseStudy = lazy(() => import('./pages/PantryNoteCaseStudy'))
 
@@ -90,6 +91,7 @@ function AppContent() {
               <Route path="/resume"                              element={<ResumePage />} />
               <Route path="/landing"                             element={<Navigate to="/" replace />} />
               <Route path="/project/surface-it-toolkit"        element={<SurfaceITCaseStudy />} />
+              <Route path="/project/gpuflight"                 element={<GPUFlightCaseStudy />} />
               <Route path="/project/home-depot-protection-plan" element={<HomeDepotCaseStudy />} />
               <Route path="/project/pantry-note"               element={<PantryNoteCaseStudy />} />
               <Route path="/project/:slug"                     element={<ProjectDetail />} />

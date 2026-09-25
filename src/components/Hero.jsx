@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import ParticleCanvas from './ParticleCanvas'
+import { RESUME_FILE } from '../data/resume'
 
 const COMPANIES = ['Microsoft', 'Home Depot', 'Blue Cross NC', 'Samsung', 'LG']
 
@@ -84,7 +85,7 @@ export default function Hero({ darkMode = false }) {
               <ArrowIcon />
             </Link>
             <a
-              href="/Resume/AhwonCho_SeniorUXVisualDesigner.pdf"
+              href={RESUME_FILE}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"

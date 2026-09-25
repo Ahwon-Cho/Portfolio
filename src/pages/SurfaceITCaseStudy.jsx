@@ -16,8 +16,10 @@ import sitHero3      from '../img/sit_hero3.png'
 import sitKakaduDark from '../img/sit_project_kakadu_dark.png'
 import sitKakaduLight from '../img/sit_project_kakadu_light.png'
 import sitUefi       from '../img/sit_uefi.png'
+import sitFinal1     from '../img/sit_final1.png'
 import sitFinal2     from '../img/sit_final2.png'
 import sitFinal3     from '../img/sit_final3.png'
+import sitFinal4     from '../img/sit_final4.png'
 import sitFinal5     from '../img/sit_final5.png'
 import sitFinal6     from '../img/sit_final6.png'
 import sitFinal7     from '../img/sit_final7.png'
@@ -42,7 +44,9 @@ const UEFI_SCREENSHOT = sitUefi
 
 const FINAL_DESIGNS = [
   { src: sitFinal3, alt: 'Dark mode: Data Eraser USB Builder final review' },
+  { src: sitFinal1, alt: 'Dark mode: Recovery Tool — create a new USB key or manage an existing one' },
   { src: sitFinal5, alt: 'Dark mode: UEFI dock setup and certificate validation' },
+  { src: sitFinal4, alt: 'Dark mode: dock configuration packages built and ready to deploy' },
   { src: sitFinal8, alt: 'Dark mode: UEFI device configuration and certification' },
 ]
 
@@ -418,16 +422,31 @@ export default function SurfaceITCaseStudy() {
 
             <section aria-labelledby="review-decision-heading">
               <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-4">Decision 02 · UEFI configuration</p>
-              <h3 id="review-decision-heading" className="font-bold text-2xl md:text-3xl text-ink-900">Use a dynamic form to reduce unnecessary steps</h3>
+              <h3 id="review-decision-heading" className="font-bold text-2xl md:text-3xl text-ink-900">Use a dynamic form to reduce cognitive load</h3>
               <p className="text-stone-600 max-w-2xl mt-5">
-                I replaced a rigid sequence of setup screens with a dynamic form. It responds to
-                each selection and reveals only the relevant fields, helping admins complete the
-                configuration in fewer steps before reviewing and creating the package.
+                I used progressive disclosure to keep a complex technical form focused. Choices such
+                as deployment build, package type, or dock type reveal only the fields relevant to
+                that path, making the configuration easier to scan and understand.
               </p>
               <div className="case-evidence-grid case-evidence-grid--pair">
-                <CaseStudyFigure src={sitFinal6} alt="Dynamic UEFI dock configuration form showing only relevant component policies" caption="Dynamic form: relevant settings remain together in context" />
-                <CaseStudyFigure src={sitFinal7} alt="UEFI dock configuration package review after the required selections are complete" caption="Review: verify the completed configuration before creating the package" />
+                <CaseStudyFigure src={sitFinal8}
+                  alt="Dynamic UEFI device configuration form with fields that respond to deployment and package selections"
+                  caption="Device setup: only fields relevant to earlier selections are shown" />
+                <CaseStudyFigure src={sitFinal5}
+                  alt="Dynamic UEFI dock form showing certificate requirements for the selected dock type"
+                  caption="Dock setup: the selected dock type determines the required certificates" />
               </div>
+              <details className="case-artifact-details">
+                <summary>See the later configuration and review steps</summary>
+                <div className="case-evidence-grid case-evidence-grid--pair">
+                  <CaseStudyFigure src={sitFinal6}
+                    alt="UEFI dock component policy configuration"
+                    caption="Configure the policies for the selected dock path" />
+                  <CaseStudyFigure src={sitFinal7}
+                    alt="UEFI dock configuration package final review"
+                    caption="Verify the completed configuration before creating the package" />
+                </div>
+              </details>
               <details className="case-artifact-details">
                 <summary>Explore the full UEFI workflow canvas</summary>
                 <CaseStudyFigure src={UEFI_SCREENSHOT} alt="UEFI Configurator workflow canvas" caption="Full UEFI workflow" />
